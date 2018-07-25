@@ -11,13 +11,13 @@ export const environment = {
   },
   login : '',
   oauth2 : {
-    eprUrl : 'http://127.0.0.1:9090/careconnect-gateway-secure/STU3',
+    eprUrl : 'http://127.0.0.1:9090/ccri-smartonfhir/STU3',
     client_id : 'clinical-assurance-tool',
     client_secret : 'AM3ai-PGoZZRW-7osWbzvGlDBHjHq7M2aBlpNttreHeEyB5jequWy8fsHMVQP4JV0Kd0Fzrtu0iNEqGqguq69Qs',
     cookie_domain : 'localhost'
   },
   smart: {
-    cardiac : 'http://127.0.0.1:8000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch=',
-    growthChart : 'http://127.0.0.1:9000/launch.html?iss=http://localhost:9090/careconnect-gateway-secure/STU3&launch='
+    cardiac : 'http://127.0.0.1:8000/launch.html?iss=http://localhost:9090/ccri-smartonfhir/STU3&launch=',
+    growthChart : 'http://127.0.0.1:9000/launch.html?iss=http://localhost:9090/ccri-smartonfhir/STU3&launch='
   }
 };
