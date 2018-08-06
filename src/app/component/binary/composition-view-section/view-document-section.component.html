@@ -77,6 +77,10 @@
                       <h4>Prescriptions</h4>
                       <app-medication-request [medicationRequests]="prescriptions" (medicationRequest)="onResoureSelected($event)"></app-medication-request>
                   </span>
+                    <span *ngIf="immunisations.length>0">
+                      <h4>Immunisations</h4>
+                      <app-immunisation [immunisations]="immunisations" (immunisation)="onResoureSelected($event)"></app-immunisation>
+                  </span>
                   <span *ngIf="roles.length>0">
                       <h4>PractitionerRole</h4>
                       <app-practitioner-role [roles]="roles" (practitionerRole)="onResoureSelected($event)"></app-practitioner-role>
