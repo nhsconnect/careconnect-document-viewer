@@ -38,6 +38,7 @@ export class ViewDocumentSectionComponent implements OnInit {
   roles : fhir.PractitionerRole[];
   services : fhir.HealthcareService[];
   immunisations : fhir.Immunization[];
+  forms : fhir.QuestionnaireResponse[];
 
   showStructured : boolean = false;
 
@@ -64,6 +65,7 @@ export class ViewDocumentSectionComponent implements OnInit {
     this.roles=[];
     this.services=[];
     this.immunisations=[];
+      this.forms=[];
 
     this.getPopover(this.section);
 
@@ -189,6 +191,10 @@ export class ViewDocumentSectionComponent implements OnInit {
               let organization: fhir.Organization = <fhir.Organization> resource;
               this.organisations.push(organization);
               break;
+            case "QuestionnaireResponse" :
+                let form: fhir.QuestionnaireResponse = <fhir.QuestionnaireResponse> resource;
+                this.forms.push(form);
+                break;
             case "HealthcareService":
               let service: fhir.HealthcareService = <fhir.HealthcareService> resource;
               this.services.push(service);

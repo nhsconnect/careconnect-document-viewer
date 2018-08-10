@@ -89,6 +89,10 @@
                       <h4>HealthcareService</h4>
                       <app-healthcare-service [services]="services" (healthcareService)="onResoureSelected($event)"></app-healthcare-service>
                   </span>
+                      <span *ngIf="forms.length>0">
+                      <h4>Questionnaire</h4>
+                      <app-questionnaire-response [forms]="forms" (form)="onResoureSelected($event)"></app-questionnaire-response>
+                  </span>
                 </div>
                 <div *ngIf="section.entry == undefined">
                   No structured content referenced
