@@ -24,7 +24,7 @@ import { MedicationStatementComponent } from './component/medication-statement/m
 import { ConditionComponent } from './component/condition/condition.component';
 import { ProcedureComponent } from './component/procedure/procedure.component';
 import { ObservationComponent } from './component/observation/observation.component';
-import { AllergyIntolleranceComponent } from './component/allergy-intollerance/allergy-intollerance.component';
+import { AllergyIntoleranceComponent } from './component/allergy-intolerance/allergy-intolerance.component';
 import { EncounterComponent } from './component/encounter/encounter.component';
 import { MedicationRequestComponent } from './component/medication-request/medication-request.component';
 import { MedicationComponent } from './component/medication/medication.component';
@@ -141,7 +141,7 @@ import { QuestionnaireResponseComponent } from './component/questionnaire-respon
     ConditionComponent,
     ProcedureComponent,
     ObservationComponent,
-    AllergyIntolleranceComponent,
+    AllergyIntoleranceComponent,
     EncounterComponent,
 
     MedicationRequestComponent,

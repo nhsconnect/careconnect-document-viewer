@@ -7,11 +7,11 @@ import {FhirService} from "../../service/fhir.service";
 import {AllergyIntoleranceDataSource} from "../../data-source/allergy-data-source";
 
 @Component({
-  selector: 'app-allergy-intollerance',
-  templateUrl: './allergy-intollerance.component.html',
-  styleUrls: ['./allergy-intollerance.component.css']
+  selector: 'app-allergy-intolerance',
+  templateUrl: './allergy-intolerance.component.html',
+  styleUrls: ['./allergy-intolerance.component.css']
 })
-export class AllergyIntolleranceComponent implements OnInit {
+export class AllergyIntoleranceComponent implements OnInit {
 
   @Input() allergies : fhir.AllergyIntolerance[];
 
