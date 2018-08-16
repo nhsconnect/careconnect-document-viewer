@@ -121,6 +121,8 @@ import {PractitionerRoleDialogComponent} from "./dialog/practitioner-role-dialog
 import {EncounterDialogComponent} from "./dialog/encounter-dialog/encounter-dialog.component";
 import {PingComponent} from "./modules/ping/ping.component";
 import { QuestionnaireResponseComponent } from './component/questionnaire-response/questionnaire-response.component';
+import { RiskAssessmentComponent } from './component/risk-assessment/risk-assessment.component';
+import { GoalComponent } from './component/goal/goal.component';
 
 
 
@@ -179,7 +181,9 @@ import { QuestionnaireResponseComponent } from './component/questionnaire-respon
     PractitionerRoleDialogComponent,
     EncounterDialogComponent,
     PingComponent,
-    QuestionnaireResponseComponent
+    QuestionnaireResponseComponent,
+    RiskAssessmentComponent,
+    GoalComponent
   ],
   entryComponents: [
     ResourceDialogComponent,

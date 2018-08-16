@@ -39,6 +39,8 @@ export class ViewDocumentSectionComponent implements OnInit {
   services : fhir.HealthcareService[];
   immunisations : fhir.Immunization[];
   forms : fhir.QuestionnaireResponse[];
+  risks : fhir.RiskAssessment[];
+  goals : fhir.Goal[];
 
   showStructured : boolean = false;
 
@@ -66,6 +68,8 @@ export class ViewDocumentSectionComponent implements OnInit {
     this.services=[];
     this.immunisations=[];
       this.forms=[];
+      this.risks=[];
+      this.goals=[];
 
     this.getPopover(this.section);
 
@@ -107,10 +111,24 @@ export class ViewDocumentSectionComponent implements OnInit {
               let encounter: fhir.Encounter = <fhir.Encounter> resource;
               this.encounters.push(encounter);
               break;
-              case "Immunization" :
-                  let immunisation: fhir.Immunization = <fhir.Immunization> resource;
-                  this.immunisations.push(immunisation);
-                  break;
+            case "Goal":
+                let goal: fhir.Goal = <fhir.Goal> resource;
+
+                this.goals.push(goal);
+                break;
+            case "HealthcareService":
+                let service: fhir.HealthcareService = <fhir.HealthcareService> resource;
+                this.services.push(service);
+                break;
+            case "Immunization" :
+                let immunisation: fhir.Immunization = <fhir.Immunization> resource;
+                this.immunisations.push(immunisation);
+                break;
+            case "Location":
+                let location: fhir.Location = <fhir.Location> resource;
+
+                this.locations.push(location);
+                break;
             case "List" :
               let list: fhir.List = <fhir.List> resource;
               if (list.entry != undefined) {
@@ -195,15 +213,11 @@ export class ViewDocumentSectionComponent implements OnInit {
                 let form: fhir.QuestionnaireResponse = <fhir.QuestionnaireResponse> resource;
                 this.forms.push(form);
                 break;
-            case "HealthcareService":
-              let service: fhir.HealthcareService = <fhir.HealthcareService> resource;
-              this.services.push(service);
-              break;
-            case "Location":
-              let location: fhir.Location = <fhir.Location> resource;
+              case "RiskAssessment":
+                  let risk: fhir.RiskAssessment = <fhir.RiskAssessment> resource;
+                  this.risks.push(risk);
+                  break;
 
-              this.locations.push(location);
-              break;
             default :
               console.log('**** missing ' + resource.resourceType);
               this.entries.push(resource.resourceType);

@@ -436,6 +436,22 @@ export class FhirService {
 
   }
 
+    getGoal(patientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/Goal?patient=${patientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
+
+    getRiskAssessment(patientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/RiskAssessment?patient=${patientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
+
     getQuestionnaireResponse(patientId: string): Observable<fhir.Bundle> {
 
         const url = this.getEPRUrl()  + `/QuestionnaireResponse?patient=${patientId}`;
