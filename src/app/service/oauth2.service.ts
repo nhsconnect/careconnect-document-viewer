@@ -34,6 +34,7 @@ export class Oauth2Service {
   public isAuthenticated(): boolean {
     // get the token
     const token = this.getToken();
+    if (token === undefined) return false;
     const helper = new JwtHelperService();
     // return a boolean reflecting
     // whether or not the token is expired
