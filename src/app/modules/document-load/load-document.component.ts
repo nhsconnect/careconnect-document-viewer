@@ -33,8 +33,7 @@ export class LoadDocumentComponent implements OnInit {
 
   notFhir :boolean;
 
-  file : File;
-
+  files: File | FileList;
 
   practiceSettings : fhir.ValueSet;
 
@@ -192,7 +191,49 @@ export class LoadDocumentComponent implements OnInit {
   }
 
   // https://stackoverflow.com/questions/40214772/file-upload-in-angular
+   cancelEvent(){
+       this.notFhir = true;
+       this.documentForm =  this.compositionFG;
+       this.document.file=undefined;
+   }
 
+    selectEvent(files: FileList | File): void {
+        if (files instanceof FileList) {
+            console.log(files);
+            let file: File = files[0];
+            this.document.file = file;
+            this.formData = new FormData();
+            this.formData.append('uploadFile', file, file.name);
+            if (this.getContentType(file).lastIndexOf('fhir')==-1) {
+                this.notFhir = true;
+                this.documentForm = this.documentReferenceFG;
+                console.log('documentReference validation');
+            } else {
+                this.notFhir = false;
+                this.documentForm = this.compositionFG;
+                console.log('composition validation');
+            }
+        } else {
+        console.log(files);
+            let file: File = files;
+            this.document.file = file;
+            console.log(file);
+            this.formData = new FormData();
+            this.formData.append('uploadFile', file, file.name);
+
+
+            if (this.getContentType(file).lastIndexOf('fhir')==-1) {
+                this.notFhir = true;
+                this.documentForm = this.documentReferenceFG;
+                console.log('documentReference validation');
+            } else {
+                this.notFhir = false;
+                this.documentForm = this.compositionFG;
+                console.log('composition validation');
+            }
+        }
+    }
+/*
    fileChange(event) {
     let fileList: FileList = event.target.files;
     if (fileList.length > 0) {
@@ -212,6 +253,7 @@ export class LoadDocumentComponent implements OnInit {
       }
     }
   }
+  */
   public getContentType(file) : string {
     let ext = file.name.substr(file.name.lastIndexOf('.') + 1);
     if (ext === 'xml' || ext==='XML') {
@@ -271,7 +313,7 @@ export class LoadDocumentComponent implements OnInit {
         }
       );
     } else {
-      this.file = file;
+    //  this.file = file;
       this.buildBinary(file);
     }
   }
@@ -279,7 +321,7 @@ export class LoadDocumentComponent implements OnInit {
     buildBundle(base64file : string) :any {
       let binary: fhir.Binary = {
         id : uuid(),
-        contentType: this.getContentType(this.file),
+        contentType: this.getContentType(this.files),
         content: base64file
       };
 

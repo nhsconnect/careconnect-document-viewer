@@ -251,9 +251,9 @@ import { CarePlanComponent } from './component/care-plan/care-plan.component';
     CovalentMenuModule,
     CovalentDialogsModule,
     CovalentMediaModule,
-    CovalentNotificationsModule
+    CovalentNotificationsModule,
 
-   // CovalentFileModule
+    CovalentFileModule
 
 /*
     // Issue with https://github.com/Teradata/covalent/issues/1152

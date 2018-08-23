@@ -3,23 +3,11 @@
   <mat-card-title>Import Document</mat-card-title>
   <mat-card-content>
 <form [formGroup]="documentForm"  >
-  <!--
-  <span *ngIf="auth.permission == undefined || (auth.permission.eprUser == undefined || !auth.permission.eprUser)">
-    <div class="form-group">
-      <label for="fileName1">Select file to upload</label>
-      <input type="file" id="fileName1" name="fileName1" class="form-control-file" (change)="fileChange($event)" placeholder="Upload file" accept=".json,.xml" [formControl]="documentForm.controls['fileName']">
-    </div>
-    <div *ngIf="fileName.invalid && (fileName.dirty)"
-         class="alert alert-danger">
-      No file specified
-    </div>
 
-
-  </span> -->
   <span >
     <div>
-      <!-- needs cdk sorting covalent2?
-      <td-file-upload #singleFileUpload [(ngModel)]="files" (select)="selectEvent($event)" (upload)="uploadEvent($event)" (cancel)="cancelEvent()"  required>
+
+      <td-file-upload #singleFileUpload (select)="selectEvent($event)" (cancel)="cancelEvent()" [formControl]="documentForm.controls['fileName']" formControlName="fileName"  required>
         <mat-icon>file_upload</mat-icon><span>{{ singleFileUpload.value?.name }}</span>
         <ng-template td-file-input-label>
           <mat-icon>attach_file</mat-icon>
@@ -29,13 +17,7 @@
           </span>
         </ng-template>
       </td-file-upload>
-      -->
-      <input type="file" id="fileName2" name="fileName2" class="ng-hide" (change)="fileChange($event)" placeholder="Upload file" accept=".json,.xml,.pdf,.doc,.docx,.jpg,.html" [formControl]="documentForm.controls['fileName']" formControlName="fileName">
-     <!-- <label for="fileName2" class="md-button md-raised md-primary">Choose files</label> -->
-      <div *ngIf="fileName.invalid && (fileName.dirty)"
-      class="alert alert-danger">
-       No file specified
-       </div>
+
     </div>
       <span *ngIf="notFhir">
 
