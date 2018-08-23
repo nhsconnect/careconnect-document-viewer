@@ -123,6 +123,9 @@ import {PingComponent} from "./modules/ping/ping.component";
 import { QuestionnaireResponseComponent } from './component/questionnaire-response/questionnaire-response.component';
 import { RiskAssessmentComponent } from './component/risk-assessment/risk-assessment.component';
 import { GoalComponent } from './component/goal/goal.component';
+import { ClinicalImpressionComponent } from './component/clinical-impression/clinical-impression.component';
+import { ConsentComponent } from './component/consent/consent.component';
+import { CarePlanComponent } from './component/care-plan/care-plan.component';
 
 
 
@@ -183,7 +186,10 @@ import { GoalComponent } from './component/goal/goal.component';
     PingComponent,
     QuestionnaireResponseComponent,
     RiskAssessmentComponent,
-    GoalComponent
+    GoalComponent,
+    ClinicalImpressionComponent,
+    ConsentComponent,
+    CarePlanComponent
   ],
   entryComponents: [
     ResourceDialogComponent,

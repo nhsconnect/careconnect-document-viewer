@@ -39,6 +39,18 @@ export class ConditionComponent implements OnInit {
       this.dataSource = new ConditionDataSource(this.fhirService, undefined, this.conditions);
     }
   }
+
+    select(resource) {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.data = {
+            id: 1,
+            resource: resource
+        };
+        let resourceDialog : MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
+    }
   getCodeSystem(system : string) : string {
     return this.linksService.getCodeSystem(system);
   }
@@ -103,15 +115,5 @@ export class ConditionComponent implements OnInit {
 
   }
 
-  select(resource) {
-    const dialogConfig = new MatDialogConfig();
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.data = {
-      id: 1,
-      resource: resource
-    };
-    let resourceDialog : MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
-  }
 }

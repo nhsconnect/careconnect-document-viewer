@@ -37,6 +37,22 @@
                       <h4>Allergies</h4>
                       <app-allergy-intolerance [allergies]="allergies" (allergy)="onResoureSelected($event)"></app-allergy-intolerance>
                   </span>
+                  <span *ngIf="conditions.length>0">
+                      <h4>Conditions</h4>
+                      <app-condition [conditions]="conditions" [useBundle]="true" (condition)="onResoureSelected($event)"></app-condition>
+                  </span>
+                    <span *ngIf="consents.length>0">
+                      <h4>Consent</h4>
+                      <app-consent [consents]="consents" [useBundle]="true" (consent)="onResoureSelected($event)"></app-consent>
+                  </span>
+                    <span *ngIf="carePlans.length>0">
+                      <h4>Care Plans</h4>
+                      <app-care-plan [carePlans]="carePlans" [useBundle]="true" (carePlan)="onResoureSelected($event)"></app-care-plan>
+                  </span>
+                    <span *ngIf="impressions.length>0">
+                      <h4>Clinical Impressions</h4>
+                      <app-clinical-impression [clinicalImpressions]="impressions" [useBundle]="true" (clinicalImpressions)="onResoureSelected($event)"></app-clinical-impression>
+                  </span>
                   <span *ngIf="patients.length>0">
                       <h4>Patient</h4>
                       <app-patient [patients]="patients" (patient)="onResoureSelected($event)"></app-patient>
@@ -61,10 +77,7 @@
                       <h4>Medication Statement</h4>
                       <app-medication-statement [medicationStatements]="medicationStatements" (medicationStatement)="onResoureSelected($event)"></app-medication-statement>
                   </span>
-                  <span *ngIf="conditions.length>0">
-                      <h4>Conditions</h4>
-                      <app-condition [conditions]="conditions" [useBundle]="true" (condition)="onResoureSelected($event)"></app-condition>
-                  </span>
+
                   <span *ngIf="procedures.length>0">
                       <h4>Procedure</h4>
                       <app-procedure [procedures]="procedures" [useBundle]="true" (procedure)="onResoureSelected($event)"></app-procedure>

@@ -429,20 +429,31 @@ export class FhirService {
 
 
   getEPRObservations(patientId: string): Observable<fhir.Bundle> {
-
     const url = this.getEPRUrl()  + `/Observation?patient=${patientId}`;
-
     return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
   }
 
     getGoal(patientId: string): Observable<fhir.Bundle> {
-
         const url = this.getEPRUrl()  + `/Goal?patient=${patientId}`;
-
         return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
     }
+
+    getClinicalImpression(patientId: string): Observable<fhir.Bundle> {
+        const url = this.getEPRUrl()  + `/ClinicalImpression?patient=${patientId}`;
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+    }
+
+    getCarePlan(patientId: string): Observable<fhir.Bundle> {
+        const url = this.getEPRUrl()  + `/CarePlan?patient=${patientId}`;
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+    }
+
+    getConsent(patientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/Consent?patient=${patientId}`;
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+    }
+
 
     getRiskAssessment(patientId: string): Observable<fhir.Bundle> {
 

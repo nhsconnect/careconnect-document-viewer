@@ -41,6 +41,9 @@ export class ViewDocumentSectionComponent implements OnInit {
   forms : fhir.QuestionnaireResponse[];
   risks : fhir.RiskAssessment[];
   goals : fhir.Goal[];
+  impressions : fhir.ClinicalImpression[];
+  carePlans : fhir.CarePlan[];
+  consents : fhir.Consent[];
 
   showStructured : boolean = false;
 
@@ -70,6 +73,9 @@ export class ViewDocumentSectionComponent implements OnInit {
       this.forms=[];
       this.risks=[];
       this.goals=[];
+      this.impressions=[];
+      this.consents=[];
+      this.carePlans=[];
 
     this.getPopover(this.section);
 
@@ -102,10 +108,21 @@ export class ViewDocumentSectionComponent implements OnInit {
               let allergyIntolerance: fhir.AllergyIntolerance = <fhir.AllergyIntolerance> resource;
               this.allergies.push(allergyIntolerance);
               break;
+              case "CarePlan" :
+                  let carePlan: fhir.CarePlan = <fhir.CarePlan> resource;
+                  this.carePlans.push(carePlan);
+                  break;
+              case "Consent" :
+                  let consent: fhir.Consent = <fhir.Consent> resource;
+                  this.consents.push(consent);
+                  break;
+              case "ClinicalImpression" :
+                  let clinicalImpression: fhir.ClinicalImpression = <fhir.ClinicalImpression> resource;
+                  this.impressions.push(clinicalImpression);
+                  break;
             case "Condition" :
               let condition: fhir.Condition = <fhir.Condition> resource;
               this.conditions.push(condition);
-
               break;
             case "Encounter" :
               let encounter: fhir.Encounter = <fhir.Encounter> resource;
