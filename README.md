@@ -29,3 +29,7 @@ docker push thorlogic/ccri-app
 
 docker run -d -p 4200:80 --name ccri-app thorlogic/ccri-app 
 
+### Docker clean up
+
+docker rm $(docker ps -q -f 'status=exited')
+docker rmi $(docker images -q -f "dangling=true")
