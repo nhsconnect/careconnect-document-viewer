@@ -192,7 +192,7 @@ export class LoadDocumentComponent implements OnInit {
 
   // https://stackoverflow.com/questions/40214772/file-upload-in-angular
    cancelEvent(){
-       this.notFhir = true;
+       this.notFhir = false;
        this.documentForm =  this.compositionFG;
        this.document.file=undefined;
    }
@@ -270,7 +270,11 @@ export class LoadDocumentComponent implements OnInit {
   }
   onSubmitClick() {
     this.progressBar = true;
-    if (!this.getFormValidationErrors()) return;
+    if (!this.getFormValidationErrors()) {
+        this.progressBar = false;
+        this.warnValidation();
+        return;
+    }
 
     let file: File = <File> this.formData.get('uploadFile');
     console.log('clicked FileName = ' + file.name);
@@ -542,6 +546,21 @@ export class LoadDocumentComponent implements OnInit {
       }
     } );
   }
+
+    warnValidation() {
+        let alertConfig : IConfirmConfig = { message : "Validation errors found." };
+        alertConfig.disableClose =  false; // defaults to false
+        alertConfig.viewContainerRef = this._viewContainerRef;
+        alertConfig.title = 'Validation'; //OPTIONAL, hides if not provided
+        alertConfig.cancelButton = 'No';
+        alertConfig.acceptButton = 'Ok'; //OPTIONAL, defaults to 'ACCEPT'
+        alertConfig.width = '400px'; //OPTIONAL, defaults to 400px
+        this._dialogService.openAlert(alertConfig).afterClosed().subscribe((accept: boolean) => {
+            if (accept) {
+                this.onReplaceClick();
+            }
+        } );
+    }
 
   showIssue(operationOutcome : fhir.OperationOutcome) {
     const dialogConfig = new MatDialogConfig();
