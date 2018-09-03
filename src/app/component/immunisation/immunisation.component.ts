@@ -5,6 +5,9 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {ProcedureDataSource} from "../../data-source/procedure-data-source";
 import {ImmunizationDataSource} from "../../data-source/immunization-data-source";
 import {FhirService} from "../../service/fhir.service";
+import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
+import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
+import {BundleService} from "../../service/bundle.service";
 
 @Component({
   selector: 'app-immunisation',
@@ -19,11 +22,16 @@ export class ImmunisationComponent implements OnInit {
 
   dataSource : ImmunizationDataSource;
 
-  displayedColumns = ['date', 'code','codelink','status',  'resource'];
+    practitioners : fhir.Practitioner[];
+
+    organisations : fhir.Organization[];
+
+  displayedColumns = ['date','procedure', 'code','codelink','indication','indicationlink','dose','site','route','status', 'manufacturer','practitionerRole','practitioner', 'batch', 'expire', 'resource'];
 
   constructor(private linksService : LinksService,
               public dialog: MatDialog,
-              public fhirService : FhirService) { }
+              public fhirService : FhirService,
+              public bundleService : BundleService) { }
 
   ngOnInit() {
     if (this.patientId != undefined) {
@@ -56,5 +64,56 @@ export class ImmunisationComponent implements OnInit {
     };
     let resourceDialog : MatDialogRef<ResourceDialogComponent> = this.dialog.open( ResourceDialogComponent, dialogConfig);
   }
+
+    showOrganisation(immunisastion : fhir.Immunization) {
+        this.organisations = [];
+
+        this.bundleService.getResource(immunisastion.manufacturer.reference).subscribe( (organisation) => {
+
+            if (organisation != undefined && organisation.resourceType === "Organization") {
+
+                this.organisations.push(<fhir.Organization> organisation);
+
+                const dialogConfig = new MatDialogConfig();
+
+                dialogConfig.disableClose = true;
+                dialogConfig.autoFocus = true;
+
+                dialogConfig.data = {
+                    id: 1,
+                    organisations : this.organisations
+                };
+                let resourceDialog : MatDialogRef<OrganisationDialogComponent> = this.dialog.open( OrganisationDialogComponent, dialogConfig);
+
+            }
+        });
+    }
+
+
+
+    showPractitioner(immunisation : fhir.Immunization) {
+        this.practitioners = [];
+
+        for (let practitionerReference of immunisation.practitioner) {
+            this.bundleService.getResource(practitionerReference.actor.reference).subscribe((practitioner) => {
+                    if (practitioner != undefined && practitioner.resourceType === "Practitioner") {
+                        this.practitioners.push(<fhir.Practitioner> practitioner);
+
+                        const dialogConfig = new MatDialogConfig();
+
+                        dialogConfig.disableClose = true;
+                        dialogConfig.autoFocus = true;
+
+                        dialogConfig.data = {
+                            id: 1,
+                            practitioners : this.practitioners
+                        };
+                        let resourceDialog : MatDialogRef<PractitionerDialogComponent> = this.dialog.open( PractitionerDialogComponent, dialogConfig);
+                    }
+                }
+            );
+        }
+    }
+
 
 }
