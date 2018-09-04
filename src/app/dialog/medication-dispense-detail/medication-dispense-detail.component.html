@@ -1,0 +1,122 @@
+<h2 mat-dialog-title>Medication Dispense</h2>
+<mat-dialog-content>
+  <table>
+    <tr>
+      <td>Handed Over</td>
+      <td><b> {{medicationDispense.whenHandedOver | date: 'dd-MMM-yyyy HH:mm'}}</b></td>
+    </tr>
+    <tr>
+      <td>Prepared</td>
+      <td><b>{{medicationDispense.whenPrepared | date: 'dd-MMM-yyyy HH:mm'}}</b></td>
+    </tr>
+    <tr>
+      <td>Medication</td>
+      <td><b> <span *ngIf="medicationDispense.medicationCodeableConcept !=undefined" >
+          <span *ngIf="medicationDispense.medicationCodeableConcept !=undefined">{{medicationDispense.medicationCodeableConcept.coding[0].display}}</span>
+
+        </span>
+        <span *ngIf="medicationDispense.medicationReference !=undefined">
+
+            <span>{{medicationDispense.medicationReference.display}}</span>
+
+        </span></b></td>
+    </tr>
+    <tr>
+      <td>Supply type</td>
+      <td><b><span *ngIf="medicationDispense.type != undefined">
+        {{medicationDispense.type.coding[0].display}}
+      </span></b></td>
+    </tr>
+    <tr>
+      <td>Form</td>
+      <td><b>  <span *ngFor="let dosage of medicationDispense.dosageInstruction">
+            <span *ngIf="dosage.maxDosePerPeriod != undefined" >
+              <span> {{dosage.maxDosePerPeriod.numerator.value}} {{dosage.maxDosePerPeriod.numerator.unit}} </span>
+            </span>
+
+        </span></b></td>
+    </tr>
+    <tr>
+      <td>Batch number</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Site</td>
+      <td><b><b> <span *ngFor="let dosage of medicationDispense.dosageInstruction">
+
+            <span *ngIf="dosage.site!=undefined && dosage.site.coding.length>0" >
+              {{dosage.site.coding[0].display}}
+            </span>
+        </span></b></b></td>
+    </tr>
+    <tr>
+      <td>Route</td>
+      <td><b> <span *ngFor="let dosage of medicationDispense.dosageInstruction">
+
+            <span *ngIf="dosage.route!=undefined && dosage.route.coding.length>0" >
+              {{dosage.route.coding[0].display}}
+            </span>
+        </span></b></td>
+    </tr>
+    <tr>
+      <td>Method</td>
+      <td><b> <span *ngFor="let dosage of medicationDispense.dosageInstruction">
+
+            <span *ngIf="dosage.method!=undefined && dosage.method.coding.length>0" >
+              {{dosage.method.coding[0].display}}
+            </span>
+        </span></b></td>
+    </tr>
+    <tr>
+      <td>Indication</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Reason for supply</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Reason for non supply</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Total amount of medication supplied</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Remove dose amount description</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Remove dose timing description</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Dose directions description</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Additional instructions</td>
+      <td><b><span *ngFor="let dosage of medicationDispense.dosageInstruction">
+          <span *ngFor="let instrs of dosage.additionalInstruction">
+                {{instrs.coding[0].display}}
+          </span>
+        </span></b></td>
+    </tr>
+    <tr>
+      <td>Supplied by</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td>Role</td>
+      <td><b></b></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><b></b></td>
+    </tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>

@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>Immunisation</h2>
+<mat-dialog-content>
+ <table>
+   <tr>
+     <td>Immunisation</td>
+     <td><b>{{immunisation.vaccineCode.coding[0].display}}</b></td>
+   </tr>
+   <tr>
+     <td>Status</td>
+     <td><b> {{immunisation.status}}</b></td>
+   </tr>
+   <tr>
+     <td>Date</td>
+     <td><b>{{immunisation.date | date: 'dd-MMM-yyyy'}}</b></td>
+   </tr>
+   <tr>
+     <td>Procedure</td>
+     <td><b> <span *ngFor="let extension of immunisation.extension">
+           <span *ngIf="extension.url == 'https://fhir.hl7.org.uk/STU3/StructureDefinition/Extension-CareConnect-VaccinationProcedure-1'">
+                 {{extension.valueCodeableConcept.coding[0].display}}
+            </span>
+        </span></b></td>
+   </tr>
+   <tr>
+     <td>Batch No.</td>
+     <td><b>{{ immunisation.lotNumber }}</b></td>
+   </tr>
+   <tr>
+     <td>Expire</td>
+     <td><b>{{immunisation.expirationDate | date: 'dd-MMM-yyyy'}}</b></td>
+   </tr>
+   <tr>
+     <td>Site</td>
+     <td><b> <span *ngIf="immunisation.site != undefined" >
+          {{immunisation.site.coding[0].display}}
+        </span></b></td>
+   </tr>
+   <tr>
+     <td>Route</td>
+     <td><b> <span *ngIf="immunisation.route != undefined" >
+           {{immunisation.route.coding[0].display}}
+         </span></b></td>
+   </tr>
+   <tr>
+     <td>Indication</td>
+     <td><b> <span *ngIf="immunisation.explanation != undefined && immunisation.explanation.reason.length > 0" >
+          {{immunisation.explanation.reason[0].coding[0].display}}
+        </span></b></td>
+   </tr>
+ </table>
+
+
+
+  <!--   Vaccine product
+     Vaccine procedure
+
+     Serialisation code
+
+     Remove dose sequence
+
+
+     -->
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</mat-dialog-actions>
+
+
+
+
+
+

@@ -127,6 +127,8 @@ import { ClinicalImpressionComponent } from './component/clinical-impression/cli
 import { ConsentComponent } from './component/consent/consent.component';
 import { CarePlanComponent } from './component/care-plan/care-plan.component';
 import { MedicationDispenseComponent } from './component/medication-dispense/medication-dispense.component';
+import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-detail/medication-dispense-detail.component';
+import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
 
 
 
@@ -191,7 +193,9 @@ import { MedicationDispenseComponent } from './component/medication-dispense/med
     ClinicalImpressionComponent,
     ConsentComponent,
     CarePlanComponent,
-    MedicationDispenseComponent
+    MedicationDispenseComponent,
+    MedicationDispenseDetailComponent,
+    ImmunisationDetailComponent
   ],
   entryComponents: [
     ResourceDialogComponent,
@@ -201,7 +205,9 @@ import { MedicationDispenseComponent } from './component/medication-dispense/med
     PractitionerDialogComponent,
     OrganisationDialogComponent,
     PractitionerRoleDialogComponent,
-    EncounterDialogComponent
+    EncounterDialogComponent,
+      MedicationDispenseDetailComponent,
+      ImmunisationDetailComponent
   ],
   imports: [
     BrowserModule,

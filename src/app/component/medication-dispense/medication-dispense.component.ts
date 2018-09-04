@@ -9,6 +9,7 @@ import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dia
 import {MedicationDispenseDataSource} from "../../data-source/medication-dispense-data-source";
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
+import {MedicationDispenseDetailComponent} from "../../dialog/medication-dispense-detail/medication-dispense-detail.component";
 
 @Component({
   selector: 'app-medication-dispense',
@@ -27,7 +28,7 @@ export class MedicationDispenseComponent implements OnInit {
 
     dataSource : MedicationDispenseDataSource;
 
-    displayedColumns = ['medication', 'medicationlink','status','dose','quantity', 'prepared', 'handedover','practitioner','organisation', 'resource'];
+    displayedColumns = ['medication', 'medicationlink','status','dose','quantity', 'prepared', 'handedover','practitioner','organisation', 'more', 'resource'];
 
     practitioners : fhir.Practitioner[];
 
@@ -163,6 +164,20 @@ export class MedicationDispenseComponent implements OnInit {
     }
 
 
+    more(medicationDispense : fhir.MedicationDispense) {
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            id: 1,
+            medicationDispense: medicationDispense
+        };
+        let resourceDialog: MatDialogRef<MedicationDispenseDetailComponent> = this.dialog.open(MedicationDispenseDetailComponent, dialogConfig);
+
+    }
 
     showPractitioner(medicationDispense : fhir.MedicationDispense) {
         this.practitioners = [];

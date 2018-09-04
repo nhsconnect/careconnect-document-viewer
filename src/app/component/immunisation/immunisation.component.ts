@@ -8,6 +8,8 @@ import {FhirService} from "../../service/fhir.service";
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
 import {BundleService} from "../../service/bundle.service";
+import {MedicationDispenseDetailComponent} from "../../dialog/medication-dispense-detail/medication-dispense-detail.component";
+import {ImmunisationDetailComponent} from "../../dialog/immunisation-detail/immunisation-detail.component";
 
 @Component({
   selector: 'app-immunisation',
@@ -26,7 +28,7 @@ export class ImmunisationComponent implements OnInit {
 
     organisations : fhir.Organization[];
 
-  displayedColumns = ['date','procedure', 'code','codelink','indication','indicationlink','dose','site','route','status', 'manufacturer','practitionerRole','practitioner', 'batch', 'expire', 'resource'];
+  displayedColumns = ['date','procedure', 'code','codelink','indication','indicationlink','dose','manufacturer','practitionerRole','practitioner', 'more', 'resource'];
 
   constructor(private linksService : LinksService,
               public dialog: MatDialog,
@@ -89,6 +91,21 @@ export class ImmunisationComponent implements OnInit {
         });
     }
 
+
+    more(immunisation : fhir.Immunization) {
+
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            id: 1,
+            immunisation: immunisation
+        };
+        let resourceDialog: MatDialogRef<ImmunisationDetailComponent> = this.dialog.open(ImmunisationDetailComponent, dialogConfig);
+
+    }
 
 
     showPractitioner(immunisation : fhir.Immunization) {

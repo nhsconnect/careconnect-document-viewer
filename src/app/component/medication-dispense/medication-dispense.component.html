@@ -122,6 +122,12 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="more">
+      <th mat-header-cell *matHeaderCellDef width="5%"> More </th>
+      <td mat-cell *matCellDef="let medicationDispense">
+        <button mat-icon-button color="accent"  ngbTooltip="View Details" (click)="more(medicationDispense)"><mat-icon>more_horiz</mat-icon></button>
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="resource">
       <th mat-header-cell *matHeaderCellDef width="5%"> FHIR </th>
