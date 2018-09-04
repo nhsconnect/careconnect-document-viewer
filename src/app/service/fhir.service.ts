@@ -403,13 +403,21 @@ export class FhirService {
 
   }
 
-  getEPRMedicationRequests(patientId: string): Observable<fhir.Bundle> {
+  getMedicationDispense(patientId: string): Observable<fhir.Bundle> {
 
-    const url = this.getEPRUrl()  + `/MedicationRequest?patient=${patientId}`;
+    const url = this.getEPRUrl()  + `/MedicationDispense?patient=${patientId}`;
 
     return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
 
   }
+
+    getEPRMedicationRequests(patientId: string): Observable<fhir.Bundle> {
+
+        const url = this.getEPRUrl()  + `/MedicationRequest?patient=${patientId}`;
+
+        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+
+    }
 
   getEPRMedicationStatements(patientId: string): Observable<fhir.Bundle> {
 

@@ -126,6 +126,7 @@ import { GoalComponent } from './component/goal/goal.component';
 import { ClinicalImpressionComponent } from './component/clinical-impression/clinical-impression.component';
 import { ConsentComponent } from './component/consent/consent.component';
 import { CarePlanComponent } from './component/care-plan/care-plan.component';
+import { MedicationDispenseComponent } from './component/medication-dispense/medication-dispense.component';
 
 
 
@@ -189,7 +190,8 @@ import { CarePlanComponent } from './component/care-plan/care-plan.component';
     GoalComponent,
     ClinicalImpressionComponent,
     ConsentComponent,
-    CarePlanComponent
+    CarePlanComponent,
+    MedicationDispenseComponent
   ],
   entryComponents: [
     ResourceDialogComponent,

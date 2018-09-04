@@ -24,6 +24,7 @@ export class ViewDocumentSectionComponent implements OnInit {
   entries : any[];
 
   medicationStatements : fhir.MedicationStatement[];
+  medicationDispenses : fhir.MedicationDispense[];
   prescriptions : fhir.MedicationRequest[];
   medications : fhir.Medication[];
   conditions : fhir.Condition[];
@@ -57,6 +58,7 @@ export class ViewDocumentSectionComponent implements OnInit {
   ngOnInit() {
     this.entries = [];
     this.medicationStatements =[];
+      this.medicationDispenses =[];
     this.prescriptions =[];
     this.medications=[];
     this.conditions=[];
@@ -192,6 +194,13 @@ export class ViewDocumentSectionComponent implements OnInit {
               }
 
               break;
+              case "MedicationDispense" :
+                  let medicationDispense: fhir.MedicationDispense = <fhir.MedicationDispense> resource;
+                  this.medicationDispenses.push(medicationDispense);
+                  if (medicationDispense.medicationReference != undefined) {
+                      this.getReferencedItem(medicationDispense.medicationReference.reference);
+                  }
+                  break;
             case "MedicationStatement" :
               let medicationStatement: fhir.MedicationStatement = <fhir.MedicationStatement> resource;
               this.medicationStatements.push(medicationStatement);
