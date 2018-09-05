@@ -80,7 +80,6 @@
             <span *ngIf="dosage.maxDosePerPeriod != undefined" >
               <span  > {{dosage.maxDosePerPeriod.numerator.value}} {{dosage.maxDosePerPeriod.numerator.unit}} </span>
             </span>
-
         </span>
       </td>
     </ng-container>
@@ -101,22 +100,22 @@
 
 
     <ng-container matColumnDef="practitioner">
-      <th mat-header-cell *matHeaderCellDef width="5%"> Perf. </th>
+      <th mat-header-cell *matHeaderCellDef width="5%"> Pharmacist </th>
       <td mat-cell *matCellDef="let medicationDispense">
         <span *ngIf="medicationDispense.performer != undefined && medicationDispense.performer.length > 0">
           <span *ngIf="medicationDispense.performer[0].actor != undefined">
-            <button mat-icon-button color="accent"  ngbTooltip="View Performer" (click)="showPractitioner(medicationDispense)"><mat-icon>person</mat-icon></button>
+            <button mat-icon-button color="accent"  ngbTooltip="View Pharmacist" (click)="showPractitioner(medicationDispense)"><mat-icon>person</mat-icon></button>
           </span>
         </span>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="organisation">
-      <th mat-header-cell *matHeaderCellDef width="5%"> Org. </th>
+      <th mat-header-cell *matHeaderCellDef width="5%"> Pharmacy </th>
       <td mat-cell *matCellDef="let medicationDispense">
         <span *ngIf="medicationDispense.performer != undefined && medicationDispense.performer.length > 0">
           <span *ngIf="medicationDispense.performer[0].onBehalfOf != undefined">
-            <button mat-icon-button color="accent"  ngbTooltip="View Organisation" (click)="showOrganisation(medicationDispense)"><mat-icon>account_balance</mat-icon></button>
+            <button mat-icon-button color="accent"  ngbTooltip="View Pharmacy" (click)="showOrganisation(medicationDispense)"><mat-icon>account_balance</mat-icon></button>
           </span>
         </span>
       </td>

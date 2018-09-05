@@ -8,7 +8,6 @@ import {FhirService} from "../../service/fhir.service";
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
 import {BundleService} from "../../service/bundle.service";
-import {MedicationDispenseDetailComponent} from "../../dialog/medication-dispense-detail/medication-dispense-detail.component";
 import {ImmunisationDetailComponent} from "../../dialog/immunisation-detail/immunisation-detail.component";
 
 @Component({
@@ -28,7 +27,7 @@ export class ImmunisationComponent implements OnInit {
 
   organisations : fhir.Organization[];
 
-  displayedColumns = ['procedure', 'code','codelink','indication','indicationlink','dose','manufacturer','status','date','practitionerRole','practitioner', 'detail', 'resource'];
+  displayedColumns = ['procedure', 'code','codelink','indication','indicationlink','dose','status','date', 'detail', 'resource'];
 
   constructor(private linksService : LinksService,
               public dialog: MatDialog,
