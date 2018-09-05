@@ -28,7 +28,7 @@ export class MedicationDispenseComponent implements OnInit {
 
     dataSource : MedicationDispenseDataSource;
 
-    displayedColumns = ['medication', 'medicationlink','status','dose','quantity', 'prepared', 'handedover','practitioner','organisation', 'more', 'resource'];
+    displayedColumns = ['medication', 'medicationlink','dose','quantity', 'status','prepared', 'handedover','practitioner','organisation', 'detail', 'resource'];
 
     practitioners : fhir.Practitioner[];
 

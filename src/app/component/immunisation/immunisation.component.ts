@@ -24,11 +24,11 @@ export class ImmunisationComponent implements OnInit {
 
   dataSource : ImmunizationDataSource;
 
-    practitioners : fhir.Practitioner[];
+  practitioners : fhir.Practitioner[];
 
-    organisations : fhir.Organization[];
+  organisations : fhir.Organization[];
 
-  displayedColumns = ['date','procedure', 'code','codelink','indication','indicationlink','dose','manufacturer','practitionerRole','practitioner', 'more', 'resource'];
+  displayedColumns = ['procedure', 'code','codelink','indication','indicationlink','dose','manufacturer','status','date','practitionerRole','practitioner', 'detail', 'resource'];
 
   constructor(private linksService : LinksService,
               public dialog: MatDialog,

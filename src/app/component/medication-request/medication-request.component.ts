@@ -31,7 +31,7 @@ export class MedicationRequestComponent implements OnInit {
 
   dataSource : MedicationRequestDataSource;
 
-  displayedColumns = ['medication', 'medicationlink','status','dose','route','routelink','form', 'authored', 'status', 'resource'];
+  displayedColumns = ['medication', 'medicationlink','dose','route','routelink','form', 'status','authored',  'resource'];
 
 
   constructor(private linksService : LinksService,

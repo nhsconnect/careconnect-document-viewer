@@ -113,7 +113,9 @@ export class EdmsComponent implements AfterViewInit {
       });
     this.subPatient = this.eprService.getPatientChangeEmitter()
       .subscribe( patient => {
+        if (patient !== undefined) console.log('EDMS main patient change '+patient.id);
         this.patient = patient;
+        this.section='documents';
       });
      this.eprService.getSectionChangeEvent()
       .subscribe( section => {
