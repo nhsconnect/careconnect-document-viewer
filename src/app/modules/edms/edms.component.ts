@@ -76,7 +76,7 @@ export class EdmsComponent implements AfterViewInit {
   },
   ];
 
-  name="Clinical Assurance Tool";
+  name="Clinical Document Viewer";
 
 
   patient : fhir.Patient;
