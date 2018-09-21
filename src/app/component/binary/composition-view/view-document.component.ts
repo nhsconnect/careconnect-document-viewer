@@ -93,8 +93,10 @@ export class ViewDocumentComponent implements OnInit {
       for (let entry of this.document.entry) {
         if (entry.resource.resourceType === "Encounter") {
          // console.log('Doc Ent = '+entry.fullUrl);
-          if (entry.fullUrl.indexOf(this.composition.encounter.reference) != -1)
-          this.encounter = <fhir.Encounter>entry.resource;
+            if (entry.fullUrl !== undefined) {
+                if (entry.fullUrl.indexOf(this.composition.encounter.reference) != -1)
+                    this.encounter = <fhir.Encounter>entry.resource;
+            }
         }
       }
     }
