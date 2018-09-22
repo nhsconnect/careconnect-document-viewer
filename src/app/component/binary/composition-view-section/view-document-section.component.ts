@@ -262,6 +262,17 @@ export class ViewDocumentSectionComponent implements OnInit {
               });
           }
         }
+      for(let medicationStatement of this.medicationStatements) {
+          if (medicationStatement.medicationReference !== undefined) {
+              let resource = this.bundleService.getResource(medicationStatement.medicationReference.reference).subscribe(
+                  (resource) => {
+                      if (resource != undefined && (resource.resourceType === 'Medication')) {
+                          let medication : fhir.Medication = <fhir.Medication> resource;
+                          medicationStatement.medicationReference.display = medication.code.coding[0].display;
+                      }
+                  });
+          }
+      }
       }
 
 
