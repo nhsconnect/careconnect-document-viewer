@@ -19,15 +19,15 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ##Docker 
 
 
-docker build . -t thorlogic/ccri-app
+docker build . -t thorlogic/ccri-cat
 
-docker tag thorlogic/ccri-app thorlogic/ccri-app:stable
+docker tag thorlogic/ccri-cat thorlogic/ccri-cat:latest
 
-docker push thorlogic/ccri-app
+docker push thorlogic/ccri-cat
 
 ###Local test 
 
-docker run -d -p 4200:80 --name ccri-app thorlogic/ccri-app 
+docker run -d -p 4200:80 --name ccri-app thorlogic/ccri-cat 
 
 ### Docker clean up
 

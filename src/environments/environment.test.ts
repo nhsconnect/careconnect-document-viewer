@@ -6,18 +6,18 @@
 export const environment = {
   production: false,
   keycloak: {
-    RootUrl: 'https://enterprisearchitecture-test.digital.nhs.uk/auth',
-    authServerUrl: 'https://enterprisearchitecture-test.digital.nhs.uk/auth',
+    RootUrl: 'KEYCLOAK_AUTH_URL',
+    authServerUrl: 'KEYCLOAK_SERVER_URL',
     realm : 'ReferenceImplementations',
     client_secret : 'KEYCLOAK_CLIENT_SECRET',
     client_id : 'ccri-cat'
   },
   login : '',
   oauth2 : {
-    eprUrl : 'https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3',
+    eprUrl : 'FHIR_SERVER_URL',
     client_id : 'clinical-assurance-tool',
     client_secret : 'SMART_OAUTH2_CLIENT_SECRET',
-    cookie_domain: 'purple.testlab.nhs.uk'
+    cookie_domain: 'CAT_COOKIE_DOMAIN'
   },
   smart: {
     cardiac : 'https://purple.testlab.nhs.uk/cardiac/launch.html?iss=https://purple.testlab.nhs.uk/smart-on-fhir-resource/STU3&launch=',
