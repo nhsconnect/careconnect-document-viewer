@@ -82,7 +82,9 @@ export class ViewDocumentSectionComponent implements OnInit {
     this.getPopover(this.section);
 
   }
+  clearDown() {
 
+  }
 
   getPopover(section : fhir.CompositionSection)  {
 
