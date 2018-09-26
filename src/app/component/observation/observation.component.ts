@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LinksService} from "../../service/links.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {ObservationDataSource} from "../../data-source/observation-data-source";

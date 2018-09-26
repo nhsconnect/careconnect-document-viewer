@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FhirService} from "../../service/fhir.service";
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
-import {NgbTabset} from "@ng-bootstrap/ng-bootstrap";
 import {LinksService} from "../../service/links.service";
 import {EprService} from "../../service/epr.service";
 
@@ -48,12 +47,6 @@ export class EdmsRecordComponent implements OnInit {
   @Input()
   section : string = undefined;
 
-  page : number;
-
-  graphData = {};
-
-  @ViewChild('tabs')
-  private tabs:NgbTabset;
 
   constructor(private fhirService: FhirService,
               private route: ActivatedRoute,

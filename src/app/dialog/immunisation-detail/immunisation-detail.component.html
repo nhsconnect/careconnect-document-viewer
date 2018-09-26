@@ -46,7 +46,7 @@
          <td>
              <span *ngIf="immunisation.manufacturer != undefined">
                  {{immunisation.manufacturer.display}}
-                <button mat-icon-button color="accent"  ngbTooltip="View Manufacturer" (click)="showOrganisation(immunisation)"><mat-icon>account_balance</mat-icon></button>
+                <button mat-icon-button color="accent"  matTooltip="View Manufacturer" (click)="showOrganisation(immunisation)"><mat-icon>account_balance</mat-icon></button>
              </span>
          </td>
    </tr>
@@ -95,7 +95,7 @@
                  <span *ngFor="let practitioner of immunisation.practitioner">
                      <span *ngIf="practitioner.actor !== undefined">{{practitioner.actor.display}}</span>
                  </span>
-          <button mat-icon-button color="accent"  ngbTooltip="View Administered by" (click)="showPractitioner(immunisation)"><mat-icon>person</mat-icon></button>
+          <button mat-icon-button color="accent"  matTooltip="View Administered by" (click)="showPractitioner(immunisation)"><mat-icon>person</mat-icon></button>
         </span>
          </td>
      </tr>

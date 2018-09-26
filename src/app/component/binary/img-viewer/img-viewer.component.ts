@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FhirService} from "../../../service/fhir.service";
 import {ActivatedRoute} from "@angular/router";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 import {IAlertConfig, TdDialogService} from "@covalent/core";
 
 @Component({
@@ -21,7 +21,6 @@ export class ImgViewerComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
           private fhirService : FhirService,
-          private modalService: NgbModal,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef
               ) { }

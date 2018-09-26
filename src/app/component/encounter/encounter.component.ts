@@ -97,7 +97,7 @@ export class EncounterComponent implements OnInit {
         console.log(reference);
         let refArray: string[] = reference.location.reference.split('/');
         if (refArray.length>1) {
-          this.fhirService.getResource(reference.location.reference).subscribe(data => {
+          this.fhirService.getResource('/Encounter/'+reference.location.reference).subscribe(data => {
               if (data != undefined) {
                 this.locations.push(<fhir.Location>data);
 

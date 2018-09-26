@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoadDocumentComponent } from './modules/document-load/load-document.component';
 import { EdmsComponent } from './modules/edms/edms.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { FileUploadModule } from "ng2-file-upload";
 import { ViewDocumentComponent } from './component/binary/composition-view/view-document.component';
@@ -66,29 +65,28 @@ import {PdfViewerModule} from "ng2-pdf-viewer";
 import { ImgViewerComponent } from './component/binary/img-viewer/img-viewer.component';
 import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-  MatButtonModule,
-  MatCardModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatGridListModule,
-  MatIcon,
-  MatIconRegistry,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatPaginatorModule,
-  MatSelectModule,
+    DateAdapter,
+    MAT_DATE_FORMATS,
+    MAT_DATE_LOCALE,
+    MatButtonModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatGridListModule,
+    MatIconRegistry,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatPaginatorModule,
+    MatSelectModule,
 
-  MatSidenavModule,
-  MatTableModule,
-  MatToolbarModule,
-  MatSnackBarModule,
-  MatMenuModule,
-  MatProgressBarModule,
-  MatProgressSpinnerModule
+    MatSidenavModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule, MatTooltipModule
 } from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-adapter";
@@ -220,7 +218,6 @@ import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immuni
     AppRoutingModule,
     FileUploadModule,
     HttpClientModule,
-    NgbModule.forRoot(),
     TreeModule,
     PdfViewerModule,
     ImageViewerModule,
@@ -243,6 +240,7 @@ import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immuni
     MatSnackBarModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+      MatTooltipModule,
 
 
     CovalentLayoutModule,

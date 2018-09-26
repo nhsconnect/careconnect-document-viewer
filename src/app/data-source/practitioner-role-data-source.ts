@@ -1,8 +1,7 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
 import {BundleService} from "../service/bundle.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export class PractitionerRoleDataSource extends DataSource<any> {
 
@@ -28,7 +27,7 @@ export class PractitionerRoleDataSource extends DataSource<any> {
     console.log('PractitionerRole.connect useBundle = '+this.useBundle);
 
     if (!this.useBundle) {
-      this.fhirService.searchPractitionerRoleByPractitioner(this.practitioner.id).subscribe(bundle => {
+      this.fhirService.get('/PractitionerRole?practitioner='+this.practitioner.id).subscribe(bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             console.log('entry = ' + entry.resource.resourceType);

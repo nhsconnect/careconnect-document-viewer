@@ -4,10 +4,10 @@ import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dia
 
 import {PractitionerDataSource} from "../../data-source/practitioner-data-source";
 import {FhirService} from "../../service/fhir.service";
-import {Observable} from "rxjs/Observable";
 import {BundleService} from "../../service/bundle.service";
 
 import {PractitionerRoleDialogComponent} from "../../dialog/practitioner-role-dialog/practitioner-role-dialog.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-practitioner',

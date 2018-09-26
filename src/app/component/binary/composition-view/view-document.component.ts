@@ -1,8 +1,6 @@
 import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {FhirService} from "../../../service/fhir.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {EprService} from "../../../service/epr.service";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {ResourceDialogComponent} from "../../../dialog/resource-dialog/resource-dialog.component";
 import {IAlertConfig, TdDialogService} from "@covalent/core";
@@ -28,7 +26,6 @@ export class ViewDocumentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
             private fhirService : FhirService,
-            private modalService: NgbModal,
             public dialog: MatDialog,
             public bundleService : BundleService,
               private _dialogService: TdDialogService,

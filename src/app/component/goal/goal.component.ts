@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AllergyIntoleranceDataSource} from "../../data-source/allergy-data-source";
 import {GoalDataSource} from "../../data-source/goal-data-source";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";

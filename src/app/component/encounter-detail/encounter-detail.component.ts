@@ -33,7 +33,7 @@ export class EncounterDetailComponent implements OnInit {
 
   ngOnInit() {
 
-    this.fhirService.getEPREncounterInclude(this.encounterId).subscribe(data=> {
+    this.fhirService.get('/Encounter?_id='+this.encounterId+'&_revinclude=*&_count=50').subscribe(data=> {
         this.observations = [];
         this.obsTotal = 0;
 

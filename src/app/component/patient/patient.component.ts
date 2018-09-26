@@ -4,10 +4,10 @@ import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dia
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
 import {PatientDataSource} from "../../data-source/patient-data-source";
 import {FhirService} from "../../service/fhir.service";
-import {Observable} from "rxjs/Observable";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {BundleService} from "../../service/bundle.service";
+import {Observable} from "rxjs";
 
 
 

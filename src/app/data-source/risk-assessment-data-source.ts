@@ -1,8 +1,7 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
 
 export class RiskAssessmentDataSource extends DataSource<any> {
   constructor(public fhirService : FhirService,
@@ -25,7 +24,7 @@ export class RiskAssessmentDataSource extends DataSource<any> {
     this.dataStore = { risks: [] };
 
     if (this.patientId != undefined) {
-      this.fhirService.getRiskAssessment(this.patientId).subscribe((bundle => {
+      this.fhirService.get('/RiskAssessment?patient='+this.patientId).subscribe((bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             this.dataStore.risks.push(<fhir.RiskAssessment> entry.resource);

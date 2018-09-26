@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {DataSet, Timeline, TimelineOptions} from "vis";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+
 
 //declare var vis: any;
 
@@ -21,7 +21,7 @@ export class PatientTimelineComponent implements OnInit {
 
   encounterId : string;
 
-  constructor(private modalService: NgbModal,private elementRef: ElementRef) { }
+  constructor(private elementRef: ElementRef) { }
 
   @ViewChild("modalContent", {read: TemplateRef}) tref ;
 
@@ -130,7 +130,7 @@ export class PatientTimelineComponent implements OnInit {
             console.log(this.tref);
             console.log('Encounter Selected');
             this.encounterId = itemstr[1];
-            this.modalService.open(this.tref, {windowClass: 'dark-modal'});
+           // TODO ReEnable this.modalService.open(this.tref, {windowClass: 'dark-modal'});
           }
         }
         //console.log('clicked '+properties.item)

@@ -4,9 +4,8 @@ import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dia
 
 import {OrganisationDataSource} from "../../data-source/organisation-data-source";
 import {FhirService} from "../../service/fhir.service";
-import {Observable} from "rxjs/Observable";
-import {PatientDataSource} from "../../data-source/patient-data-source";
 import {BundleService} from "../../service/bundle.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-organisation',

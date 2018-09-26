@@ -1,8 +1,6 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
-
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export class ConditionDataSource extends DataSource<any> {
   constructor(public fhirService : FhirService, public patientId : string,public conditions : fhir.Condition[]
@@ -24,7 +22,7 @@ export class ConditionDataSource extends DataSource<any> {
     this.dataStore = { conditions: [] };
 
     if (this.patientId != undefined) {
-      this.fhirService.getEPRConditions(this.patientId).subscribe((bundle => {
+      this.fhirService.get('/Condition?patient='+this.patientId).subscribe((bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             this.dataStore.conditions.push(<fhir.Condition> entry.resource);

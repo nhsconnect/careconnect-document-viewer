@@ -14,10 +14,10 @@
         </span></b>
         <span *ngIf="medicationDispense.medicationCodeableConcept !=undefined" >
             <span *ngIf="isSNOMED(medicationDispense.medicationCodeableConcept.coding[0].system)">
-              <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(medicationDispense.medicationCodeableConcept.coding[0].system)}} {{medicationDispense.medicationCodeableConcept.coding[0].code}}" (click)="getSNOMEDLink(medicationDispense.medicationCodeableConcept.coding[0])">
+              <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(medicationDispense.medicationCodeableConcept.coding[0].system)}} {{medicationDispense.medicationCodeableConcept.coding[0].code}}" (click)="getSNOMEDLink(medicationDispense.medicationCodeableConcept.coding[0])">
                   <mat-icon>book</mat-icon>
               </button>
-              <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(medicationDispense.medicationCodeableConcept.coding[0].system)}} {{medicationDispense.medicationCodeableConcept.coding[0].code}}" (click)="getDMDLink(medicationDispense.medicationCodeableConcept.coding[0])">
+              <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(medicationDispense.medicationCodeableConcept.coding[0].system)}} {{medicationDispense.medicationCodeableConcept.coding[0].code}}" (click)="getDMDLink(medicationDispense.medicationCodeableConcept.coding[0])">
                   <mat-icon>turned_in</mat-icon>git
 
               </button>
@@ -177,7 +177,7 @@
       <td><span *ngIf="medicationDispense.performer != undefined && medicationDispense.performer.length > 0">
           <span *ngIf="medicationDispense.performer[0].actor != undefined">
             <b>{{medicationDispense.performer[0].actor.display}}</b>
-            <button mat-icon-button color="accent"  ngbTooltip="View Pharmacist" (click)="showPractitioner(medicationDispense)"><mat-icon>person</mat-icon></button>
+            <button mat-icon-button color="accent"  matTooltip="View Pharmacist" (click)="showPractitioner(medicationDispense)"><mat-icon>person</mat-icon></button>
           </span>
         </span></td>
     </tr>
@@ -186,7 +186,7 @@
       <td>  <span *ngIf="medicationDispense.performer != undefined && medicationDispense.performer.length > 0">
           <span *ngIf="medicationDispense.performer[0].onBehalfOf != undefined">
             <b>{{medicationDispense.performer[0].onBehalfOf.display}}</b>
-            <button mat-icon-button color="accent"  ngbTooltip="View Pharmacy" (click)="showOrganisation(medicationDispense)"><mat-icon>account_balance</mat-icon></button>
+            <button mat-icon-button color="accent"  matTooltip="View Pharmacy" (click)="showOrganisation(medicationDispense)"><mat-icon>account_balance</mat-icon></button>
           </span>
         </span></td>
     </tr>

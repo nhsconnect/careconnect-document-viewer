@@ -1,8 +1,6 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
-
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export class DocumentReferenceDataSource extends DataSource<any> {
   constructor(public fhirService : FhirService, public patientId : string,public documents : fhir.DocumentReference[]
@@ -24,7 +22,7 @@ export class DocumentReferenceDataSource extends DataSource<any> {
     this.dataStore = { documents: [] };
 
     if (this.patientId != undefined) {
-      this.fhirService.getEPRDocuments(this.patientId).subscribe((bundle => {
+      this.fhirService.get('/DocumentReference?patient='+this.patientId).subscribe((bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             this.dataStore.documents.push(<fhir.DocumentReference> entry.resource);

@@ -1,8 +1,7 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
+import {BehaviorSubject, Observable} from "rxjs";
 
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
-import {Observable} from "rxjs/Observable";
 
 export class ConsentDataSource extends DataSource<any> {
   constructor(public fhirService : FhirService,
@@ -25,7 +24,7 @@ export class ConsentDataSource extends DataSource<any> {
     this.dataStore = { consents: [] };
 
     if (this.patientId != undefined) {
-      this.fhirService.getConsent(this.patientId).subscribe((bundle => {
+      this.fhirService.get('/Consent?patient='+this.patientId).subscribe((bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             this.dataStore.consents.push(<fhir.Consent> entry.resource);

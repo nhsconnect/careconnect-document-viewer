@@ -1,7 +1,6 @@
 import {DataSource} from "@angular/cdk/table";
 import {FhirService} from "../service/fhir.service";
-import {Observable } from "rxjs/Observable";
-import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {BehaviorSubject, Observable} from "rxjs";
 
 export class QuestionnaireResponseDataSource extends DataSource<any> {
 
@@ -27,7 +26,7 @@ export class QuestionnaireResponseDataSource extends DataSource<any> {
     this.dataStore = { forms: [] };
 
      if (this.patientId != undefined) {
-      this.fhirService.getQuestionnaireResponse(this.patientId).subscribe((bundle => {
+      this.fhirService.get('/QuestionnaireResponse?patient='+this.patientId).subscribe((bundle => {
         if (bundle != undefined && bundle.entry != undefined) {
           for (let entry of bundle.entry) {
             this.dataStore.forms.push(<fhir.QuestionnaireResponse> entry.resource);

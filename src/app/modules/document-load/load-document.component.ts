@@ -5,7 +5,6 @@ import {AuthService} from "../../service/auth.service";
 import {FhirService} from "../../service/fhir.service";
 import {Router} from "@angular/router";
 import {EprService} from "../../service/epr.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {DocumentRef} from "../../model/document-ref";
 import { v4 as uuid } from 'uuid';
@@ -62,7 +61,6 @@ export class LoadDocumentComponent implements OnInit {
               public auth : AuthService,
               private fhirService : FhirService,
               public eprService : EprService,
-              private modalService : NgbModal,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef,
               public dialog: MatDialog) { }

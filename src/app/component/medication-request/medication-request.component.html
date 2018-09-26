@@ -38,10 +38,10 @@
 
           <span *ngIf="medicationRequest.medicationCodeableConcept !=undefined" >
             <span *ngIf="isSNOMED(medicationRequest.medicationCodeableConcept.coding[0].system)">
-              <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(medicationRequest.medicationCodeableConcept.coding[0].system)}} {{medicationRequest.medicationCodeableConcept.coding[0].code}}" (click)="getSNOMEDLink(medicationRequest.medicationCodeableConcept.coding[0])">
+              <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(medicationRequest.medicationCodeableConcept.coding[0].system)}} {{medicationRequest.medicationCodeableConcept.coding[0].code}}" (click)="getSNOMEDLink(medicationRequest.medicationCodeableConcept.coding[0])">
                   <mat-icon>book</mat-icon>
               </button>
-              <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(medicationRequest.medicationCodeableConcept.coding[0].system)}} {{medicationRequest.medicationCodeableConcept.coding[0].code}}" (click)="getDMDLink(medicationRequest.medicationCodeableConcept.coding[0])">
+              <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(medicationRequest.medicationCodeableConcept.coding[0].system)}} {{medicationRequest.medicationCodeableConcept.coding[0].code}}" (click)="getDMDLink(medicationRequest.medicationCodeableConcept.coding[0])">
                   <mat-icon>turned_in</mat-icon>
               </button>
             </span>
@@ -99,7 +99,7 @@
         <span *ngFor="let dosage of medicationRequest.dosage">
 
             <span *ngIf="dosage.route!=undefined && dosage.route.coding.length>0" >
-               <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(dosage.route.coding[0].system)}} {{dosage.route.coding[0].code}}" (click)="getSNOMEDLink(dosage.route.coding[0])">
+               <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(dosage.route.coding[0].system)}} {{dosage.route.coding[0].code}}" (click)="getSNOMEDLink(dosage.route.coding[0])">
                   <mat-icon>book</mat-icon>
               </button>
             </span>
@@ -117,7 +117,7 @@
     <ng-container matColumnDef="resource">
       <th mat-header-cell *matHeaderCellDef width="5%"> FHIR </th>
       <td mat-cell *matCellDef="let medicationRequest">
-        <button mat-icon-button color="accent"  ngbTooltip="View FHIR resource" (click)="select(medicationRequest)"><mat-icon>code</mat-icon></button>
+        <button mat-icon-button color="accent"  matTooltip="View FHIR resource" (click)="select(medicationRequest)"><mat-icon>code</mat-icon></button>
       </td>
     </ng-container>
 

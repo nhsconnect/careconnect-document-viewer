@@ -21,7 +21,6 @@
               "src/favicon.png"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/jstree/dist/themes/default/style.min.css",
@@ -105,7 +104,6 @@
               "node_modules/jstree/dist/jstree.min.js"
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/jstree/dist/themes/default/style.min.css"

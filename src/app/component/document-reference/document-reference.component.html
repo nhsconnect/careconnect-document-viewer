@@ -33,12 +33,12 @@
       <td mat-cell *matCellDef="let document">
       <span *ngIf="document.type.coding[0].code != undefined" >
         <span *ngIf="isSNOMED(document.type.coding[0].system)">
-          <button mat-icon-button color="accent" ngbTooltip="{{getCodeSystem(document.type.coding[0].system)}} {{document.type.coding[0].code}}" (click)="getSNOMEDLink(document.type.coding[0])">
+          <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(document.type.coding[0].system)}} {{document.type.coding[0].code}}" (click)="getSNOMEDLink(document.type.coding[0])">
               <mat-icon>book</mat-icon>
           </button>
         </span>
          <span *ngIf="!isSNOMED(document.type.coding[0].system)">
-              <mat-icon ngbTooltip="{{getCodeSystem(document.type.coding[0].system)}} {{document.type.coding[0].code}}">book_outline</mat-icon>
+              <mat-icon matTooltip="{{getCodeSystem(document.type.coding[0].system)}} {{document.type.coding[0].code}}">book_outline</mat-icon>
         </span>
       </span>
       </td>
@@ -58,7 +58,7 @@
       <th mat-header-cell *matHeaderCellDef width="5%"></th>
       <td mat-cell *matCellDef="let document">
         <span *ngIf="document.author !=undefined && document.author.length > 0">
-          <button mat-icon-button color="accent"  ngbTooltip="View Authors" (click)="showAuthors(document)"><mat-icon>person</mat-icon></button>
+          <button mat-icon-button color="accent"  matTooltip="View Authors" (click)="showAuthors(document)"><mat-icon>person</mat-icon></button>
         </span>
       </td>
     </ng-container>
@@ -74,7 +74,7 @@
       <th mat-header-cell *matHeaderCellDef width="5%"></th>
       <td mat-cell *matCellDef="let document">
         <span *ngIf="document.custodian !=undefined">
-          <button mat-icon-button color="accent"  ngbTooltip="View Custodian" (click)="showCustodian(document)"><mat-icon>account_balance</mat-icon></button>
+          <button mat-icon-button color="accent"  matTooltip="View Custodian" (click)="showCustodian(document)"><mat-icon>account_balance</mat-icon></button>
         </span>
       </td>
     </ng-container>
@@ -95,11 +95,11 @@
       <th mat-header-cell *matHeaderCellDef >Open</th>
       <td mat-cell *matCellDef="let document">
 
-        <button mat-icon-button color="accent" ngbTooltip="View document" (click)="selectDocument(document)"><mat-icon>collections_bookmark</mat-icon></button> </td>
+        <button mat-icon-button color="accent" matTooltip="View document" (click)="selectDocument(document)"><mat-icon>collections_bookmark</mat-icon></button> </td>
     </ng-container>
     <ng-container matColumnDef="resource">
       <th mat-header-cell *matHeaderCellDef >FHIR</th>
-      <td mat-cell *matCellDef="let document">  <button mat-icon-button color="accent" ngbTooltip="View FHIR resource" (click)="select(document)"><mat-icon>code</mat-icon></button>  </td>
+      <td mat-cell *matCellDef="let document">  <button mat-icon-button color="accent" matTooltip="View FHIR resource" (click)="select(document)"><mat-icon>code</mat-icon></button>  </td>
     </ng-container>
 
 

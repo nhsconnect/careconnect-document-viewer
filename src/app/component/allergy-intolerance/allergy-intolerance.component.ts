@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LinksService} from "../../service/links.service";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
-import {EncounterDataSource} from "../../data-source/encounter-data-source";
 import {FhirService} from "../../service/fhir.service";
 import {AllergyIntoleranceDataSource} from "../../data-source/allergy-data-source";
 

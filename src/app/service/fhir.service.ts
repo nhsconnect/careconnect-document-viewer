@@ -252,6 +252,14 @@ export class FhirService {
     return this.http.post<any>(url,"{ launch_id : '"+contextId+"', parameters : { username : 'Get Details From Keycloak', patient : '"+patientId+"' }  }", {'headers': headers});
   }
 
+  // 26/9/2018 Added Simplified code
+    public get(search : string) : Observable<fhir.Bundle> {
+        let url = this.getEPRUrl() + search;
+
+        return this.http.get<fhir.Bundle>(url, {'headers': this.getHeaders()});
+
+    }
+
   getSearchCompositions(patientId : string) : Observable<fhir.Bundle> {
 
     const url = this.getEPRUrl() + this.path +`?patient=${patientId}`;
@@ -312,14 +320,6 @@ export class FhirService {
     return this.http.post<fhir.Bundle>(url,document,{ 'headers' :headers});
   }
 
-  postBundleValidate(document: any,contentType : string) : Observable<any> {
-
-    let headers :HttpHeaders = this.getEPRHeaders(false);
-    headers.append('Content-Type',contentType);
-    const url = this.getEPRUrl() + `/Bundle/$validate?_format=json`;
-
-    return this.http.post<fhir.Bundle>(url,document,{ 'headers' :headers});
-  }
 
   putBundle(document: any,contentType : string) : Observable<fhir.Bundle> {
 
@@ -334,21 +334,8 @@ export class FhirService {
     return this.http.put<fhir.Bundle>(url,document,{ 'params': params, 'headers' :headers});
   }
 
-  getEPREncounters(patientId: string): Observable<fhir.Bundle> {
 
-    const url = this.getEPRUrl()  + `/Encounter?patient=${patientId}`;
 
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-  getEPRConditions(patientId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/Condition?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
 
   getResource(reference : string ) : Observable<fhir.Resource> {
     const url = this.getEPRUrl()  + '/' + reference;
@@ -364,68 +351,8 @@ export class FhirService {
 
   }
 
-  getEPRDocuments(patientId: string): Observable<fhir.Bundle> {
 
-    const url = this.getEPRUrl()  + `/DocumentReference?patient=${patientId}`;
 
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-  getDocumentReference(documentId: string): Observable<fhir.DocumentReference> {
-
-    const url = this.getEPRUrl()  + `/DocumentReference/${documentId}`;
-
-    return this.http.get<fhir.DocumentReference>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-  getEPREncounter(encounterId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/Encounter/${encounterId}/$document?_count=50`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-  getEPREncounterInclude(encounterId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/Encounter?_id=${encounterId}&_revinclude=*&_count=50`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-  getEPRImmunisations(patientId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/Immunization?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-  getMedicationDispense(patientId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/MedicationDispense?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
-
-    getEPRMedicationRequests(patientId: string): Observable<fhir.Bundle> {
-
-        const url = this.getEPRUrl()  + `/MedicationRequest?patient=${patientId}`;
-
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-    }
-
-  getEPRMedicationStatements(patientId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/MedicationStatement?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
 
   getEPRMedication(medicationId: string): Observable<fhir.Medication> {
 
@@ -436,48 +363,6 @@ export class FhirService {
   }
 
 
-  getEPRObservations(patientId: string): Observable<fhir.Bundle> {
-    const url = this.getEPRUrl()  + `/Observation?patient=${patientId}`;
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-  }
-
-    getGoal(patientId: string): Observable<fhir.Bundle> {
-        const url = this.getEPRUrl()  + `/Goal?patient=${patientId}`;
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-    }
-
-    getClinicalImpression(patientId: string): Observable<fhir.Bundle> {
-        const url = this.getEPRUrl()  + `/ClinicalImpression?patient=${patientId}`;
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-    }
-
-    getCarePlan(patientId: string): Observable<fhir.Bundle> {
-        const url = this.getEPRUrl()  + `/CarePlan?patient=${patientId}`;
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-    }
-
-    getConsent(patientId: string): Observable<fhir.Bundle> {
-
-        const url = this.getEPRUrl()  + `/Consent?patient=${patientId}`;
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-    }
-
-
-    getRiskAssessment(patientId: string): Observable<fhir.Bundle> {
-
-        const url = this.getEPRUrl()  + `/RiskAssessment?patient=${patientId}`;
-
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-    }
-
-    getQuestionnaireResponse(patientId: string): Observable<fhir.Bundle> {
-
-        const url = this.getEPRUrl()  + `/QuestionnaireResponse?patient=${patientId}`;
-
-        return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-    }
 
 
 

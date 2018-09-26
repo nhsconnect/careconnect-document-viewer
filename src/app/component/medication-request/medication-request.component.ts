@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LinksService} from "../../service/links.service";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {FhirService} from "../../service/fhir.service";
 import {ResourceDialogComponent} from "../../dialog/resource-dialog/resource-dialog.component";
 import {MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material";
-import {MedicationStatementDataSource} from "../../data-source/medication-statement-data-source";
 import {MedicationRequestDataSource} from "../../data-source/medication-request-data-source";
 import {BundleService} from "../../service/bundle.service";
 import {MedicationDialogComponent} from "../../dialog/medication-dialog/medication-dialog.component";
@@ -35,7 +33,7 @@ export class MedicationRequestComponent implements OnInit {
 
 
   constructor(private linksService : LinksService,
-              private modalService: NgbModal,
+
               private fhirService : FhirService,
               private bundleService : BundleService,
               public dialog: MatDialog) { }
@@ -94,7 +92,7 @@ export class MedicationRequestComponent implements OnInit {
       console.log(reference);
       let refArray: string[] = reference.split('/');
       if (refArray.length>1) {
-        this.fhirService.getEPRMedication(refArray[refArray.length - 1]).subscribe(data => {
+        this.fhirService.get('/Medication/'+(refArray[refArray.length - 1])).subscribe(data => {
             if (data != undefined) {
               this.meds.push(<fhir.Medication>data);
               this.selectedMeds.push(<fhir.Medication>data);
