@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoadDocumentComponent } from './modules/document-load/load-document.component';
-import { EdmsComponent } from './modules/edms/edms.component';
 
 import { FileUploadModule } from "ng2-file-upload";
 import { ViewDocumentComponent } from './component/binary/composition-view/view-document.component';
@@ -128,6 +127,7 @@ import { MedicationDispenseComponent } from './component/medication-dispense/med
 import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-detail/medication-dispense-detail.component';
 import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
 import {LayoutModule} from "@angular/cdk/layout";
+import {EdmsComponent} from "./modules/edms/edms.component";
 
 
 
@@ -135,7 +135,7 @@ import {LayoutModule} from "@angular/cdk/layout";
   declarations: [
     AppComponent,
     LoadDocumentComponent,
-    EdmsComponent,
+      EdmsComponent,
     ViewDocumentComponent,
     ViewDocumentSectionComponent,
     PatientFindComponent,
