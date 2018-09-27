@@ -91,11 +91,11 @@ import {
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-adapter";
 import {
-  CovalentDialogsModule, CovalentFileModule,
+    CovalentDialogsModule, CovalentExpansionPanelModule, CovalentFileModule,
 
-  CovalentJsonFormatterModule,
-  CovalentLayoutModule, CovalentMediaModule,
-  CovalentMenuModule, CovalentNotificationsModule, TdFileInputComponent
+    CovalentJsonFormatterModule,
+    CovalentLayoutModule, CovalentMediaModule,
+    CovalentMenuModule, CovalentMessageModule, CovalentNotificationsModule, TdFileInputComponent
 
 } from "@covalent/core";
 import {CovalentHttpModule} from "@covalent/http";
@@ -127,6 +127,7 @@ import { CarePlanComponent } from './component/care-plan/care-plan.component';
 import { MedicationDispenseComponent } from './component/medication-dispense/medication-dispense.component';
 import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-detail/medication-dispense-detail.component';
 import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
+import {LayoutModule} from "@angular/cdk/layout";
 
 
 
@@ -210,6 +211,7 @@ import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immuni
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+      LayoutModule,
     RouterModule.forRoot([]),
     CookieModule
       .forRoot(),
@@ -259,7 +261,9 @@ import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immuni
     CovalentMediaModule,
     CovalentNotificationsModule,
 
-    CovalentFileModule
+    CovalentFileModule,
+      CovalentExpansionPanelModule,
+      CovalentMessageModule,
 
 /*
     // Issue with https://github.com/Teradata/covalent/issues/1152
