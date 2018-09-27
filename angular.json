@@ -28,7 +28,12 @@
             "scripts": [
               "node_modules/keycloak-js/dist/keycloak.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/jstree/dist/jstree.min.js"
+              "node_modules/jstree/dist/jstree.min.js",
+              {
+                "input": "node_modules/pdfjs-dist/build/pdf.min.js"
+              }, {
+                "input": "node_modules/pdfjs-dist/build/pdf.worker.min.js"
+              }
             ]
           },
           "configurations": {
