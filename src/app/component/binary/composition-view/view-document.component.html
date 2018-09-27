@@ -2,7 +2,7 @@
  <span *ngIf="composition!=undefined" class="container-fluid">
     <mat-card>
         <mat-card-title >
-            <div>{{composition.title}}</div>
+            <div>FHIR Document</div>
         </mat-card-title>
         <mat-card-subtitle> <td-message label="Info" sublabel="Generated from the FHIR Document structured content" color="accent" icon="info"></td-message></mat-card-subtitle>
         <mat-card-content>
@@ -21,8 +21,11 @@
 
       <mat-card>
             <mat-card-title>
-                <strong>{{composition.title}}</strong>
+                <div layout="row" layout-align="start center" flex>
+                <span>{{composition.title}}</span>
+                <span flex></span>
                 {{composition.date | date: 'dd MMM yyyy HH:mm' }}
+                </div>
             </mat-card-title>
             <mat-card-subtitle> <td-message label="Info" sublabel="Generated from the FHIR Document narrative content" color="accent" icon="info"></td-message></mat-card-subtitle>
           <mat-card-content>

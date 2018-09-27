@@ -293,9 +293,10 @@ export class LoadDocumentComponent implements OnInit {
             }
           }
           if (this.eprService.documentReference !== undefined) {
-            this.eprService.setSection('binary');
+              this.router.navigate(['edms', 'binary', this.eprService.documentReference.id], );
+
           } else {
-            this.eprService.setSection('documents');
+              this.router.navigate(['edms', 'documents'], );
           }
         },
         err => {
@@ -321,9 +322,10 @@ export class LoadDocumentComponent implements OnInit {
   }
 
     buildBundle(base64file : string) :any {
+      let file: File = <File> this.formData.get('uploadFile');
       let binary: fhir.Binary = {
         id : uuid(),
-        contentType: this.getContentType(this.files),
+        contentType: this.getContentType(file),
         content: base64file
       };
 
@@ -438,7 +440,11 @@ export class LoadDocumentComponent implements OnInit {
               this.eprService.patient = <fhir.Patient> entry.resource;
             }
           }
-          this.eprService.setSection('binary');
+          if (this.eprService.documentReference != undefined && this.eprService.documentReference.id !== undefined) {
+              this.router.navigate(['edms', 'binary', this.eprService.documentReference.id] );
+          } else {
+              this.router.navigate(['edms', 'documents'] );
+          }
         },
         err => {
           this.progressBar = false;
@@ -454,7 +460,7 @@ export class LoadDocumentComponent implements OnInit {
 
 
 
-  buildBinary(file) :string {
+  buildBinary(file : File) :string {
     let result="";
     var reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -506,7 +512,11 @@ export class LoadDocumentComponent implements OnInit {
             this.eprService.documentReference = <fhir.DocumentReference> entry.resource;
           }
         }
-        this.eprService.setSection('binary');
+            if (this.eprService.documentReference != undefined) {
+                this.router.navigate(['edms', 'binary', this.eprService.documentReference.id] );
+            } else {
+                this.router.navigate(['edms', 'documents'] );
+            }
       },
       err  => {
         this.progressBar = false;

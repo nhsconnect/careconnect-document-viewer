@@ -52,21 +52,32 @@ export class EdmsRecordComponent implements OnInit {
               private route: ActivatedRoute,
               private linksService : LinksService,
               private patientEprService : EprService,
-              private router : Router
+
               ) { }
 
 
   ngOnInit() {
-    this.patientId = this.patientEprService.patient.id;
+
+    this.patientEprService.getPatientChangeEmitter().subscribe(patient =>
+    {
+      if (patient != undefined) {
+          this.patientId = patient.id;
+      }
+    })
+    ;
+    if (this.patientEprService.patient != undefined) {
+        this.patientId = this.patientEprService.patient.id;
+    }
 
     //this.selectPatientEPR(this.patientId);
 
+      /*
     this.patientEprService.getSectionChangeEvent().subscribe( (section) => {
         console.log("Section = "+this.section);
         this.section = section;
       }
     );
-
+*/
     console.log("Section = "+this.section);
     if (this.section == undefined ) {
       this.section = "documents";

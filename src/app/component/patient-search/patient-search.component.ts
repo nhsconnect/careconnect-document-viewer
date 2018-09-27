@@ -94,12 +94,10 @@ export class PatientSearchComponent implements OnInit {
   }
 
   selectPatient(patient : fhir.Patient) {
-   // console.log('Patient Search - change '+patient.id );
+
     this.patientChange.set(patient);
     this.patients$ = undefined;
     this.patientSelected.emit(patient);
-    /*
-    */
   }
 
 

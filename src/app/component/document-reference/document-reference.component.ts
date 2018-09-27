@@ -67,9 +67,9 @@ export class DocumentReferenceComponent implements OnInit {
    // console.log("DocumentRef clicked = " + document.id);
     if (document.content != undefined && document.content.length> 0) {
 
-      this.patientEprService.setDocumentReference(document);
-      this.patientEprService.setSection('binary');
-
+     this.patientEprService.setDocumentReference(document);
+     // this.patientEprService.setSection('binary');
+        this.router.navigate(['edms', 'binary', document.id], );
     } else {
       let alertConfig : IAlertConfig = { message : 'Unable to locate document.'};
       alertConfig.disableClose =  false; // defaults to false

@@ -10,13 +10,13 @@ export class EprService {
 
   resource : any = undefined;
 
-  section : string;
+ // section : string;
 
   userName : string;
 
   userEmail : string;
 
-  patientAllergies : fhir.AllergyIntolerance[] = [];
+ // patientAllergies : fhir.AllergyIntolerance[] = [];
 
   constructor(
     private fhirService : FhirService
@@ -28,12 +28,13 @@ export class EprService {
 
   private resourceChangeEvent : EventEmitter<any> = new EventEmitter();
 
-  private sectionChangeEvent : EventEmitter<string> = new EventEmitter();
+
 
   set(patient: fhir.Patient) {
 
     this.patient = patient;
 
+    /* 27/9/2018 Removed patient allergy lookup
     this.patientAllergies = [];
 
     if (patient != undefined && patient.id != undefined) {
@@ -47,6 +48,7 @@ export class EprService {
         }
       );
     }
+    */
 
     this.patientChangeEvent.emit(this.patient);
   }
@@ -62,6 +64,7 @@ export class EprService {
     return this.resourceChangeEvent;
   }
 
+  /*
   getSectionChangeEvent() {
     return this.sectionChangeEvent;
   }
@@ -70,7 +73,7 @@ export class EprService {
     this.section = section;
     this.sectionChangeEvent.emit(section);
   }
-
+*/
   setResource(resource) {
     this.resource = resource;
     this.resourceChangeEvent.emit(resource);

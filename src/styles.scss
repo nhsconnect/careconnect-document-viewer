@@ -41,13 +41,7 @@ td {padding: 3px; font-size: 10pt;}
   background-color: gray;
 }
 
-.fill-remaining-space {
-  /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
-  flex: 0 1 auto;
 
-  layout-align: space-between none;
-}
 
 .input-half-width {
   width: 50%;

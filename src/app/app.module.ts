@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -128,6 +129,7 @@ import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-
 import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
 import {LayoutModule} from "@angular/cdk/layout";
 import {EdmsComponent} from "./modules/edms/edms.component";
+import {EdmsRoutingModule} from "./edms-routing.module";
 
 
 
@@ -212,12 +214,12 @@ import {EdmsComponent} from "./modules/edms/edms.component";
     BrowserModule,
     BrowserAnimationsModule,
       LayoutModule,
-    RouterModule.forRoot([]),
     CookieModule
       .forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
+      FlexLayoutModule,
+
     FileUploadModule,
     HttpClientModule,
     TreeModule,
@@ -262,8 +264,11 @@ import {EdmsComponent} from "./modules/edms/edms.component";
     CovalentNotificationsModule,
 
     CovalentFileModule,
-      CovalentExpansionPanelModule,
-      CovalentMessageModule,
+    CovalentExpansionPanelModule,
+    CovalentMessageModule,
+
+      EdmsRoutingModule,
+    AppRoutingModule
 
 /*
     // Issue with https://github.com/Teradata/covalent/issues/1152

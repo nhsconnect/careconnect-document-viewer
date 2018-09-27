@@ -17,9 +17,9 @@ export class PatientFindComponent implements OnInit {
 
   selectPatient(patient : fhir.Patient) {
   //  console.log('Patient change - '+patient.id);
-    if (patient !=undefined) {
+    if (patient !== undefined) {
         this.patientChange.set(patient);
-        this.router.navigate(['epr/'+patient.id ] );
+        this.router.navigate(['edms','documents' ] );
 
     }
   }
