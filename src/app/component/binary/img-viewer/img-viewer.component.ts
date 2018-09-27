@@ -11,8 +11,7 @@ import {IAlertConfig, TdDialogService} from "@covalent/core";
 })
 export class ImgViewerComponent implements OnInit {
 
-  imgSrc :string= 'http://yellow.testlab.nhs.uk/careconnect-ri/img/nhs_digital_logo.png';
-
+  imgSrc :string= 'https://data.developer.nhs.uk/ccri/img/nhs_digital_logo.png';
 
 
   @Input() document : any;
