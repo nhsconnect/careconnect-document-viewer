@@ -343,13 +343,6 @@ export class FhirService {
     return this.http.get<fhir.Resource>(url,{ 'headers' : this.getEPRHeaders()});
   }
 
-  getEPRAllergies(patientId: string): Observable<fhir.Bundle> {
-
-    const url = this.getEPRUrl()  + `/AllergyIntolerance?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
 
 
 
@@ -384,13 +377,7 @@ export class FhirService {
     return this.http.get<fhir.Patient>(url,{ 'headers' : this.getEPRHeaders()});
 
   }
-  getEPRProcedures(patientId: string): Observable<fhir.Bundle> {
 
-    const url = this.getEPRUrl()  + `/Procedure?patient=${patientId}`;
-
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
-
-  }
 
   getValueSet(valueSet : string ) : Observable<fhir.ValueSet> {
     const url = 'https://vonk.fire.ly/ValueSet/'+valueSet;
@@ -400,13 +387,6 @@ export class FhirService {
     return this.http.get<fhir.ValueSet>(url,{ 'headers' : headers });
   }
 
-  getNHSDValueSet(valueSet : string ) : Observable<fhir.ValueSet> {
-    const url = 'https://fhir-test.nhs.uk/STU3/ValueSet/'+valueSet;
-    let headers = new HttpHeaders();
-    headers = headers.append('Accept', 'application/fhir+json');
-
-    return this.http.get<fhir.ValueSet>(url,{ 'headers' : headers });
-  }
 
 
 
