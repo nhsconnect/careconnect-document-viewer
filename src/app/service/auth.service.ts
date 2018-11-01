@@ -38,6 +38,9 @@ export class AuthService {
 
   }
 
+  isLoggedOn() : boolean {
+    return this.oauth2.isAuthenticated();
+  }
 
   setLocalUser(User : User) {
     if (User != undefined) console.log('User set ' + User.email + ' ' + User.userName );

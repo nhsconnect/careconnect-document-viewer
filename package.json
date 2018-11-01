@@ -28,7 +28,7 @@
     "@angular/platform-browser-dynamic": "6.1.9",
     "@angular/router": "6.1.9",
     "@auth0/angular-jwt": "^2.0.0",
-    "@covalent/core": "^2.0.0-beta.3",
+    "@covalent/core": "^2.0.0-beta.4",
     "@covalent/dynamic-forms": "^2.0.0-beta.3",
     "@covalent/highlight": "^2.0.0-beta.3",
     "@covalent/http": "^2.0.0-beta.3",

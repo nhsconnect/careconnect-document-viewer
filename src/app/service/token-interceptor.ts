@@ -50,7 +50,7 @@ export class TokenInterceptor implements HttpInterceptor {
                  console.log("Interceptor error");
                  if (err.status === 401) {
                    console.log('*** 401 401 401 401 401 ***');
-                   if (this.authService.getAccessToken() != undefined) {
+                   if (this.oauth2.getToken() != undefined) {
                      console.log('Removing access token and reauthorising');
                      this.oauth2.removeToken();
                      this.fhir.authoriseOAuth2();
