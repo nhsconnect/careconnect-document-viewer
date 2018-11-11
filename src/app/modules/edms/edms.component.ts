@@ -103,12 +103,14 @@ export class EdmsComponent implements AfterViewInit {
     this._changeDetectorRef.detectChanges();
   }
 
+  /*
   toggleMiniNav(): void {
     this.miniNav = !this.miniNav;
     setTimeout(() => {
       this.manageList.sidenav._animationStarted.emit()
     });
   }
+  */
 
 
 
