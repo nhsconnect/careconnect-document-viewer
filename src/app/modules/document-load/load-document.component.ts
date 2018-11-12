@@ -470,7 +470,8 @@ export class LoadDocumentComponent implements OnInit {
      );
     let me = this;
     reader.onload = function(this) {
-      me.loadComplete.emit(btoa(reader.result));
+
+      me.loadComplete.emit(btoa(String.fromCharCode.apply(null,reader.result.toString())));
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);
