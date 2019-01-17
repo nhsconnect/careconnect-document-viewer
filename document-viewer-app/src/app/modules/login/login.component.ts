@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../service/auth.service';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FhirService} from "../../service/fhir.service";
-import {EprService} from "../../service/epr.service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {FhirService} from '../../service/fhir.service';
+import {EprService} from '../../service/epr.service';
 
-import {KeycloakService} from "../../service/keycloak.service";
+import {KeycloakService} from '../../service/keycloak.service';
 
 
 @Component({
@@ -15,19 +15,18 @@ import {KeycloakService} from "../../service/keycloak.service";
 export class LoginComponent implements OnInit {
 
 
-  logonRedirect : string = undefined;
+  logonRedirect: string = undefined;
 
   subscription: any;
 
-  jwt : any = undefined;
+  jwt: any;
 
   constructor(private authService: AuthService,
               private router: Router,
-              private  fhirService: FhirService,
-              private eprService : EprService
-
-              ,private activatedRoute: ActivatedRoute
-              ,public keycloakService : KeycloakService
+              private fhirService: FhirService,
+              private eprService: EprService,
+              private activatedRoute: ActivatedRoute,
+              public keycloakService: KeycloakService
     ) {
   }
 
@@ -60,7 +59,7 @@ export class LoginComponent implements OnInit {
 
           this.subscription = this.fhirService.getOAuthChangeEmitter()
             .subscribe(item => {
-              console.log("The Call back ran");
+              console.log('The Call back ran');
               this.router.navigate(['ping']);
             });
           this.performLogins();
@@ -69,16 +68,16 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  performLogins() :void {
+  performLogins(): void {
 
-    //console.log('Perform logins');
+    // console.log('Perform logins');
 
       // Set a call back for the CookieService
       this.keycloakService.getCookieEventEmitter()
           .subscribe(item => {
              // console.log('Cookie event '+this.logonRedirect);
               if (this.logonRedirect !== undefined) {
-                window.location.href =this.logonRedirect;
+                window.location.href = this.logonRedirect;
               } else {
                 this.fhirService.authoriseOAuth2();
               }

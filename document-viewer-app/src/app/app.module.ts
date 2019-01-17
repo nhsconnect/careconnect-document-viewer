@@ -1,16 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FlexLayoutModule} from "@angular/flex-layout";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 import { LoadDocumentComponent } from './modules/document-load/load-document.component';
 
-import { FileUploadModule } from "ng2-file-upload";
 import { ViewDocumentComponent } from './component/binary/composition-view/view-document.component';
-import { FhirService } from "./service/fhir.service";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+
+
 import { ViewDocumentSectionComponent } from './component/binary/composition-view-section/view-document-section.component';
 import { PatientSearchComponent } from './component/patient-search/patient-search.component';
 
@@ -27,41 +24,18 @@ import { AllergyIntoleranceComponent } from './component/allergy-intolerance/all
 import { EncounterComponent } from './component/encounter/encounter.component';
 import { MedicationRequestComponent } from './component/medication-request/medication-request.component';
 import { MedicationComponent } from './component/medication/medication.component';
-
 import { DocumentReferenceComponent } from './component/document-reference/document-reference.component';
-import {AuthService} from "./service/auth.service";
-import {LoginComponent} from "./modules/login/login.component";
-
-
-import {LinksService} from "./service/links.service";
-import {EprService} from "./service/epr.service";
-import {ObservationDetailComponent} from "./component/observation-detail/observation-detail.component";
-import {CareGoogleChartComponent} from "./component/care-google-chart/care-google-chart.component";
-
 import { ImmunisationComponent } from './component/immunisation/immunisation.component';
-
 import { PatientTimelineComponent } from './component/patient-timeline/patient-timeline.component';
 import { EncounterDetailComponent } from './component/encounter-detail/encounter-detail.component';
 import { PractitionerSearchComponent } from './component/practitioner-search/practitioner-search.component';
 import { OrganisationSearchComponent } from './component/organisation-search/organisation-search.component';
 import { OrganisationComponent } from './component/organisation/organisation.component';
 import { PractitionerComponent } from './component/practitioner/practitioner.component';
-
-import {AuthGuard} from "./service/auth-guard";
-
-
-import {LogoutComponent} from "./modules/logout/logout.component";
 import { CallbackComponent } from './modules/callback/callback.component';
-import {ErrorsHandler} from "./service/errors-handler";
-
-import {KeycloakService} from "./service/keycloak.service";
-import {TokenInterceptor} from "./service/token-interceptor";
-import {Oauth2Service} from "./service/oauth2.service";
 import { ResourceDialogComponent } from './dialog/resource-dialog/resource-dialog.component';
 import { TreeModule } from 'angular-tree-component';
-
 import { PdfViewerComponent } from './component/binary/pdf-viewer/pdf-viewer.component';
-import {PdfViewerModule} from "ng2-pdf-viewer";
 import { ImgViewerComponent } from './component/binary/img-viewer/img-viewer.component';
 import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 import {
@@ -87,9 +61,9 @@ import {
     MatMenuModule,
     MatProgressBarModule,
     MatProgressSpinnerModule, MatTooltipModule
-} from "@angular/material";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from "@angular/material-moment-adapter";
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {
     CovalentDialogsModule, CovalentExpansionPanelModule, CovalentFileModule,
 
@@ -97,27 +71,26 @@ import {
     CovalentLayoutModule, CovalentMediaModule,
     CovalentMenuModule, CovalentMessageModule, CovalentNotificationsModule, TdFileInputComponent
 
-} from "@covalent/core";
-import {CovalentHttpModule} from "@covalent/http";
-import {CovalentHighlightModule} from "@covalent/highlight";
-import {CovalentMarkdownModule} from "@covalent/markdown";
+} from '@covalent/core';
+import {CovalentHttpModule} from '@covalent/http';
+import {CovalentHighlightModule} from '@covalent/highlight';
+import {CovalentMarkdownModule} from '@covalent/markdown';
 
-import {PatientComponent} from "./component/patient/patient.component";
-import {MedicationDialogComponent} from "./dialog/medication-dialog/medication-dialog.component";
-import {CookieModule, CookieService} from "ngx-cookie";
-import {IssueDialogComponent} from "./dialog/issue-dialog/issue-dialog.component";
-import {LocationDialogComponent} from "./dialog/location-dialog/location-dialog.component";
-import {PractitionerDialogComponent} from "./dialog/practitioner-dialog/practitioner-dialog.component";
-import {OrganisationDialogComponent} from "./dialog/organisation-dialog/organisation-dialog.component";
-import {LocationComponent} from "./component/location/location.component";
-import {BundleService} from "./service/bundle.service";
+import {PatientComponent} from './component/patient/patient.component';
+import {MedicationDialogComponent} from './dialog/medication-dialog/medication-dialog.component';
+import {CookieModule, CookieService} from 'ngx-cookie';
+import {IssueDialogComponent} from './dialog/issue-dialog/issue-dialog.component';
+import {LocationDialogComponent} from './dialog/location-dialog/location-dialog.component';
+import {PractitionerDialogComponent} from './dialog/practitioner-dialog/practitioner-dialog.component';
+import {OrganisationDialogComponent} from './dialog/organisation-dialog/organisation-dialog.component';
+import {LocationComponent} from './component/location/location.component';
+import {BundleService} from './service/bundle.service';
 import {PractitionerRoleComponent} from './component/practitioner-role/practitioner-role.component';
-import {HealthcareServiceComponent} from "./component/healthcare-service/healthcare-service.component";
-import {RouterModule} from "@angular/router";
+import {HealthcareServiceComponent} from './component/healthcare-service/healthcare-service.component';
 import {BinaryComponent} from './component/binary/binary/binary.component';
-import {PractitionerRoleDialogComponent} from "./dialog/practitioner-role-dialog/practitioner-role-dialog.component";
-import {EncounterDialogComponent} from "./dialog/encounter-dialog/encounter-dialog.component";
-import {PingComponent} from "./modules/ping/ping.component";
+import {PractitionerRoleDialogComponent} from './dialog/practitioner-role-dialog/practitioner-role-dialog.component';
+import {EncounterDialogComponent} from './dialog/encounter-dialog/encounter-dialog.component';
+import {PingComponent} from './modules/ping/ping.component';
 import { QuestionnaireResponseComponent } from './component/questionnaire-response/questionnaire-response.component';
 import { RiskAssessmentComponent } from './component/risk-assessment/risk-assessment.component';
 import { GoalComponent } from './component/goal/goal.component';
@@ -127,11 +100,32 @@ import { CarePlanComponent } from './component/care-plan/care-plan.component';
 import { MedicationDispenseComponent } from './component/medication-dispense/medication-dispense.component';
 import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-detail/medication-dispense-detail.component';
 import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
-import {LayoutModule} from "@angular/cdk/layout";
-import {EdmsComponent} from "./modules/edms/edms.component";
-import {EdmsRoutingModule} from "./edms-routing.module";
+import {LayoutModule} from '@angular/cdk/layout';
+import {EdmsComponent} from './modules/edms/edms.component';
+import {EdmsRoutingModule} from './edms-routing.module';
+import {LoginComponent} from './modules/login/login.component';
+import {LogoutComponent} from './modules/logout/logout.component';
+import {ObservationDetailComponent} from './component/observation-detail/observation-detail.component';
+import {CareGoogleChartComponent} from './component/care-google-chart/care-google-chart.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FileUploadModule} from 'ng2-file-upload';
+import {PdfViewerModule} from 'ng2-pdf-viewer';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {FhirService} from './service/fhir.service';
+import {AuthService} from './service/auth.service';
+import {LinksService} from './service/links.service';
+import {EprService} from './service/epr.service';
+import {AuthGuard} from './service/auth-guard';
+import {Oauth2Service} from './service/oauth2.service';
+import {KeycloakService} from './service/keycloak.service';
+import {ErrorsHandler} from './service/errors-handler';
+import {TokenInterceptor} from './service/token-interceptor';
+import {AppConfig} from './app-config';
 
-
+export function initializeApp(appConfig: AppConfig) {
+  return () => appConfig.load();
+}
 
 @NgModule({
   declarations: [
@@ -218,7 +212,7 @@ import {EdmsRoutingModule} from "./edms-routing.module";
       .forRoot(),
     FormsModule,
     ReactiveFormsModule,
-      FlexLayoutModule,
+    FlexLayoutModule,
 
     FileUploadModule,
     HttpClientModule,
@@ -276,17 +270,16 @@ import {EdmsRoutingModule} from "./edms-routing.module";
 */
   ],
   providers: [
-    FhirService
-    //,ObservationDataSource
-    , AuthService
-    ,LinksService
-    ,EprService
-    ,AuthGuard
-    ,CookieService
-    ,KeycloakService
-    ,Oauth2Service
-    ,BundleService
-    ,MatIconRegistry,
+    FhirService,
+    AuthService,
+    LinksService,
+    EprService,
+    AuthGuard,
+    CookieService,
+    KeycloakService,
+    Oauth2Service,
+    BundleService,
+    MatIconRegistry,
     {
       provide: ErrorHandler,
       useClass: ErrorsHandler,
