@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FhirService} from "../../service/fhir.service";
 import {AuthService} from "../../service/auth.service";
+import {AppConfigService} from "../../service/app-config.service";
 
 @Component({
   selector: 'app-callback',
@@ -18,7 +19,8 @@ export class CallbackComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute
     ,private  fhirService : FhirService
-    ,private router: Router) { }
+    ,private router: Router
+    ,private appConfig: AppConfigService) { }
 
   ngOnInit() {
     this.authCode = this.activatedRoute.snapshot.queryParams['code'];
@@ -34,9 +36,18 @@ export class CallbackComponent implements OnInit {
           // Potentially a loop but need to record the access token
 
         });
-
-      this.fhirService.performGetAccessToken(this.authCode);
+      if (this.appConfig.getConfig() !== undefined) {
+        this.fhirService.performGetAccessToken(this.authCode);
+      } else {
+        this.appConfig.getInitEventEmitter().subscribe( ()=> {
+          this.fhirService.performGetAccessToken(this.authCode);
+            }
+        )
+      }
+      // this.fhirService.performGetAccessToken(this.authCode);
     }
   }
+
+
 
 }

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {ErrorHandler, NgModule} from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -121,11 +121,19 @@ import {Oauth2Service} from './service/oauth2.service';
 import {KeycloakService} from './service/keycloak.service';
 import {ErrorsHandler} from './service/errors-handler';
 import {TokenInterceptor} from './service/token-interceptor';
-import {AppConfig} from './app-config';
+import {AppConfigService} from "./service/app-config.service";
 
+/*
 export function initializeApp(appConfig: AppConfig) {
   return () => appConfig.load();
 }
+*/
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+    return appConfig.loadConfig();
+  };
+};
+
 
 @NgModule({
   declarations: [
@@ -270,6 +278,13 @@ export function initializeApp(appConfig: AppConfig) {
 */
   ],
   providers: [
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    },
     FhirService,
     AuthService,
     LinksService,

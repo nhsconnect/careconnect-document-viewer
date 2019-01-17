@@ -1,34 +1,33 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {environment} from "../../environments/environment";
+import {AppConfigService} from "./app-config.service";
 
 @Injectable()
 export class Oauth2Service {
 
   public scope : string;
 
-  constructor(
-  ) {
+  constructor(private appConfig: AppConfigService) {
 
   }
 
   public getToken(): string {
-    const access_token = localStorage.getItem('access_token_' + environment.oauth2.client_id);
+    const access_token = localStorage.getItem('access_token_' + this.getCatClientId());
     if (access_token === "" || access_token === null) return undefined;
     return access_token;
   }
 
   removeToken() {
-    localStorage.removeItem('access_token_' + environment.oauth2.client_id);
+    localStorage.removeItem('access_token_' + this.getCatClientId());
   }
 
   setToken(access_token : string) {
-    localStorage.setItem('access_token_' + environment.oauth2.client_id, access_token);
+    localStorage.setItem('access_token_' + this.getCatClientId(), access_token);
   }
 
   setScope(scope : string) {
     this.scope = scope;
-    localStorage.setItem('scope_' + environment.oauth2.client_id, scope);
+    localStorage.setItem('scope_' + this.getCatClientId(), scope);
   }
 
   public isAuthenticated(): boolean {
@@ -48,6 +47,13 @@ export class Oauth2Service {
     console.log('Token '+token);
     let retStr = helper.decodeToken(token)
     return retStr;
+  }
+
+  getCatClientId() {
+    // This is a marker for entryPoint.sh to replace
+    let secret :string = 'SMART_OAUTH2_CLIENT_ID';
+    if (secret.indexOf('CLIENT_ID') !== -1 && this.appConfig.getConfig() !== undefined) secret = this.appConfig.getConfig().oauth2client_id;
+    return secret;
   }
 
 }

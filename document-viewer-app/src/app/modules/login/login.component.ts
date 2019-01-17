@@ -5,6 +5,7 @@ import {FhirService} from '../../service/fhir.service';
 import {EprService} from '../../service/epr.service';
 
 import {KeycloakService} from '../../service/keycloak.service';
+import {AppConfigService} from "../../service/app-config.service";
 
 
 @Component({
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
               private fhirService: FhirService,
               private eprService: EprService,
               private activatedRoute: ActivatedRoute,
-              public keycloakService: KeycloakService
+              public keycloakService: KeycloakService,
+              private appConfig: AppConfigService
     ) {
   }
 
@@ -37,12 +39,24 @@ export class LoginComponent implements OnInit {
 
       this.logonRedirect = this.activatedRoute.snapshot.queryParams['afterAuth'];
 
-      KeycloakService.init()
-        .then(() => {
+      if (this.appConfig.getConfig() !== undefined) {
+          this.keycloakInit();
+      } else {
+          this.appConfig.getInitEventEmitter().subscribe( ()=> {
+              this.keycloakInit();
+              }
+          )
+      }
 
-          this.onKeyCloakComplete();
-        })
-        .catch(e => console.log('rejected'));
+  }
+
+  keycloakInit() {
+      this.keycloakService.init()
+          .then(() => {
+
+              this.onKeyCloakComplete();
+          })
+          .catch(e => console.log('rejected'));
 
 
   }
@@ -54,8 +68,8 @@ export class LoginComponent implements OnInit {
         // Set up a redirect for completion of OAuth2 login
         // This should only be called if OAuth2 has not been performed
 
-      this.eprService.userName = KeycloakService.getUsername();
-      this.eprService.userEmail = KeycloakService.getUserEmail();
+      this.eprService.userName = this.keycloakService.getUsername();
+      this.eprService.userEmail = this.keycloakService.getUserEmail();
 
           this.subscription = this.fhirService.getOAuthChangeEmitter()
             .subscribe(item => {

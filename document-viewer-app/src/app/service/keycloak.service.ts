@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {CookieService} from 'ngx-cookie';
+import {AppConfigService} from "./app-config.service";
 
 declare let Keycloak: any;
 
@@ -16,6 +17,7 @@ export class KeycloakService {
   constructor(
 
       private _cookieService: CookieService,
+      public _appConfig: AppConfigService
 
   ) {
 
@@ -25,56 +27,58 @@ export class KeycloakService {
 
   private cookieEvent: EventEmitter<any> = new EventEmitter();
 
-  public rootUrl: string;
 
-  static getClientSecret() {
+  getClientSecret() {
     // This is a marker for entryPoint.sh to replace
     let secret = 'KEYCLOAK_CLIENT_SECRET';
     if (secret.indexOf('SECRET') !== -1) {
-      secret = environment.keycloak.client_secret;
+      secret = this._appConfig.getConfig().keycloakclient_secret;
     }
     return secret;
   }
 
-  static getKeycloakRootUrl() {
+  getKeycloakRootUrl() {
     let rootUrl = 'KEYCLOAK_ROOT_URL';
     if (rootUrl.indexOf('KEYCLOAK') !== -1) {
-      rootUrl = environment.keycloak.RootUrl;
+      rootUrl = this._appConfig.getConfig().keycloakrooturl;
     }
     return rootUrl;
   }
-  static getKeycloakServerUrl() {
-    let rootUrl = 'KEYCLOAK_SERVER_URL';
-    if (rootUrl.indexOf('KEYCLOAK') !== -1) {
-      rootUrl = environment.keycloak.authServerUrl;
-    }
-    return rootUrl;
-  }
-  static getKeycloakRealm() {
+
+  getKeycloakRealm() {
     let realm = 'KEYCLOAK_REALM';
     if (realm.indexOf('KEYCLOAK') !== -1) {
-      realm = environment.keycloak.realm;
+      realm = this._appConfig.getConfig().keycloakrealm;
     }
     return realm;
   }
-  static getKeycloakClientId() {
+  getKeycloakClientId() {
     let clienId = 'KEYCLOAK_CLIENT_ID';
     if (clienId.indexOf('KEYCLOAK') !== -1) {
-      clienId = environment.keycloak.client_id;
+      clienId = this._appConfig.getConfig().keycloakclient_id;
     }
     return clienId;
   }
 
 
-  static getUsername(): string {
+  public getUsername(): string {
     return KeycloakService.auth.authz.tokenParsed.preferred_username;
   }
 
-  static getUserEmail(): string {
+  public getUserEmail(): string {
     return KeycloakService.auth.authz.tokenParsed.resource_access.toString();
   }
 
-  static init(): Promise<any> {
+  getKeycloakServerUrl() {
+    let rootUrl = 'KEYCLOAK_SERVER_URL';
+    if (rootUrl.indexOf('KEYCLOAK') !== -1) {
+      console.log(this._appConfig.getConfig());
+      rootUrl = this._appConfig.getConfig().keycloakauthserverurl;
+    }
+    return rootUrl;
+  }
+
+  public init(): Promise<any> {
 
     const keycloakAuth: any = Keycloak({
       url: this.getKeycloakRootUrl(),
@@ -197,7 +201,7 @@ export class KeycloakService {
 
     let cookieDomain = 'CAT_COOKIE_DOMAIN';
     if (cookieDomain.indexOf('CAT_') !== -1) {
-      cookieDomain = environment.oauth2.cookie_domain;
+      cookieDomain = this._appConfig.getConfig().oauth2cookie_domain;
     }
     return cookieDomain;
 

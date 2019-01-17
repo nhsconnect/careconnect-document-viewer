@@ -6,6 +6,7 @@ import org.apache.camel.Message;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.http4.HttpComponent;
+import org.apache.camel.language.Constant;
 import org.apache.camel.util.jsse.KeyManagersParameters;
 import org.apache.camel.util.jsse.KeyStoreParameters;
 import org.apache.camel.util.jsse.SSLContextParameters;
@@ -26,8 +27,31 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${fhir.resource.serverBase}")
 	private String serverBase;
 
+	@Value("${keycloak.rooturl}")
+	private String keycloakrooturl;
 
-    @Override
+	@Value("${keycloak.authserverurl}")
+	private String keycloakauthserverurl;
+
+	@Value("${keycloak.realm}")
+	private String keycloakrealm;
+
+	@Value("${keycloak.client_secret}")
+	private String keycloakclient_secret;
+
+	@Value("${keycloak.client_id}")
+	private String keycloakclient_id;
+
+	@Value("${oauth2.client_id}")
+	private String oauth2client_id;
+
+	@Value("${oauth2.client_secret}")
+	private String oauth2client_secret;
+
+	@Value("${oauth2.cookie_domain}")
+	private String oauth2cookie_domain;
+
+	@Override
     public void configure() 
     {
 
@@ -45,7 +69,17 @@ public class CamelMonitorRoute extends RouteBuilder {
 
 		from("direct:hello")
 				.routeId("helloTest")
-				.transform().constant("{ \"fhirServer\" : \""+serverBase+"\" }");
+				.setHeader("Content-Type", constant("application/json"))
+				.transform().constant("{ \"fhirServer\": \""+serverBase+"\", "
+				+"\"keycloakauthserverurl\": \""+keycloakauthserverurl+"\", "
+				+"\"keycloakclient_id\": \""+keycloakclient_id+"\", "
+				+"\"keycloakclient_secret\": \""+keycloakclient_secret+"\", "
+				+"\"keycloakrealm\": \""+keycloakrealm+"\", "
+				+"\"keycloakrooturl\": \""+keycloakrooturl+"\", "
+				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
+				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
+				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\""
+				+ " }");
 
 
 
