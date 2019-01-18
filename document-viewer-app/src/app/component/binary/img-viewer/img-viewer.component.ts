@@ -11,7 +11,7 @@ import {IAlertConfig, TdDialogService} from "@covalent/core";
 })
 export class ImgViewerComponent implements OnInit {
 
-  imgSrc :string= 'https://data.developer.nhs.uk/ccri/img/nhs_digital_logo.png';
+  imgSrc = 'https://data.developer.nhs.uk/ccri/img/nhs_digital_logo.png';
 
 
   @Input() document : any;
@@ -25,7 +25,7 @@ export class ImgViewerComponent implements OnInit {
               ) { }
 
   ngOnInit() {
-    //let id = this.route.snapshot.paramMap.get('binaryId');
+    // let id = this.route.snapshot.paramMap.get('binaryId');
     this.getDocument(this.binaryId);
   }
 

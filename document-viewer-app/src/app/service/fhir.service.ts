@@ -1,15 +1,15 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent } from 'rxjs';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Oauth2token} from "../model/oauth2token";
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Oauth2token} from '../model/oauth2token';
 
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
 
-import {Router} from "@angular/router";
-import {PlatformLocation} from "@angular/common";
-import {environment} from "../../environments/environment";
-import {Oauth2Service} from "./oauth2.service";
-import {AppConfigService} from "./app-config.service";
+import {Router} from '@angular/router';
+import {PlatformLocation} from '@angular/common';
+import {environment} from '../../environments/environment';
+import {Oauth2Service} from './oauth2.service';
+import {AppConfigService} from './app-config.service';
 
 @Injectable()
 export class FhirService {
@@ -24,45 +24,68 @@ export class FhirService {
 
   private registerUri: string;
 
-  private smartToken : Oauth2token;
+  private smartToken: Oauth2token;
 
-  oauthTokenChange : EventEmitter<Oauth2token> = new EventEmitter();
+  oauthTokenChange: EventEmitter<Oauth2token> = new EventEmitter();
 
   public path = '/Composition';
 
 
   public getEPRUrl(): string {
 
-    let eprUrl :string = 'FHIR_SERVER_URL';
-    if (eprUrl.indexOf('FHIR_SERVER') != -1 && this.appConfig.getConfig() !== undefined) eprUrl = this.appConfig.getConfig().fhirServer;
-    return eprUrl;
+    let eprUrl = 'FHIR_SERVER_URL';
+    if (eprUrl.indexOf('FHIR_SERVER') !== -1 && this.appConfig.getConfig() !== undefined) {
+      eprUrl = this.appConfig.getConfig().fhirServer;
+    } else if (eprUrl.indexOf('FHIR_SERVER') !== -1) {
+      eprUrl = environment.oauth2.eprUrl;
+    }
+      return eprUrl;
+  }
+
+  public getMessagingUrl(): string {
+
+    let eprUrl = 'FHIR_MESSAGING_URL';
+    if (eprUrl.indexOf('FHIR_MESSAGING_URL') !== -1 && this.appConfig.getConfig() !== undefined) {
+      eprUrl = this.appConfig.getConfig().messagingServer;
+    } else if (eprUrl.indexOf('FHIR_MESSAGING_URL') !== -1) {
+      eprUrl = environment.messagingUrl;
+    }
+      return eprUrl;
   }
 
   getCatClientSecret() {
     // This is a marker for entryPoint.sh to replace
-    let secret :string = 'SMART_OAUTH2_CLIENT_SECRET';
-    if (secret.indexOf('SECRET') != -1 && this.appConfig.getConfig() !== undefined) secret = this.appConfig.getConfig().oauth2client_secret;
-    console.log('oauth2 client secret = '+secret);
+    let secret = 'SMART_OAUTH2_CLIENT_SECRET';
+    if (secret.indexOf('SECRET') !== -1 && this.appConfig.getConfig() !== undefined) {
+      secret = this.appConfig.getConfig().oauth2client_secret;
+    } else if (secret.indexOf('SECRET') !== -1 ) {
+      secret = environment.oauth2.client_secret;
+    }
+    console.log('oauth2 client secret = ' + secret);
     return secret;
   }
 
   getCatClientId() {
     // This is a marker for entryPoint.sh to replace
-    let secret :string = 'SMART_OAUTH2_CLIENT_ID';
-    if (secret.indexOf('CLIENT_ID') !== -1 && this.appConfig.getConfig() !== undefined) secret = this.appConfig.getConfig().oauth2client_id;
-    console.log('oauth2 client id = '+secret);
+    let secret = 'SMART_OAUTH2_CLIENT_ID';
+    if (secret.indexOf('CLIENT_ID') !== -1 && this.appConfig.getConfig() !== undefined) {
+      secret = this.appConfig.getConfig().oauth2client_id;
+    } else if (secret.indexOf('CLIENT_ID') !== -1) {
+      secret = environment.oauth2.client_id;
+    }
+    console.log('oauth2 client id = ' + secret);
     return secret;
   }
 
-  constructor(  private http: HttpClient
-                ,private authService: AuthService
-                , private router: Router
-                , private platformLocation: PlatformLocation
-                , private oauth2service: Oauth2Service
-                , private appConfig: AppConfigService
+  constructor(  private http: HttpClient,
+                private authService: AuthService,
+                private router: Router,
+                private platformLocation: PlatformLocation,
+                private oauth2service: Oauth2Service,
+                private appConfig: AppConfigService
                 ) { }
 
-  getHeaders(contentType : boolean = true ): HttpHeaders {
+  getHeaders(contentType: boolean = true ): HttpHeaders {
 
     let headers = new HttpHeaders(
       );
@@ -73,38 +96,38 @@ export class FhirService {
     return headers;
   }
 
-  getEPRHeaders(contentType : boolean = true ): HttpHeaders {
+  getEPRHeaders(contentType: boolean = true ): HttpHeaders {
 
-    let headers = this.getHeaders(contentType);
+    const headers = this.getHeaders(contentType);
 
     return headers;
   }
 
-  authoriseOAuth2() : void  {
+  authoriseOAuth2(): void  {
 
     console.log('authoriseOAuth2');
-    this.http.get<fhir.CapabilityStatement>(this.getEPRUrl()+'/metadata').subscribe(
+    this.http.get<fhir.CapabilityStatement>(this.getEPRUrl() + '/metadata').subscribe(
       conformance  => {
 
         console.log('conformance response');
 
-        for (let rest of conformance.rest) {
-          for (let extension of rest.security.extension) {
+        for (const rest of conformance.rest) {
+          for (const extension of rest.security.extension) {
 
-            if (extension.url == "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris") {
+            if (extension.url === 'http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris') {
 
-              for (let smartextension of extension.extension) {
+              for (const smartextension of extension.extension) {
 
                 switch (smartextension.url) {
-                  case "authorize" : {
+                  case 'authorize' : {
                       this.authoriseUri = smartextension.valueUri;
                       break;
                   }
-                  case "register" : {
+                  case 'register' : {
                     this.registerUri = smartextension.valueUri;
                     break;
                   }
-                  case "token" : {
+                  case 'token' : {
                     this.tokenUri = smartextension.valueUri;
                     break;
                   }
@@ -133,23 +156,25 @@ export class FhirService {
     return this.oauthTokenChange;
   }
 
-  getScope() :string {
-    return localStorage.getItem("scope");
+  getScope(): string {
+    return localStorage.getItem('scope');
   }
-  hasScope(resource : string) : boolean {
-    let scope : string= this.getScope();
+  hasScope(resource: string): boolean {
+    const scope: string = this.getScope();
 
-    if (scope.indexOf(resource) !== -1) return true;
+    if (scope.indexOf(resource) !== -1) {
+      return true;
+    }
     return false;
   }
 
 
-  performAuthorise (clientId : string, clientSecret :string){
+  performAuthorise (clientId: string, clientSecret: string){
 
 
-    localStorage.setItem("authoriseUri", this.authoriseUri);
-    localStorage.setItem("tokenUri", this.tokenUri);
-    localStorage.setItem("registerUri", this.registerUri);
+    localStorage.setItem('authoriseUri', this.authoriseUri);
+    localStorage.setItem('tokenUri', this.tokenUri);
+    localStorage.setItem('registerUri', this.registerUri);
 
     if (this.oauth2service.getToken() !== undefined) {
       // access token is present so forgo access token retrieval
@@ -157,7 +182,8 @@ export class FhirService {
       this.authService.updateUser();
       // Check token expiry
       if (!this.oauth2service.isAuthenticated()) {
-        const url = this.authoriseUri + '?client_id=' + clientId + '&response_type=code&redirect_uri='+document.baseURI+'/callback&aud=https://test.careconnect.nhs.uk';
+        const url = this.authoriseUri + '?client_id=' + clientId + '&response_type=code&redirect_uri='
+            + document.baseURI + '/callback&aud=https://test.careconnect.nhs.uk';
         // Perform redirect to
         window.location.href = url;
       }
@@ -165,7 +191,8 @@ export class FhirService {
       this.router.navigateByUrl('ping');
     } else {
 
-      const url = this.authoriseUri + '?client_id=' + clientId + '&response_type=code&redirect_uri='+document.baseURI+'/callback&aud=https://test.careconnect.nhs.uk';
+      const url = this.authoriseUri + '?client_id=' + clientId + '&response_type=code&redirect_uri='
+          + document.baseURI + '/callback&aud=https://test.careconnect.nhs.uk';
       // Perform redirect to
       window.location.href = url;
     }
@@ -175,30 +202,30 @@ export class FhirService {
 
   performRegister() {
     if (this.registerUri === undefined) {
-      this.registerUri = localStorage.getItem("registerUri");
+      this.registerUri = localStorage.getItem('registerUri');
     }
     const url = this.registerUri;
 
-    let payload = JSON.stringify({ client_name : 'ClinicalAssuranceTool' ,
-      redirect_uris : [document.baseURI+"/callback"],
+    const payload = JSON.stringify({ client_name : 'ClinicalAssuranceTool' ,
+      redirect_uris : [document.baseURI + '/callback'],
       client_uri : document.baseURI,
-      grant_types: ["authorization_code"],
-      scope: "user/Patient.read user/DocumentReference.read user/*.read user/Binary.read user/Bundle.write smart/orchestrate_launch"
+      grant_types: ['authorization_code'],
+      scope: 'user/Patient.read user/DocumentReference.read user/*.read user/Binary.read user/Bundle.write smart/orchestrate_launch'
     });
 
     let headers = new HttpHeaders( {'Content-Type': 'application/json '} );
-    headers = headers.append('Accept','application/json');
-    this.http.post(url,payload,{ 'headers' : headers }  ).subscribe( response => {
+    headers = headers.append('Accept', 'application/json');
+    this.http.post(url, payload,{ 'headers' : headers }  ).subscribe( response => {
 
        // KGM firebase code this.db.object('oauth2/'+encodeURI((this.platformLocation as any).location.origin)).set(response);
         this.performAuthorise((response as any).client_id, (response as any).client_secret);
       }
       , (error: any) => {
-        console.log("Register Response Error = "+error);
+        console.log('Register Response Error = ' + error);
       }
       ,() => {
 
-        console.log("Register complete()")
+        console.log('Register complete()');
 
 
 
@@ -328,7 +355,7 @@ export class FhirService {
     let headers :HttpHeaders = this.getEPRHeaders(false);
     headers.append('Content-Type',contentType);
     headers.append('Prefer','return=representation');
-    const url = this.getEPRUrl() + `/Bundle`;
+    const url = this.getMessagingUrl() + '/Bundle';
 
     return this.http.post<fhir.Bundle>(url,document,{ 'headers' :headers});
   }
@@ -341,7 +368,7 @@ export class FhirService {
     headers.append('Prefer','return=representation');
 
     // TODO Get real id from XML Bundle
-    const url = this.getEPRUrl() + `/Bundle`;
+    const url = this.getMessagingUrl() + '/Bundle';
     let params = new HttpParams();
     params = params.append('identifier','https://tools.ietf.org/html/rfc4122|1ff370b6-fc5b-40a1-9721-2a942e301f65');
     return this.http.put<fhir.Bundle>(url,document,{ 'params': params, 'headers' :headers});

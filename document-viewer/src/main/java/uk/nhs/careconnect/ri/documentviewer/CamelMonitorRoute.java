@@ -27,6 +27,9 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${fhir.resource.serverBase}")
 	private String serverBase;
 
+	@Value("${fhir.messaging.serverBase}")
+	private String messagingBase;
+
 	@Value("${keycloak.rooturl}")
 	private String keycloakrooturl;
 
@@ -71,6 +74,7 @@ public class CamelMonitorRoute extends RouteBuilder {
 				.routeId("helloTest")
 				.setHeader("Content-Type", constant("application/json"))
 				.transform().constant("{ \"fhirServer\": \""+serverBase+"\", "
+				+"\"messagingServer\": \""+messagingBase+"\", "
 				+"\"keycloakauthserverurl\": \""+keycloakauthserverurl+"\", "
 				+"\"keycloakclient_id\": \""+keycloakclient_id+"\", "
 				+"\"keycloakclient_secret\": \""+keycloakclient_secret+"\", "

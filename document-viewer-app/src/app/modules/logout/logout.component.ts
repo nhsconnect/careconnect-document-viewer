@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../service/auth.service";
 import {KeycloakService} from "../../service/keycloak.service";
-import {environment} from "../../../environments/environment";
 import {CookieService} from "ngx-cookie";
 import {Oauth2Service} from "../../service/oauth2.service";
 import {AppConfigService} from "../../service/app-config.service";

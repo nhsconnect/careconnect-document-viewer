@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {CookieService} from 'ngx-cookie';
-import {AppConfigService} from "./app-config.service";
+import {AppConfigService} from './app-config.service';
 
 declare let Keycloak: any;
 
@@ -31,34 +31,55 @@ export class KeycloakService {
   getClientSecret() {
     // This is a marker for entryPoint.sh to replace
     let secret = 'KEYCLOAK_CLIENT_SECRET';
-    if (secret.indexOf('SECRET') !== -1) {
+    if (secret.indexOf('SECRET') !== -1 && this._appConfig.getConfig() !== undefined) {
       secret = this._appConfig.getConfig().keycloakclient_secret;
+    } else if (secret.indexOf('SECRET') !== -1) {
+      secret = environment.keycloak.client_secret;
     }
     return secret;
   }
 
   getKeycloakRootUrl() {
     let rootUrl = 'KEYCLOAK_ROOT_URL';
-    if (rootUrl.indexOf('KEYCLOAK') !== -1) {
+    if (rootUrl.indexOf('KEYCLOAK') !== -1 && this._appConfig.getConfig() !== undefined) {
       rootUrl = this._appConfig.getConfig().keycloakrooturl;
+    } else if (rootUrl.indexOf('KEYCLOAK') !== -1) {
+      rootUrl = environment.keycloak.RootUrl;
     }
     return rootUrl;
   }
 
   getKeycloakRealm() {
     let realm = 'KEYCLOAK_REALM';
-    if (realm.indexOf('KEYCLOAK') !== -1) {
+    if (realm.indexOf('KEYCLOAK') !== -1 && this._appConfig.getConfig() !== undefined) {
       realm = this._appConfig.getConfig().keycloakrealm;
+    } else if (realm.indexOf('KEYCLOAK') !== -1) {
+      realm = environment.keycloak.realm;
     }
     return realm;
   }
   getKeycloakClientId() {
     let clienId = 'KEYCLOAK_CLIENT_ID';
-    if (clienId.indexOf('KEYCLOAK') !== -1) {
+    if (clienId.indexOf('KEYCLOAK') !== -1 && this._appConfig.getConfig() !== undefined) {
       clienId = this._appConfig.getConfig().keycloakclient_id;
+    } else if (clienId.indexOf('KEYCLOAK') !== -1) {
+      clienId = environment.keycloak.client_id;
     }
     return clienId;
   }
+
+  getCookieDomain() {
+
+    let cookieDomain = 'CAT_COOKIE_DOMAIN';
+    if (cookieDomain.indexOf('CAT_') !== -1 && this._appConfig.getConfig() !== undefined) {
+      cookieDomain = this._appConfig.getConfig().oauth2cookie_domain;
+    } else  if (cookieDomain.indexOf('CAT_') !== -1) {
+      cookieDomain = environment.oauth2.cookie_domain;
+    }
+      return cookieDomain;
+
+  }
+
 
 
   public getUsername(): string {
@@ -71,9 +92,11 @@ export class KeycloakService {
 
   getKeycloakServerUrl() {
     let rootUrl = 'KEYCLOAK_SERVER_URL';
-    if (rootUrl.indexOf('KEYCLOAK') !== -1) {
+    if (rootUrl.indexOf('KEYCLOAK') !== -1 && this._appConfig.getConfig()) {
       console.log(this._appConfig.getConfig());
       rootUrl = this._appConfig.getConfig().keycloakauthserverurl;
+    } else if (rootUrl.indexOf('KEYCLOAK') !== -1) {
+      rootUrl = environment.keycloak.authServerUrl;
     }
     return rootUrl;
   }
@@ -197,14 +220,5 @@ export class KeycloakService {
     }
   }
 
-  getCookieDomain() {
-
-    let cookieDomain = 'CAT_COOKIE_DOMAIN';
-    if (cookieDomain.indexOf('CAT_') !== -1) {
-      cookieDomain = this._appConfig.getConfig().oauth2cookie_domain;
-    }
-    return cookieDomain;
-
-  }
 
 }
