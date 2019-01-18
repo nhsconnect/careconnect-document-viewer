@@ -56,6 +56,7 @@ export class BinaryComponent implements OnInit {
   }
 
   processDocument() {
+      // TODO KGM Need to move to actual URL
       const array: string[] = this.document.content[0].attachment.url.split('/');
       this.binaryId = array[array.length - 1];
 

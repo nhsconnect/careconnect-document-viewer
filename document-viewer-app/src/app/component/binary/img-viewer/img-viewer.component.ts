@@ -38,7 +38,7 @@ export class ImgViewerComponent implements OnInit {
         var fileURL = URL.createObjectURL(res);
         console.log(fileURL);
         this.imgSrc =fileURL;
-        //modalWaitRef.close();
+        // modalWaitRef.close();
       },
       (err) => {
         this.showWarnDlg("Unable to load document");
