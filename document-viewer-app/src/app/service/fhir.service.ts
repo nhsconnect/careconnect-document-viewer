@@ -399,32 +399,32 @@ export class FhirService {
 
 
 
-    getEPRObservationsByCode(patientId: number, code:string, date : string): Observable<fhir.Bundle> {
+    getEPRObservationsByCode(patientId: number, code: string, date: string): Observable<fhir.Bundle> {
 
-    let url = this.getEPRUrl()  + `/Observation?patient=${patientId}`+`&code=${code}&_count=20`;
-    if (date != undefined) {
+    let url = this.getEPRUrl()  + '/Observation?patient=' + patientId + '&code=' + code + '&_count=20';
+    if (date !== undefined) {
       url = url + '&date=ge' + date;
     }
 
-    return this.http.get<fhir.Bundle>(url,{ 'headers' : this.getEPRHeaders()});
+    return this.http.get<fhir.Bundle>(url, { 'headers' : this.getEPRHeaders()});
 
   }
 
   getEPRPatient(patientId: string): Observable<fhir.Patient> {
 
-    const url = this.getEPRUrl()  + `/Patient/${patientId}`;
+    const url = this.getEPRUrl()  + '/Patient/' + patientId;
 
-    return this.http.get<fhir.Patient>(url,{ 'headers' : this.getEPRHeaders()});
+    return this.http.get<fhir.Patient>(url, { 'headers' : this.getEPRHeaders()});
 
   }
 
 
-  getValueSet(valueSet : string ) : Observable<fhir.ValueSet> {
-    const url = 'https://vonk.fire.ly/ValueSet/'+valueSet;
+  getValueSet(valueSet: string ): Observable<fhir.ValueSet> {
+    const url = 'https://vonk.fire.ly/ValueSet/' + valueSet;
     let headers = new HttpHeaders();
     headers = headers.append('Accept', 'application/fhir+json');
 
-    return this.http.get<fhir.ValueSet>(url,{ 'headers' : headers });
+    return this.http.get<fhir.ValueSet>(url, { 'headers' : headers });
   }
 
 
