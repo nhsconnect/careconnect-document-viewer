@@ -162,7 +162,7 @@
                             <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>../document-viewer-app/dist/</directory>
+                                    <directory>../web/dist/</directory>
                                 </resource>
                             </resources>
                         </configuration>
