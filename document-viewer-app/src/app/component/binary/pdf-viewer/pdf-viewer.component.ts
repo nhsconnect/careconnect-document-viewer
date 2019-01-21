@@ -1,7 +1,7 @@
-import {Component, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {FhirService} from "../../../service/fhir.service";
-import {ActivatedRoute} from "@angular/router";
-import {IAlertConfig, TdDialogService} from "@covalent/core";
+import {Component, Input, OnInit, ViewContainerRef} from '@angular/core';
+import {FhirService} from '../../../service/fhir.service';
+import {ActivatedRoute} from '@angular/router';
+import {IAlertConfig, TdDialogService} from '@covalent/core';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -10,21 +10,21 @@ import {IAlertConfig, TdDialogService} from "@covalent/core";
 })
 export class PdfViewerComponent implements OnInit {
 
-  docId : string;
+  docId: string;
 
 
-  @Input() document : any;
+  @Input() document: any;
 
-  pdfSrc: string = '';
+  pdfSrc = '';
 
-  page: number = 1;
+  page = 1;
   totalPages: number;
-  isLoaded: boolean = false;
+  isLoaded = false;
 
-  @Input() binaryId : string;
+  @Input() binaryId: string;
 
   constructor(private route: ActivatedRoute,
-              private fhirService : FhirService,
+              private fhirService: FhirService,
               private _dialogService: TdDialogService,
               private _viewContainerRef: ViewContainerRef) { }
 
@@ -35,20 +35,20 @@ export class PdfViewerComponent implements OnInit {
   }
 
 
-  getDocument(id : string): void {
+  getDocument(id: string): void {
 
     this.docId = id;
 
-    //let modalWaitRef = this.modalService.open( this.modalWait,{ windowClass: 'dark-modal' });
+    // let modalWaitRef = this.modalService.open( this.modalWait,{ windowClass: 'dark-modal' });
 
     this.fhirService.getBinaryRaw(id).subscribe(
       (res) => {
-        var fileURL = URL.createObjectURL(res);
-        this.pdfSrc=fileURL;
+        const fileURL = URL.createObjectURL(res);
+        this.pdfSrc = fileURL;
       //  modalWaitRef.close();
       },
       (err) => {
-        this.showWarnDlg("Unable to load document");
+        this.showWarnDlg('Unable to load document');
       }
     );
 
@@ -65,13 +65,13 @@ export class PdfViewerComponent implements OnInit {
     this.isLoaded = true;
   }
 
-  showWarnDlg(message : string) {
-    let alertConfig : IAlertConfig = { message : message};
+  showWarnDlg(message: string) {
+    const alertConfig: IAlertConfig = { message : message};
     alertConfig.disableClose =  false; // defaults to false
     alertConfig.viewContainerRef = this._viewContainerRef;
-    alertConfig.title = 'Warning'; //OPTIONAL, hides if not provided
-    alertConfig.closeButton = 'Ok'; //OPTIONAL, defaults to 'CLOSE'
-    alertConfig.width = '400px'; //OPTIONAL, defaults to 400px
+    alertConfig.title = 'Warning'; // OPTIONAL, hides if not provided
+    alertConfig.closeButton = 'Ok'; // OPTIONAL, defaults to 'CLOSE'
+    alertConfig.width = '400px'; // OPTIONAL, defaults to 400px
     this._dialogService.openAlert(alertConfig);
   }
 }

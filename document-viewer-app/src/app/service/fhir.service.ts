@@ -309,25 +309,25 @@ export class FhirService {
   }
 
 
-  getBinary(id: string): Observable<fhir.Binary> {
+  getBinary(url: string): Observable<fhir.Binary> {
 
-    const url = this.getEPRUrl() + `/Binary/${id}`;
+    // const url = this.getEPRUrl() + `/Binary/${id}`;
 
     return this.http.get<fhir.Binary>(url,{ 'headers' : this.getEPRHeaders(true)});
 
   }
-  getBinaryRaw(id: string,): Observable<any> {
+  getBinaryRaw(url: string): Observable<any> {
 
-    const url = this.getEPRUrl() + `/Binary/${id}`;
+    // const url = this.getEPRUrl() + `/Binary/${id}`;
 
-    return this.http.get(url,{ 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
+    return this.http.get(url, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
 
   }
 
 
-  getCompositionDocumentHTML(id: string): Observable<any> {
+  getCompositionDocumentHTML(url: string): Observable<any> {
 
-    const url = this.getEPRUrl() + `/Binary/${id}`;
+    // const url = this.getEPRUrl() + `/Binary/${id}`;
 
     let headers = this.getEPRHeaders(false);
     headers = headers.append('Content-Type', 'text/html' );
@@ -336,9 +336,9 @@ export class FhirService {
       .get(url, {  headers , responseType : 'text' as 'text'});
   }
 
-  getCompositionDocumentPDF(id: string): Observable<any> {
+  getCompositionDocumentPDF(url: string): Observable<any> {
 
-    const url = this.getEPRUrl() + `/Binary/${id}`;
+    // const url = this.getEPRUrl() + `/Binary/${id}`;
 
     let headers = this.getEPRHeaders(false);
     headers = headers.append(
@@ -350,18 +350,18 @@ export class FhirService {
 
 
 
-  postBundle(document: any,contentType : string) : Observable<fhir.Bundle> {
+  postBundle(document: any, contentType : string): Observable<fhir.Bundle> {
 
-    let headers :HttpHeaders = this.getEPRHeaders(false);
-    headers.append('Content-Type',contentType);
-    headers.append('Prefer','return=representation');
+    const headers: HttpHeaders = this.getEPRHeaders(false);
+    headers.append('Content-Type', contentType);
+    headers.append('Prefer', 'return=representation');
     const url = this.getMessagingUrl() + '/Bundle';
 
-    return this.http.post<fhir.Bundle>(url,document,{ 'headers' :headers});
+    return this.http.post<fhir.Bundle>(url, document,{ 'headers': headers});
   }
 
 
-  putBundle(document: any,contentType : string) : Observable<fhir.Bundle> {
+  putBundle(document: any, contentType: string): Observable<fhir.Bundle> {
 
     let headers :HttpHeaders = this.getEPRHeaders(false);
     headers.append('Content-Type',contentType);

@@ -8,6 +8,7 @@ export const environment = {
     client_id : 'ccri-cat'
   },
   login : '',
+  messagingUrl : 'http://127.0.0.1:8182/ccri-messaging/STU3',
   oauth2 : {
     eprUrl : 'FHIR_SERVER_URL',
     client_id : 'clinical-assurance-tool',

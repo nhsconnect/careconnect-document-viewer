@@ -57,8 +57,9 @@ export class BinaryComponent implements OnInit {
 
   processDocument() {
       // TODO KGM Need to move to actual URL
-      const array: string[] = this.document.content[0].attachment.url.split('/');
-      this.binaryId = array[array.length - 1];
+      // const array: string[] = this.document.content[0].attachment.url.split('/');
+      // KGM 21 Jan 2019 Use given url rather than using binary Id
+      this.binaryId = this.document.content[0].attachment.url;
 
       if (this.binaryId !== undefined) {
           if (this.document.content[0].attachment.contentType === 'application/fhir+xml') {
