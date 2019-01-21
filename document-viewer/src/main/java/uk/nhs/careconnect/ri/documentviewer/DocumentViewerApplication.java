@@ -51,5 +51,13 @@ public class DocumentViewerApplication {
             }
         };
     }
-
+/*
+    @Bean(name = "LogQuery", destroyMethod = "stop", initMethod = "start")
+    @Scope("singleton")
+    @Lazy(false)
+    public Log4jLogQuery log4jLogQuery() {
+        Log4jLogQuery log4jLogQuery = new Log4jLogQuery();
+        return log4jLogQuery;
+    }
+*/
 }
