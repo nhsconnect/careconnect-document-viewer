@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {KeycloakService} from "./keycloak.service";
+import {HttpClient} from '@angular/common/http';
+import {FhirService} from './fhir.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,7 @@ export class AppConfigService {
   loadConfig() {
     // console.log('hello App' + document.baseURI);
     // only run if not localhost
-    console.log('baseURI = ' + document.baseURI);
-
+      console.log('baseURI = ' + document.baseURI);
 
       console.log('calling config endpoint: ' + document.baseURI + 'camel/config/http');
       this.http.get<any>(document.baseURI + 'camel/config/http').subscribe(result => {
@@ -32,7 +32,7 @@ export class AppConfigService {
           error => {
             console.log(error);
             console.log('No server detected');
-              this.initEvent.emit(undefined);
+            this.initEvent.emit(undefined);
           });
 
   }

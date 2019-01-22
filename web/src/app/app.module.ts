@@ -32,7 +32,6 @@ import { PractitionerSearchComponent } from './component/practitioner-search/pra
 import { OrganisationSearchComponent } from './component/organisation-search/organisation-search.component';
 import { OrganisationComponent } from './component/organisation/organisation.component';
 import { PractitionerComponent } from './component/practitioner/practitioner.component';
-import { CallbackComponent } from './modules/callback/callback.component';
 import { ResourceDialogComponent } from './dialog/resource-dialog/resource-dialog.component';
 import { TreeModule } from 'angular-tree-component';
 import { PdfViewerComponent } from './component/binary/pdf-viewer/pdf-viewer.component';
@@ -90,7 +89,6 @@ import {HealthcareServiceComponent} from './component/healthcare-service/healthc
 import {BinaryComponent} from './component/binary/binary/binary.component';
 import {PractitionerRoleDialogComponent} from './dialog/practitioner-role-dialog/practitioner-role-dialog.component';
 import {EncounterDialogComponent} from './dialog/encounter-dialog/encounter-dialog.component';
-import {PingComponent} from './modules/ping/ping.component';
 import { QuestionnaireResponseComponent } from './component/questionnaire-response/questionnaire-response.component';
 import { RiskAssessmentComponent } from './component/risk-assessment/risk-assessment.component';
 import { GoalComponent } from './component/goal/goal.component';
@@ -103,8 +101,6 @@ import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immuni
 import {LayoutModule} from '@angular/cdk/layout';
 import {EdmsComponent} from './modules/edms/edms.component';
 import {EdmsRoutingModule} from './edms-routing.module';
-import {LoginComponent} from './modules/login/login.component';
-import {LogoutComponent} from './modules/logout/logout.component';
 import {ObservationDetailComponent} from './component/observation-detail/observation-detail.component';
 import {CareGoogleChartComponent} from './component/care-google-chart/care-google-chart.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -118,10 +114,14 @@ import {LinksService} from './service/links.service';
 import {EprService} from './service/epr.service';
 import {AuthGuard} from './service/auth-guard';
 import {Oauth2Service} from './service/oauth2.service';
-import {KeycloakService} from './service/keycloak.service';
 import {ErrorsHandler} from './service/errors-handler';
 import {TokenInterceptor} from './service/token-interceptor';
-import {AppConfigService} from "./service/app-config.service";
+import {LoginComponent} from './security/login/login.component';
+import {LogoutComponent} from './security/logout/logout.component';
+import {CallbackComponent} from './security/callback/callback.component';
+import {PingComponent} from './security/ping/ping.component';
+import {AppConfigService} from './service/app-config.service';
+import { LoadingComponent } from './loading/loading.component';
 
 /*
 export function initializeApp(appConfig: AppConfig) {
@@ -198,7 +198,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CarePlanComponent,
     MedicationDispenseComponent,
     MedicationDispenseDetailComponent,
-    ImmunisationDetailComponent
+    ImmunisationDetailComponent,
+    LoadingComponent
   ],
   entryComponents: [
     ResourceDialogComponent,
@@ -291,7 +292,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     EprService,
     AuthGuard,
     CookieService,
-    KeycloakService,
     Oauth2Service,
     BundleService,
     MatIconRegistry,

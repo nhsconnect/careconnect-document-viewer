@@ -1,16 +1,33 @@
-import {CanActivate, Router} from "@angular/router";
-import {AuthService} from "./auth.service";
-import {Injectable} from "@angular/core";
-import {KeycloakService} from "./keycloak.service";
+import {CanActivate, Router} from '@angular/router';
+import {AuthService} from './auth.service';
+import {Injectable} from '@angular/core';
+import {Oauth2Service} from './oauth2.service';
+import {FhirService} from './fhir.service';
+
 
 @Injectable()
 export class AuthGuard  implements CanActivate {
 
 
-  constructor(public authService: AuthService, private keyCloakservice : KeycloakService) {
+  constructor(public authService: AuthService,
+              public router: Router,
+              private fhirService: FhirService,
+              private oauth2: Oauth2Service) {
 
   }
   canActivate() {
+
+    // If not SMART on FHIR or OAuth2 then quit
+    // console.log('guard');
+
+    console.log('auth guard');
+    if (this.oauth2.isAuthenticated()) {
+      return true;
+    }
+    if (!this.fhirService.oauth2Required()) {
+      console.log('no auth required');
+      return true;
+    }
 
     if (this.authService.getCookie() !== undefined) {
       // no need to process keycloak, cookie present
@@ -19,16 +36,9 @@ export class AuthGuard  implements CanActivate {
     if (this.authService.getAccessToken() !== undefined) {
       return true;
     }
-    if (KeycloakService.auth !== undefined) {
-      if (KeycloakService.auth.authz != undefined) {
-        console.log("Auth Guard " + KeycloakService.auth.authz.authenticated);
-        return KeycloakService.auth.authz.authenticated;
-      } else {
-        console.log('Keycloak defined but auth is not - Unable to activate route');
-        return false;
-      }
-    }
+
     console.log('Unable to activate route' );
+    this.router.navigate(['login']);
     return false;
   }
 

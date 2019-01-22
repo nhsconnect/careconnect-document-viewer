@@ -1,14 +1,17 @@
 import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './modules/login/login.component';
 import {AuthGuard} from './service/auth-guard';
-import {LogoutComponent} from './modules/logout/logout.component';
-import {CallbackComponent} from './modules/callback/callback.component';
-import {PingComponent} from './modules/ping/ping.component';
+import {LogoutComponent} from './security/logout/logout.component';
+import {PingComponent} from './security/ping/ping.component';
+import {LoginComponent} from './security/login/login.component';
+import {CallbackComponent} from './security/callback/callback.component';
+import {EdmsComponent} from './modules/edms/edms.component';
+import {LoadingComponent} from './loading/loading.component';
+
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoadingComponent },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'ping', canActivate: [AuthGuard], component: PingComponent },

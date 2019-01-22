@@ -14,22 +14,27 @@ const edmsRoutes: Routes = [
         children: [
             {
                 path: '',
-                component: LoadDocumentComponent
+                canActivate: [AuthGuard],
+                component: PatientFindComponent
             },
             {
                 path: 'load',
+                canActivate: [AuthGuard],
                 component: LoadDocumentComponent
             },
             {
                 path: 'binary/:docid',
+                canActivate: [AuthGuard],
                 component: BinaryComponent
             },
             {
                 path: 'documents',
+                canActivate: [AuthGuard],
                 component: EdmsRecordComponent
             },
             {
                 path: 'patient',
+                canActivate: [AuthGuard],
                 component: PatientFindComponent,
             }]
     },

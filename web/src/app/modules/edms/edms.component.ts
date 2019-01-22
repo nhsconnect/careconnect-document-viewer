@@ -4,8 +4,6 @@ import {EprService} from '../../service/epr.service';
 import {User} from '../../model/user';
 import { TdLayoutManageListComponent, TdMediaService} from '@covalent/core';
 import {MatDialog} from '@angular/material';
-import {KeycloakService} from '../../service/keycloak.service';
-
 import {Router} from '@angular/router';
 
 @Component({
@@ -25,9 +23,7 @@ export class EdmsComponent implements AfterViewInit, OnInit {
     public dialog: MatDialog,
     private _changeDetectorRef: ChangeDetectorRef,
     public authService: AuthService,
-
     public eprService: EprService,
-    public keycloakService: KeycloakService,
     private router: Router
   ) {
 
@@ -93,7 +89,6 @@ export class EdmsComponent implements AfterViewInit, OnInit {
 
       });
 
-    this.keycloakService.setCookie();
   }
 
   ngAfterViewInit(): void {

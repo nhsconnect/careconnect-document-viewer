@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import {
   HttpErrorResponse,
   HttpEvent,
@@ -6,27 +6,29 @@ import {
   HttpInterceptor,
   HttpRequest,
   HttpResponse
-} from "@angular/common/http";
-import {Oauth2Service} from "./oauth2.service";
+} from '@angular/common/http';
+import {Oauth2Service} from './oauth2.service';
 import { Observable } from 'rxjs';
 import { tap} from 'rxjs/operators';
-import {FhirService} from "./fhir.service";
-import {AuthService} from "./auth.service";
-import {environment} from "../../environments/environment";
+import {FhirService} from './fhir.service';
+import {AuthService} from './auth.service';
+
 
 
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private oauth2 : Oauth2Service, public fhir : FhirService, public authService : AuthService) {}
+  constructor(private oauth2: Oauth2Service,
+              public fhir: FhirService,
+              public authService: AuthService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     // FHIR resource requests only
-       if ((request.url.indexOf(this.fhir.getEPRUrl()) !== -1) && (request.url.indexOf('metadata') == -1 )) {
+       if ((request.url.indexOf(this.fhir.getBaseUrl()) !== -1) && (request.url.indexOf('metadata') === -1 )) {
          console.log('Does token need refreshing ' + !this.oauth2.isAuthenticated());
-         if (request.method == "PUT" || request.method == "POST") {
+         if (request.method === 'PUT' || request.method === 'POST') {
            request = request.clone({
              setHeaders: {
                Authorization: `Bearer ${this.oauth2.getToken()}`,
@@ -47,13 +49,13 @@ export class TokenInterceptor implements HttpInterceptor {
                }
              }, (err: any) => {
                if (err instanceof HttpErrorResponse) {
-                 console.log("Interceptor error");
+                 console.log('Interceptor error');
                  if (err.status === 401) {
                    console.log('*** 401 401 401 401 401 ***');
-                   if (this.oauth2.getToken() != undefined) {
+                   if (this.oauth2.getToken() !== undefined) {
                      console.log('Removing access token and reauthorising');
                      this.oauth2.removeToken();
-                     this.fhir.authoriseOAuth2();
+                     this.authService.authoriseOAuth2();
                    } else {
                      console.log('No token found. Try logout?');
                    }
@@ -61,7 +63,7 @@ export class TokenInterceptor implements HttpInterceptor {
                  }
                }
              })
-         )
+         );
 
        } else {
          return next.handle(request);

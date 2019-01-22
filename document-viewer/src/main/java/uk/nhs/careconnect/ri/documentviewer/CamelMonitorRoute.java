@@ -30,21 +30,6 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${fhir.messaging.serverBase}")
 	private String messagingBase;
 
-	@Value("${keycloak.rooturl}")
-	private String keycloakrooturl;
-
-	@Value("${keycloak.authserverurl}")
-	private String keycloakauthserverurl;
-
-	@Value("${keycloak.realm}")
-	private String keycloakrealm;
-
-	@Value("${keycloak.client_secret}")
-	private String keycloakclient_secret;
-
-	@Value("${keycloak.client_id}")
-	private String keycloakclient_id;
-
 	@Value("${oauth2.client_id}")
 	private String oauth2client_id;
 
@@ -75,11 +60,6 @@ public class CamelMonitorRoute extends RouteBuilder {
 				.setHeader("Content-Type", constant("application/json"))
 				.transform().constant("{ \"fhirServer\": \""+serverBase+"\", "
 				+"\"messagingServer\": \""+messagingBase+"\", "
-				+"\"keycloakauthserverurl\": \""+keycloakauthserverurl+"\", "
-				+"\"keycloakclient_id\": \""+keycloakclient_id+"\", "
-				+"\"keycloakclient_secret\": \""+keycloakclient_secret+"\", "
-				+"\"keycloakrealm\": \""+keycloakrealm+"\", "
-				+"\"keycloakrooturl\": \""+keycloakrooturl+"\", "
 				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
 				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
 				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\""
