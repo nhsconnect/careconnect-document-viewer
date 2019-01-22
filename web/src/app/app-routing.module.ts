@@ -6,7 +6,7 @@ import {PingComponent} from './security/ping/ping.component';
 import {LoginComponent} from './security/login/login.component';
 import {CallbackComponent} from './security/callback/callback.component';
 import {EdmsComponent} from './modules/edms/edms.component';
-import {LoadingComponent} from './loading/loading.component';
+import {LoadingComponent} from './security/loading/loading.component';
 
 
 

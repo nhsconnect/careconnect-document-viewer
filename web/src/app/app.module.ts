@@ -121,7 +121,7 @@ import {LogoutComponent} from './security/logout/logout.component';
 import {CallbackComponent} from './security/callback/callback.component';
 import {PingComponent} from './security/ping/ping.component';
 import {AppConfigService} from './service/app-config.service';
-import { LoadingComponent } from './loading/loading.component';
+import { LoadingComponent } from './security/loading/loading.component';
 
 /*
 export function initializeApp(appConfig: AppConfig) {

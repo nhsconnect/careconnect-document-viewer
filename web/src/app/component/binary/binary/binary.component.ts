@@ -70,6 +70,6 @@ export class BinaryComponent implements OnInit {
               this.docType = 'img';
           }
       }
-      console.log('DocumentRef Id = ' + this.binaryId);
+      // console.log('DocumentRef Id = ' + this.binaryId);
   }
 }

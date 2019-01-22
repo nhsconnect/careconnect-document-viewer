@@ -11,6 +11,7 @@ import {Oauth2token} from '../model/oauth2token';
 import {FhirService} from './fhir.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {AppConfigService} from './app-config.service';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,8 @@ export class AuthService {
       private oauth2: Oauth2Service,
       private _cookieService: CookieService,
       private fhirService: FhirService,
-      private http: HttpClient
+      private http: HttpClient,
+      private appConfig: AppConfigService
   ) {
 
     this.updateUser();
@@ -52,7 +54,7 @@ export class AuthService {
 
   setLocalUser(user: User) {
     if (user !== undefined) {
-      console.log('User set ' + user.email + ' ' + user.userName );
+      // console.log('User set ' + user.email + ' ' + user.userName );
     }
     this._User = user;
     this.UserEvent.emit(this._User);
@@ -111,20 +113,40 @@ export class AuthService {
   getCatClientSecret() {
     // This is a marker for entryPoint.sh to replace
     let secret = 'SMART_OAUTH2_CLIENT_SECRET';
-    if (secret.indexOf('SECRET') !== -1) {
+    if (secret.indexOf('SECRET') !== -1 && this.appConfig.getConfig() !== undefined) {
+      secret = this.appConfig.getConfig().oauth2client_secret;
+    } else if (secret.indexOf('SECRET') !== -1 ) {
       secret = environment.oauth2.client_secret;
     }
+    console.log('oauth2 client secret = ' + secret);
     return secret;
   }
+
+  getCatClientId() {
+    // This is a marker for entryPoint.sh to replace
+    let secret = 'SMART_OAUTH2_CLIENT_ID';
+    if (secret.indexOf('CLIENT_ID') !== -1 && this.appConfig.getConfig() !== undefined) {
+      secret = this.appConfig.getConfig().oauth2client_id;
+    } else if (secret.indexOf('CLIENT_ID') !== -1) {
+      secret = environment.oauth2.client_id;
+    }
+    console.log('oauth2 client id = ' + secret);
+    return secret;
+  }
+
+
   getCookieDomain() {
 
     let cookieDomain = 'CAT_COOKIE_DOMAIN';
-    if (cookieDomain.indexOf('CAT_') !== -1) {
+    if (cookieDomain.indexOf('CAT_') !== -1 && this.appConfig.getConfig() !== undefined) {
+      cookieDomain = this.appConfig.getConfig().oauth2cookie_domain;
+    } else if (cookieDomain.indexOf('CAT_') !== -1) {
       cookieDomain = environment.oauth2.cookie_domain;
     }
     return cookieDomain;
 
   }
+
   setCookie() {
     console.log('cookie domain: ' + this.getCookieDomain());
     if (this._cookieService.get('hspc-token') !== undefined) {
@@ -142,6 +164,7 @@ export class AuthService {
       });
     }
   }
+
 
   performGetAccessToken(authCode: string ) {
 

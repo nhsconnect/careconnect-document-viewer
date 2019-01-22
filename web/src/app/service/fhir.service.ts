@@ -1,9 +1,6 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent } from 'rxjs';
+import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Oauth2token} from '../model/oauth2token';
-
-import {AuthService} from './auth.service';
 
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';
@@ -27,6 +24,8 @@ export class FhirService {
 
   private baseUrl = undefined;
 
+  private messagingUrl = undefined;
+
   private format: Formats = Formats.JsonFormatted;
 
   public path = '/Composition';
@@ -43,8 +42,7 @@ export class FhirService {
   constructor(  private http: HttpClient,
       private router: Router,
       private platformLocation: PlatformLocation,
-      private appConfig: AppConfigService,
-      private oauth2: Oauth2Service
+      private appConfig: AppConfigService
   ) {}
 
   private rootUrl: string = undefined;
@@ -77,7 +75,6 @@ export class FhirService {
   }
 
   storeBaseUrl(baseUrl: string) {
-    console.log('called storeBaseUrl');
     localStorage.setItem('baseUrl', baseUrl);
   }
 
@@ -89,17 +86,18 @@ export class FhirService {
 
     if (this.getStoredBaseUrl() !== undefined && this.getStoredBaseUrl() !== null) {
       this.baseUrl = this.getStoredBaseUrl();
-      console.log('Stored baseUrl = ' + this.baseUrl);
       return this.baseUrl;
     }
     let retStr = this.baseUrl;
-    console.log('baseUrl = ' + retStr);
+
     // this should be resolved by app-config.ts but to stop start up errors
 
     if (retStr === undefined) {
+      console.log(this.appConfig);
       if (this.appConfig.getConfig() !== undefined) {
         retStr = this.appConfig.getConfig().fhirServer;
       } else {
+        console.log('Config not detected, using environment settings');
         if (document.baseURI.includes('localhost')) {
           if (environment.oauth2.eprUrl !== undefined) {
             retStr = environment.oauth2.eprUrl;
@@ -118,38 +116,11 @@ export class FhirService {
         }
       }
     }
-    /*
-    if (retStr !== undefined) {
-      if (this.oauth2.isAuthenticated() || this.oauth2.isAuthenticating()) {
-
-        if (retStr.includes('8183/ccri-fhir')) {
-          retStr = 'https://data.developer-test.nhs.uk/ccri-smartonfhir/STU3';
-          console.log('swapping to smartonfhir instance: ' + retStr);
-          this.baseUrl = retStr;
-        } else {
-          if (retStr.includes('ccri-fhir')) {
-            retStr = retStr.replace('ccri-fhir', 'ccri-smartonfhir');
-            console.log('swapping to smartonfhir instance: ' + retStr);
-            this.baseUrl = retStr;
-          }
-        }
-      } else {
-
-        if (retStr.includes('ccri-smartonfhir')) {
-          retStr = retStr.replace('ccri-smartonfhir', 'ccri-fhir');
-          console.log('swapping to unsec fhir instance: ' + retStr);
-          this.baseUrl = retStr;
-
-        }
-      }
-    }
-    */
     this.storeBaseUrl(retStr);
     return retStr;
   }
 
   public setRootUrl(rootUrl: string) {
-    console.log('called setRootUrl');
     this.storeBaseUrl(rootUrl);
     this.rootUrl = rootUrl;
     this.baseUrl = rootUrl;
@@ -169,7 +140,7 @@ export class FhirService {
   }
 */
   public getConformance() {
-//  console.log('called CapabilityStatement');
+
     this.http.get<any>(this.getBaseUrl() + '/metadata', { 'headers' : this.getHeaders(true)}).subscribe(capabilityStatement => {
       this.conformance = capabilityStatement;
 
@@ -181,7 +152,9 @@ export class FhirService {
   }
 
   public getMessagingUrl(): string {
-
+    if (this.messagingUrl !== undefined) {
+      return this.messagingUrl;
+    }
     let eprUrl = 'FHIR_MESSAGING_URL';
     if (eprUrl.indexOf('FHIR_MESSAGING_URL') !== -1 && this.appConfig.getConfig() !== undefined) {
       eprUrl = this.appConfig.getConfig().messagingServer;
@@ -189,6 +162,11 @@ export class FhirService {
       eprUrl = environment.messagingUrl;
     }
       return eprUrl;
+  }
+
+  public setMessagingUrl(messagingUrl: string): string {
+    this.messagingUrl = messagingUrl;
+    return messagingUrl;
   }
 
   getCatClientSecret() {
@@ -199,7 +177,6 @@ export class FhirService {
     } else if (secret.indexOf('SECRET') !== -1 ) {
       secret = environment.oauth2.client_secret;
     }
-    console.log('oauth2 client secret = ' + secret);
     return secret;
   }
 
@@ -211,7 +188,6 @@ export class FhirService {
     } else if (secret.indexOf('CLIENT_ID') !== -1) {
       secret = environment.oauth2.client_id;
     }
-    console.log('oauth2 client id = ' + secret);
     return secret;
   }
 
@@ -385,7 +361,6 @@ export class FhirService {
   searchPatients(term: string): Observable<fhir.Bundle> {
     let url =  this.getBaseUrl();
     if (!isNaN(parseInt(term))) {
-      console.log('Number ' + term);
       url =  this.getBaseUrl();
       return this.http.get<fhir.Bundle>(url + `/Patient?identifier=${term}`, { 'headers' : this.getEPRHeaders() });
     } else {
@@ -417,7 +392,6 @@ export class FhirService {
   searchPractitioners(term: string): Observable<fhir.Bundle> {
     let url =  this.getBaseUrl();
     if (!isNaN(parseInt(term))) {
-      console.log('Number ' + term);
       url =  this.getBaseUrl();
       return this.http.get<fhir.Bundle>(url + `/Practitioner?identifier=${term}`, { 'headers' : this.getEPRHeaders() });
     } else {

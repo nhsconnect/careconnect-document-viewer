@@ -20,18 +20,18 @@ export class AppConfigService {
   loadConfig() {
     // console.log('hello App' + document.baseURI);
     // only run if not localhost
-      console.log('baseURI = ' + document.baseURI);
+      // console.log('baseURI = ' + document.baseURI);
 
-      console.log('calling config endpoint: ' + document.baseURI + 'camel/config/http');
+      // console.log('calling config endpoint: ' + document.baseURI + 'camel/config/http');
       this.http.get<any>(document.baseURI + 'camel/config/http').subscribe(result => {
-            console.log('app config fhirServer retrieved.');
-            console.log(result);
+            // console.log('app config fhirServer retrieved.');
+            // console.log(result);
             this.appConfig = result;
             this.initEvent.emit(result);
           },
           error => {
-            console.log(error);
-            console.log('No server detected');
+            // console.log(error);
+            console.log('No configuration endpoint detected');
             this.initEvent.emit(undefined);
           });
 
