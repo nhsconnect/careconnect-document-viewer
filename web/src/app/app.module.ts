@@ -64,11 +64,11 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {
-    CovalentDialogsModule, CovalentExpansionPanelModule, CovalentFileModule,
+  CovalentDialogsModule, CovalentExpansionPanelModule, CovalentFileModule,
 
-    CovalentJsonFormatterModule,
-    CovalentLayoutModule, CovalentMediaModule,
-    CovalentMenuModule, CovalentMessageModule, CovalentNotificationsModule, TdFileInputComponent
+  CovalentJsonFormatterModule,
+  CovalentLayoutModule, CovalentLoadingModule, CovalentMediaModule,
+  CovalentMenuModule, CovalentMessageModule, CovalentNotificationsModule, TdFileInputComponent
 
 } from '@covalent/core';
 import {CovalentHttpModule} from '@covalent/http';
@@ -265,6 +265,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentDialogsModule,
     CovalentMediaModule,
     CovalentNotificationsModule,
+    CovalentLoadingModule,
 
     CovalentFileModule,
     CovalentExpansionPanelModule,

@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {environment} from "../../environments/environment";
 
 
 
@@ -32,7 +33,15 @@ export class AppConfigService {
           error => {
             // console.log(error);
             console.log('No configuration endpoint detected');
-            this.initEvent.emit(undefined);
+            const result = {
+                fhirServer: environment.oauth2.eprUrl,
+                messagingServer: environment.messagingUrl,
+                oauth2client_id: environment.oauth2.client_id,
+                oauth2client_secret: environment.oauth2.client_secret,
+                oauth2cookie_domain: environment.oauth2.cookie_domain
+            };
+            this.appConfig = result;
+            this.initEvent.emit(result);
           });
 
   }
