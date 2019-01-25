@@ -39,6 +39,9 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${oauth2.cookie_domain}")
 	private String oauth2cookie_domain;
 
+	@Value("${conf.logon}")
+	private String logonUrl;
+
 	@Override
     public void configure() 
     {
@@ -63,6 +66,7 @@ public class CamelMonitorRoute extends RouteBuilder {
 				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
 				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
 				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\""
+				+"\"logonUrl\": \""+logonUrl+"\", "
 				+ " }");
 
 

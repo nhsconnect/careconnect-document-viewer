@@ -38,7 +38,8 @@ export class AppConfigService {
                 messagingServer: environment.messagingUrl,
                 oauth2client_id: environment.oauth2.client_id,
                 oauth2client_secret: environment.oauth2.client_secret,
-                oauth2cookie_domain: environment.oauth2.cookie_domain
+                oauth2cookie_domain: environment.oauth2.cookie_domain,
+                logonUrl: environment.oauth2.logonUrl
             };
             this.appConfig = result;
             this.initEvent.emit(result);
