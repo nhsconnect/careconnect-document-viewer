@@ -65,8 +65,8 @@ public class CamelMonitorRoute extends RouteBuilder {
 				+"\"messagingServer\": \""+messagingBase+"\", "
 				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
 				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
-				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\""
-				+"\"logonUrl\": \""+logonUrl+"\", "
+				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\", "
+				+"\"logonUrl\": \""+logonUrl+"\" "
 				+ " }");
 
 

@@ -31,7 +31,7 @@ export class AppConfigService {
             this.initEvent.emit(result);
           },
           error => {
-            // console.log(error);
+            console.log(error);
             console.log('No configuration endpoint detected');
             const result = {
                 fhirServer: environment.oauth2.eprUrl,
