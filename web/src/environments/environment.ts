@@ -6,9 +6,9 @@
 export const environment = {
   production: false,
   login : '',
-  messagingUrl : 'https://data.developer-test.nhs.uk/ccri-fhir/STU3',
+  messagingUrl : 'http://localhost:8181/ccri-document/STU3',
   oauth2 : {
-    eprUrl : 'https://data.developer-test.nhs.uk/ccri-fhir/STU3',
+    eprUrl : 'http://localhost:8181/ccri-document/STU3',
     client_id : 'clinical-assurance-tool',
     client_secret : 'AM3ai-PGoZZRW-7osWbzvGlDBHjHq7M2aBlpNttreHeEyB5jequWy8fsHMVQP4JV0Kd0Fzrtu0iNEqGqguq69Qs',
     cookie_domain : 'localhost',
