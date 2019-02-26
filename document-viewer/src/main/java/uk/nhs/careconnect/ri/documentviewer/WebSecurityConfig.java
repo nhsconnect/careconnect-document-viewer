@@ -34,11 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll().and().csrf().disable();
 
-        http
+    /*    http
                 .authorizeRequests()
                 .antMatchers("/error").permitAll()
                 .antMatchers("/jolokia/**").hasRole("ACTUATOR")
                 .antMatchers("/hawtio/**").hasRole("ACTUATOR")
-                .and().httpBasic();
+                .and().httpBasic();*/
     }
 }
