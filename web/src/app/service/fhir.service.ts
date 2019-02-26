@@ -43,7 +43,17 @@ export class FhirService {
       private router: Router,
       private platformLocation: PlatformLocation,
       private appConfig: AppConfigService
-  ) {}
+  ) {
+
+    localStorage.removeItem('baseUrl');
+    this.appConfig.getInitEventEmitter().subscribe( result => {
+      console.log('FHIR Service config change detected');
+      if (this.getBaseUrl() !== this.baseUrl) {
+        this.conformance = undefined;
+        this.getConformance();
+      }
+    });
+  }
 
   private rootUrl: string = undefined;
 
@@ -76,6 +86,11 @@ export class FhirService {
 
   storeBaseUrl(baseUrl: string) {
     localStorage.setItem('baseUrl', baseUrl);
+    if (this.baseUrl !== baseUrl) {
+      this.baseUrl = baseUrl;
+      this.conformance = undefined;
+      this.getConformance();
+    }
   }
 
   getStoredBaseUrl(): string {
@@ -96,27 +111,9 @@ export class FhirService {
       console.log(this.appConfig);
       if (this.appConfig.getConfig() !== undefined) {
         retStr = this.appConfig.getConfig().fhirServer;
-      } else {
-        console.log('Config not detected, using environment settings');
-        if (document.baseURI.includes('localhost')) {
-          if (environment.oauth2.eprUrl !== undefined) {
-            retStr = environment.oauth2.eprUrl;
-          } else {
-            retStr = 'http://127.0.0.1:8183/ccri-fhir/STU3';
-          }
-          this.baseUrl = retStr;
-        }
-        if (document.baseURI.includes('data.developer-test.nhs.uk')) {
-          retStr = 'https://data.developer-test.nhs.uk/ccri-fhir/STU3';
-          this.baseUrl = retStr;
-        }
-        if (document.baseURI.includes('data.developer.nhs.uk')) {
-          retStr = 'https://data.developer.nhs.uk/ccri-fhir/STU3';
-          this.baseUrl = retStr;
-        }
+        this.storeBaseUrl(retStr);
       }
     }
-    this.storeBaseUrl(retStr);
     return retStr;
   }
 
@@ -140,15 +137,20 @@ export class FhirService {
   }
 */
   public getConformance() {
+    if (this.conformance !== undefined) {
+      return this.conformance;
+    }
 
-    this.http.get<any>(this.getBaseUrl() + '/metadata', { 'headers' : this.getHeaders(true)}).subscribe(capabilityStatement => {
-      this.conformance = capabilityStatement;
+    if (this.baseUrl !== undefined) {
+      this.http.get<any>(this.getBaseUrl() + '/metadata', {'headers': this.getHeaders(true)}).subscribe(capabilityStatement => {
+        this.conformance = capabilityStatement;
 
-      this.conformanceChange.emit(capabilityStatement);
-    }, () => {
-      this.conformance = undefined;
-      this.conformanceChange.emit(undefined);
-    });
+        this.conformanceChange.emit(capabilityStatement);
+      }, () => {
+        this.conformance = undefined;
+        this.conformanceChange.emit(undefined);
+      });
+    }
   }
 
   public getMessagingUrl(): string {

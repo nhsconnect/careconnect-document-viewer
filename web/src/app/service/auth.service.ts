@@ -78,14 +78,11 @@ export class AuthService {
 
 
   getLogonServer() {
-    if (document.baseURI.includes('data.developer-test.nhs.uk')) {
-      return 'https://data.developer-test.nhs.uk/ccri-logon';
+    if (this.appConfig.getConfig() !== undefined) {
+      return this.appConfig.getConfig().logonUrl;
+    } else {
+      return environment.oauth2.logonUrl;
     }
-    if (document.baseURI.includes('data.developer.nhs.uk')) {
-      return 'https://data.developer.nhs.uk/ccri-logon';
-    }
-
-    return 'http://localhost:4200/ccri-logon';
   }
 
   getCookie() {
