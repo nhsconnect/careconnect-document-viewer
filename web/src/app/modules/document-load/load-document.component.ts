@@ -254,7 +254,7 @@ export class LoadDocumentComponent implements OnInit {
   */
   public getContentType(file): string {
     const ext = file.name.substr(file.name.lastIndexOf('.') + 1);
-    if (ext === 'xml' || ext === 'XML') {
+    if (ext === 'xml' || ext === 'XML' || ext === 'dat') {
       return 'application/fhir+xml';
     } else if (ext === 'json' || ext === 'JSON') {
       return 'application/fhir+json';

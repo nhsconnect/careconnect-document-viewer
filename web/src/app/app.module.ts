@@ -122,6 +122,7 @@ import {CallbackComponent} from './security/callback/callback.component';
 import {PingComponent} from './security/ping/ping.component';
 import {AppConfigService} from './service/app-config.service';
 import { LoadingComponent } from './security/loading/loading.component';
+import {KeycloakService} from "./service/keycloak.service";
 
 /*
 export function initializeApp(appConfig: AppConfig) {
@@ -296,6 +297,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     Oauth2Service,
     BundleService,
     MatIconRegistry,
+    KeycloakService,
     {
       provide: ErrorHandler,
       useClass: ErrorsHandler,

@@ -32,6 +32,22 @@ public class CamelMonitorRoute extends RouteBuilder {
 	@Value("${conf.logon}")
 	private String logonUrl;
 
+	@Value("${keycloak.rooturl}")
+	private String keycloakrooturl;
+
+	@Value("${keycloak.authserverurl}")
+	private String keycloakauthserverurl;
+
+	@Value("${keycloak.realm}")
+	private String keycloakrealm;
+
+	@Value("${keycloak.client_secret}")
+	private String keycloakclient_secret;
+
+	@Value("${keycloak.client_id}")
+	private String keycloakclient_id;
+
+
 	@Override
     public void configure() 
     {
@@ -56,7 +72,12 @@ public class CamelMonitorRoute extends RouteBuilder {
 				+"\"oauth2client_id\": \""+oauth2client_id+"\", "
 				+"\"oauth2client_secret\": \""+oauth2client_secret+"\", "
 				+"\"oauth2cookie_domain\": \""+oauth2cookie_domain+"\", "
-				+"\"logonUrl\": \""+logonUrl+"\" "
+				+"\"logonUrl\": \""+logonUrl+"\", "
+				+"\"keycloakauthserverurl\": \""+keycloakauthserverurl+"\", "
+				+"\"keycloakclient_id\": \""+keycloakclient_id+"\", "
+				+"\"keycloakclient_secret\": \""+keycloakclient_secret+"\", "
+				+"\"keycloakrealm\": \""+keycloakrealm+"\", "
+				+"\"keycloakrooturl\": \""+keycloakrooturl+"\""
 				+ " }");
 
 
