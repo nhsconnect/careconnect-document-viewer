@@ -222,16 +222,19 @@ export class FhirService {
   }
 
 
-  getBinary(url: string): Observable<fhir.Binary> {
+  getBinary(id: string): Observable<fhir.Binary> {
 
     // const url = this.getBaseUrl() + `/Binary/${id}`;
+
+    const url = this.getMessagingUrl() + '/Binary/' + id;
 
     return this.http.get<fhir.Binary>(url, { 'headers' : this.getEPRHeaders(true)});
 
   }
-  getBinaryRaw(url: string): Observable<any> {
+  getBinaryRaw(id: string): Observable<any> {
 
     // const url = this.getBaseUrl() + `/Binary/${id}`;
+    const url = this.getMessagingUrl() + '/' + id;
 
     return this.http.get(url, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
 
@@ -283,7 +286,7 @@ export class FhirService {
     headers.append('Prefer', 'return=representation');
 
     // TODO Get real id from XML Bundle
-    const url = this.getMessagingUrl() + '/Bundle';
+    const url = this.getMessagingUrl() + '/Bundle/5c8b6a69d2268b2de0f364da/';
     let params = new HttpParams();
     params = params.append('identifier', 'https://tools.ietf.org/html/rfc4122|1ff370b6-fc5b-40a1-9721-2a942e301f65');
     return this.http.put<fhir.Bundle>(url, document, { 'params': params, 'headers': headers});

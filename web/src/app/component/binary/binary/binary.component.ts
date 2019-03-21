@@ -32,7 +32,7 @@ export class BinaryComponent implements OnInit {
      this.documentReferenceId = this.route.snapshot.paramMap.get('docid');
 
      if (this.documentReferenceId !== undefined) {
-         this.fhirService.getResource('DocumentReference/' + this.documentReferenceId).subscribe(resource => {
+         this.fhirService.getResource('DocumentReference/?_id=' + this.documentReferenceId).subscribe(resource => {
              this.bundle = <fhir.Bundle> resource;
              this.document = <fhir.DocumentReference> this.bundle.entry[0].resource
 
@@ -65,17 +65,16 @@ export class BinaryComponent implements OnInit {
       console.log("this.document", this.document);
       this.binaryId = this.document.content[0].attachment.url;
 
-      // if (this.binaryId !== undefined) {
-      //     if (this.document.content[0].attachment.contentType === 'application/fhir+xml') {
-      //         this.docType = 'fhir';
-      //     } else if (this.document.content[0].attachment.contentType === 'application/pdf') {
-      //         this.docType = 'pdf';
-      //     } else if (this.document.content[0].attachment.contentType.indexOf('image') !== -1) {
-      //         this.docType = 'img';
-      //     }
-      // }
+      if (this.binaryId !== undefined) {
+          if (this.document.content[0].attachment.contentType === 'application/fhir+xml') {
+              this.docType = 'fhir';
+          } else if (this.document.content[0].attachment.contentType === 'application/pdf') {
+              this.docType = 'pdf';
+          } else if (this.document.content[0].attachment.contentType.indexOf('image') !== -1) {
+              this.docType = 'img';
+          }
+      }
 
-      this.docType = 'img';
       // console.log('DocumentRef Id = ' + this.binaryId);
   }
 }

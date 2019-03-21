@@ -61,7 +61,6 @@ export class ViewDocumentComponent implements OnInit {
       this.document = JSON.parse(atob(binary.content));
       this.bundleService.setBundle(this.document);
     }, err => {
-
         this.showWarnDlg('Unable to load document');
 
       },
