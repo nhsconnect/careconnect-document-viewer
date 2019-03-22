@@ -24,7 +24,6 @@
     "@angular/forms": "7.0.3",
     "@angular/http": "7.0.3",
     "@angular/material": "^7.3.5",
-    "@angular/material-moment-adapter": "^7.3.5",
     "@angular/platform-browser": "7.0.3",
     "@angular/platform-browser-dynamic": "7.0.3",
     "@angular/router": "7.0.3",
@@ -35,7 +34,7 @@
     "@covalent/http": "^2.0.1",
     "@covalent/markdown": "^2.0.1",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@fortawesome/free-solid-svg-icons": "^5.8.0",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@hallysonh/ngx-imageviewer": "^2.0.4",
     "@nguniversal/express-engine": "^7.1.1",
     "@types/fhir": "0.0.30",
@@ -56,7 +55,6 @@
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.4.0",
     "typescript": "3.1.6",
-    "vis": "^4.21.0",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {

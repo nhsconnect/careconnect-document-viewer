@@ -26,7 +26,6 @@ import { MedicationRequestComponent } from './component/medication-request/medic
 import { MedicationComponent } from './component/medication/medication.component';
 import { DocumentReferenceComponent } from './component/document-reference/document-reference.component';
 import { ImmunisationComponent } from './component/immunisation/immunisation.component';
-import { PatientTimelineComponent } from './component/patient-timeline/patient-timeline.component';
 import { EncounterDetailComponent } from './component/encounter-detail/encounter-detail.component';
 import { PractitionerSearchComponent } from './component/practitioner-search/practitioner-search.component';
 import { OrganisationSearchComponent } from './component/organisation-search/organisation-search.component';
@@ -38,9 +37,7 @@ import { PdfViewerComponent } from './component/binary/pdf-viewer/pdf-viewer.com
 import { ImgViewerComponent } from './component/binary/img-viewer/img-viewer.component';
 import {ImageViewerModule} from '@hallysonh/ngx-imageviewer';
 import {
-    DateAdapter,
-    MAT_DATE_FORMATS,
-    MAT_DATE_LOCALE,
+
     MatButtonModule,
     MatCardModule,
     MatDatepickerModule,
@@ -62,7 +59,6 @@ import {
     MatProgressSpinnerModule, MatTooltipModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MAT_MOMENT_DATE_FORMATS, MatMomentDateModule, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {
   CovalentDialogsModule, CovalentExpansionPanelModule, CovalentFileModule,
 
@@ -166,7 +162,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     ObservationDetailComponent,
 
     ImmunisationComponent,
-    PatientTimelineComponent,
     EncounterDetailComponent,
     PractitionerSearchComponent,
     OrganisationSearchComponent,
@@ -232,7 +227,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 
     MatSidenavModule,
     MatInputModule,
-    MatMomentDateModule,
+  //  MatMomentDateModule,
     MatDatepickerModule,
     MatSelectModule,
     MatButtonModule,
@@ -307,9 +302,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       useClass: TokenInterceptor,
       multi: true
     },
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    /*   { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+      {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},*/
   ],
   bootstrap: [AppComponent]
 })
