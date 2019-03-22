@@ -224,26 +224,17 @@ export class FhirService {
 
   getBinary(id: string): Observable<fhir.Binary> {
 
-    // const url = this.getBaseUrl() + `/Binary/${id}`;
-
-    const url = this.getMessagingUrl() + '/Binary/' + id;
-
-    return this.http.get<fhir.Binary>(url, { 'headers' : this.getEPRHeaders(true)});
+    return this.http.get<fhir.Binary>(id, { 'headers' : this.getEPRHeaders(true)});
 
   }
   getBinaryRaw(id: string): Observable<any> {
 
-    // const url = this.getBaseUrl() + `/Binary/${id}`;
-    const url = this.getMessagingUrl() + '/' + id;
-
-    return this.http.get(url, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
+    return this.http.get(id, { 'headers' : this.getEPRHeaders(false) , responseType : 'blob' });
 
   }
 
 
   getCompositionDocumentHTML(url: string): Observable<any> {
-
-    // const url = this.getBaseUrl() + `/Binary/${id}`;
 
     let headers = this.getEPRHeaders(false);
     headers = headers.append('Content-Type', 'text/html' );
