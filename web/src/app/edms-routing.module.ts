@@ -15,7 +15,7 @@ const edmsRoutes: Routes = [
             {
                 path: '',
                 canActivate: [AuthGuard],
-                component: PatientFindComponent
+                component: LoadDocumentComponent
             },
             {
                 path: 'load',

@@ -277,7 +277,7 @@ export class FhirService {
     headers.append('Prefer', 'return=representation');
 
     // TODO Get real id from XML Bundle
-    const url = this.getMessagingUrl() + '/Bundle/5c8b6a69d2268b2de0f364da/';
+    const url = this.getMessagingUrl() + '/Bundle';
     let params = new HttpParams();
     params = params.append('identifier', 'https://tools.ietf.org/html/rfc4122|1ff370b6-fc5b-40a1-9721-2a942e301f65');
     return this.http.put<fhir.Bundle>(url, document, { 'params': params, 'headers': headers});
