@@ -32,34 +32,19 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
       this.logonRedirect = this.activatedRoute.snapshot.queryParams['afterAuth'];
 
-      let jwt: any;
-      jwt = this._cookieService.get('ccri-token');
-
-      if (this.logonRedirect === undefined && jwt !== undefined) {
-
-
-          this.appConfig.getInitEventEmitter().subscribe( () => {
-              console.log('Token and config present. Authorising careconnect-document');
-              localStorage.setItem('ccri-jwt', this._cookieService.get('ccri-token'));
-              this.authService.authoriseOAuth2();
+      if (this.appConfig.getConfig() !== undefined) {
+          this.keycloakInit();
+      } else {
+          this.appConfig.getInitEventEmitter().subscribe(() => {
+                  this.keycloakInit();
               }
           );
-          console.log('Getting config');
-          this.appConfig.loadConfig();
-      } else {
-          if (this.appConfig.getConfig() !== undefined) {
-              this.keycloakInit();
-          } else {
-              this.appConfig.getInitEventEmitter().subscribe(() => {
-                      this.keycloakInit();
-                  }
-              );
-          }
       }
       /*
       This is the new version and should be reactivated once cc-logon is accessible
 
-
+        let jwt: any;
+      // jwt = this._cookieService.get('ccri-token');
       if (jwt === undefined) {
           window.location.href = this.authService.getLogonServer() + '/login?afterAuth=' + document.baseURI + 'login';
       } else {
