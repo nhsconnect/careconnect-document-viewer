@@ -38,7 +38,7 @@
     "@hallysonh/ngx-imageviewer": "^2.0.4",
     "@nguniversal/express-engine": "^7.1.1",
     "@types/fhir": "0.0.30",
-    "ajv": "^6.9.2",
+    "ajv": "^6.10.0",
     "angular-font-awesome": "^3.1.2",
     "angular-tree-component": "^7.2.1",
     "angular2-fontawesome": "^5.2.1",
