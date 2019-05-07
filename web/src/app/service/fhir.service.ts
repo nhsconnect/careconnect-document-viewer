@@ -237,7 +237,7 @@ export class FhirService {
   getCompositionDocumentHTML(url: string): Observable<any> {
 
     let headers = this.getEPRHeaders(false);
-    headers = headers.append('Content-Type', 'text/html' );
+    headers = headers.append('Accept', 'text/html' );
 
     return this.http
       .get(url, {  headers , responseType : 'text' as 'text'});
@@ -249,7 +249,7 @@ export class FhirService {
 
     let headers = this.getEPRHeaders(false);
     headers = headers.append(
-       'Content-Type', 'application/pdf' );
+       'Accept', 'application/pdf' );
 
     return this.http
       .get(url, { headers, responseType : 'blob' as 'blob'} );
