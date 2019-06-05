@@ -64,14 +64,14 @@ export class PatientSearchComponent implements OnInit {
       ),
 
       map(bundle  => {
-        var pat$: fhir.Patient[] = [];
-        var i;
-        if (bundle != undefined && bundle.hasOwnProperty("entry")) {
+        const pat$: fhir.Patient[] = [];
+        let i = 0;
+        if (bundle !== undefined && bundle.hasOwnProperty('entry')) {
           for (i = 0; i < bundle.entry.length && i < 10; i++) {
             pat$[i] = <fhir.Patient>bundle.entry[i].resource;
           }
         }
-        return pat$;}
+        return pat$; }
         )
     ), catchError(this.handleError('getPatients', []));
 
@@ -93,7 +93,7 @@ export class PatientSearchComponent implements OnInit {
     };
   }
 
-  selectPatient(patient : fhir.Patient) {
+  selectPatient(patient: fhir.Patient) {
 
     this.patientChange.set(patient);
     this.patients$ = undefined;
@@ -102,18 +102,18 @@ export class PatientSearchComponent implements OnInit {
 
 
 
-  logError(title : string) {
-      return (message :any) => {
+  logError(title: string) {
+      return (message: any) => {
         if(message instanceof HttpErrorResponse) {
-          if (message.status == 401) {
-            //this.authService.logout();
-            //this.messageService.add(title + ": 401 Unauthorised");
+          if (message.status === 401) {
+            // this.authService.logout();
+            // this.messageService.add(title + ": 401 Unauthorised");
           }
-          if (message.status == 403) {
-            //this.messageService.add(title + ": 403 Forbidden (insufficient scope)");
+          if (message.status === 403) {
+            // this.messageService.add(title + ": 403 Forbidden (insufficient scope)");
           }
         }
-        console.log("Patient Search error handling "+message);
+        console.log('Patient Search error handling ' + message);
 
         return NEVER;
 
