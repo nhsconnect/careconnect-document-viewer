@@ -358,7 +358,7 @@ export class FhirService {
     let url =  this.getBaseUrl();
     if (!isNaN(parseInt(term))) {
       url =  this.getBaseUrl();
-      return this.http.get<fhir.Bundle>(url + '/Patient?identifier=https://fhir.nhs.uk/Id/nhs-number%2F' + term,
+      return this.http.get<fhir.Bundle>(url + '/Patient?identifier=https://fhir.nhs.uk/Id/nhs-number%7C' + term,
           { 'headers' : this.getEPRHeaders() });
     } else {
 
