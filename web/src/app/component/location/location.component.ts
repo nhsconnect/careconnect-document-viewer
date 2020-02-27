@@ -17,7 +17,7 @@ export class LocationComponent implements OnInit {
 
   dataSource : LocationDataSource;
 
-  displayedColumns = ['location',  'resource'];
+  displayedColumns = ['location', 'description', 'resource'];
 
   constructor(public fhirService : FhirService,
               private linksService : LinksService,

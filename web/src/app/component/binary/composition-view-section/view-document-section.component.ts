@@ -43,6 +43,7 @@ export class ViewDocumentSectionComponent implements OnInit {
   impressions : fhir.ClinicalImpression[];
   carePlans : fhir.CarePlan[];
   consents : fhir.Consent[];
+  referrals: fhir.ReferralRequest[];
 
   showStructured : boolean = false;
 
@@ -76,6 +77,7 @@ export class ViewDocumentSectionComponent implements OnInit {
       this.impressions=[];
       this.consents=[];
       this.carePlans=[];
+      this.referrals=[];
 
     this.getPopover(this.section);
 
@@ -239,6 +241,10 @@ export class ViewDocumentSectionComponent implements OnInit {
                 let form: fhir.QuestionnaireResponse = <fhir.QuestionnaireResponse> resource;
                 this.forms.push(form);
                 break;
+            case "ReferralRequest":
+              let referral: fhir.ReferralRequest = <fhir.ReferralRequest> resource;
+              this.referrals.push(referral);
+              break;
               case "RiskAssessment":
                   let risk: fhir.RiskAssessment = <fhir.RiskAssessment> resource;
                   this.risks.push(risk);

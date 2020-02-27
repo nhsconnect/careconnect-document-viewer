@@ -108,6 +108,7 @@ import {ErrorsHandler} from './service/errors-handler';
 import {AppConfigService} from './service/app-config.service';
 import {AppRoutingModule} from "./app-routing.module";
 import 'hammerjs';
+import { ReferralRequestComponent } from './component/referral-request/referral-request.component';
 
 
 /*
@@ -178,7 +179,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CarePlanComponent,
     MedicationDispenseComponent,
     MedicationDispenseDetailComponent,
-    ImmunisationDetailComponent
+    ImmunisationDetailComponent,
+    ReferralRequestComponent
   ],
   entryComponents: [
     ResourceDialogComponent,

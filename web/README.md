@@ -1,3 +1,12 @@
+
+# angular github deploy
+
+See https://angular.io/guide/deployment#deploy-to-github-pages
+
+ng build --prod --output-path ../docs --base-href /document-viewer/
+
+remember to rename index.html to 404.html
+
 # DocumentReviewApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.

@@ -23,7 +23,7 @@ export class ConsentComponent implements OnInit {
 
     dataSource : ConsentDataSource;
 
-    displayedColumns = ['id', 'resource'];
+    displayedColumns = ['purpose', 'resource'];
 
     constructor(private linksService : LinksService,
                 public bundleService : BundleService,

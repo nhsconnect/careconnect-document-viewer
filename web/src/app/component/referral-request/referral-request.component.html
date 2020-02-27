@@ -1,0 +1,123 @@
+<div>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let referralRequest"> {{referralRequest.id}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef> Start </th>
+            <td mat-cell *matCellDef="let referralRequest">  <span *ngIf="referralRequest.period !== undefined  && referralRequest.period.start !== undefined"> {{referralRequest.period.start | date: 'dd-MMM-yyyy HH:mm'}} </span> </td>
+        </ng-container>
+        <ng-container matColumnDef="end">
+            <th mat-header-cell *matHeaderCellDef> End </th>
+            <td mat-cell *matCellDef="let referralRequest">  <span *ngIf="referralRequest.period !== undefined && referralRequest.period.end !== undefined"> {{referralRequest.period.end | date: 'dd-MMM-yyyy HH:mm'}} </span> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let referralRequest"> {{referralRequest.status }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="intent">
+            <th mat-header-cell *matHeaderCellDef> Intent </th>
+            <td mat-cell *matCellDef="let referralRequest"> {{referralRequest.intent }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="priority">
+            <th mat-header-cell *matHeaderCellDef> Priority </th>
+            <td mat-cell *matCellDef="let referralRequest"> {{referralRequest.priority }}  </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> Referral </th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.type != undefined && referralRequest.type.coding.length >0">
+          <b>{{referralRequest.type.coding[0].display}}</b>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="typelink">
+            <th mat-header-cell *matHeaderCellDef width="5%"> </th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.type != undefined && referralRequest.type.coding.length >0">
+          <span *ngIf="referralRequest.type.coding[0].code != undefined" >
+            <span *ngIf="isSNOMED(referralRequest.type.coding[0].system)">
+              <button mat-icon-button color="accent" matTooltip="{{getCodeSystem(referralRequest.type.coding[0].system)}} {{referralRequest.type.coding[0].code}}" (click)="getSNOMEDLink(referralRequest.type.coding[0])">
+                  <mat-icon>book</mat-icon>
+              </button>
+            </span>
+             <span *ngIf="!isSNOMED(referralRequest.type.coding[0].system)">
+                  <mat-icon matTooltip="{{getCodeSystem(referralRequest.type.coding[0].system)}} {{referralRequest.type.coding[0].code}}">book_outline</mat-icon>
+            </span>
+          </span>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="recipient">
+            <th mat-header-cell *matHeaderCellDef width="10%"> Recipient </th>
+            <td mat-cell *matCellDef="let referralRequest">
+                <span *ngFor="let participant of referralRequest.recipient">
+                     <i>{{participant.display}}</i>
+                </span>
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="recipientLink">
+            <th mat-header-cell *matHeaderCellDef width="5%"></th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.recipient !=undefined && referralRequest.recipient.length > 0">
+          <button mat-icon-button color="accent"  matTooltip="View Participants" (click)="showRecipient(referralRequest)"><mat-icon>local_hospital</mat-icon></button>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="requester">
+            <th mat-header-cell *matHeaderCellDef width="10%"> Requester </th>
+            <td mat-cell *matCellDef="let referralRequest">
+                <span *ngIf="referralRequest.requester !=undefined"> {{referralRequest.requester.display}}</span>
+            </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="requesterLink">
+            <th mat-header-cell *matHeaderCellDef width="5%"></th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.requester!=undefined">
+          <button mat-icon-button color="accent"  matTooltip="View Requester" (click)="showRequestor(referralRequest)"><mat-icon>person</mat-icon></button>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="locationLink">
+            <th mat-header-cell *matHeaderCellDef width="10%">Locations</th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.location!=undefined && referralRequest.location.length > 0">
+          <button mat-icon-button color="accent"  matTooltip="View Location" (click)="showLocation(referralRequest)"><mat-icon>language</mat-icon></button>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="resource">
+            <th mat-header-cell *matHeaderCellDef width="5%">FHIR</th>
+            <td mat-cell *matCellDef="let referralRequest">
+
+                <button mat-icon-button color="accent"  matTooltip="View FHIR resource" (click)="select(referralRequest)"><mat-icon>code</mat-icon></button>
+
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

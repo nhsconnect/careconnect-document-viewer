@@ -217,6 +217,17 @@
 
               </span>
 
+             <span *ngIf="referrals.length>0">
+                  <mat-card>
+                      <mat-card-title>Service/Referral Requests</mat-card-title>
+                      <mat-card-content>
+                        <app-referral-request [referralRequests]="referrals" (referralRequest)="onResoureSelected($event)"></app-referral-request>
+                      </mat-card-content>
+                  </mat-card>
+
+
+              </span>
+
         </span>
 
   </mat-card-content>

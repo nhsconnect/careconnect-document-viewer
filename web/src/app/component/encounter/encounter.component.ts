@@ -9,7 +9,7 @@ import {LocationDialogComponent} from "../../dialog/location-dialog/location-dia
 import {OrganisationDialogComponent} from "../../dialog/organisation-dialog/organisation-dialog.component";
 import {PractitionerDialogComponent} from "../../dialog/practitioner-dialog/practitioner-dialog.component";
 import {BundleService} from "../../service/bundle.service";
-import {MedicationDialogComponent} from "../../dialog/medication-dialog/medication-dialog.component";
+
 
 @Component({
   selector: 'app-encounter',
