@@ -3,7 +3,7 @@
 
 See https://angular.io/guide/deployment#deploy-to-github-pages
 
-ng build --prod --output-path ../docs --base-href /document-viewer/
+ng build --prod --output-path ../docs --base-href /careconnect-document-viewer/
 
 remember to rename index.html to 404.html
 
