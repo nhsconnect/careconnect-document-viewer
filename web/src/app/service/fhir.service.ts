@@ -1,11 +1,9 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
 import { Observable } from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-
 import {Router} from '@angular/router';
 import {PlatformLocation} from '@angular/common';
 import {environment} from '../../environments/environment';
-import {Oauth2Service} from './oauth2.service';
 import {AppConfigService} from './app-config.service';
 
 export enum Formats {
@@ -22,7 +20,7 @@ export class FhirService {
   // TODO https://www.intertech.com/Blog/angular-4-tutorial-handling-refresh-token-with-new-httpinterceptor/
   //
 
-  private baseUrl = undefined;
+  private baseUrl = 'https://data.developer.nhs.uk/ccri-document/STU3';
 
   private messagingUrl = undefined;
 
@@ -169,28 +167,6 @@ export class FhirService {
   public setMessagingUrl(messagingUrl: string): string {
     this.messagingUrl = messagingUrl;
     return messagingUrl;
-  }
-
-  getCatClientSecret() {
-    // This is a marker for entryPoint.sh to replace
-    let secret = 'SMART_OAUTH2_CLIENT_SECRET';
-    if (secret.indexOf('SECRET') !== -1 && this.appConfig.getConfig() !== undefined) {
-      secret = this.appConfig.getConfig().oauth2client_secret;
-    } else if (secret.indexOf('SECRET') !== -1 ) {
-      secret = environment.oauth2.client_secret;
-    }
-    return secret;
-  }
-
-  getCatClientId() {
-    // This is a marker for entryPoint.sh to replace
-    let secret = 'SMART_OAUTH2_CLIENT_ID';
-    if (secret.indexOf('CLIENT_ID') !== -1 && this.appConfig.getConfig() !== undefined) {
-      secret = this.appConfig.getConfig().oauth2client_id;
-    } else if (secret.indexOf('CLIENT_ID') !== -1) {
-      secret = environment.oauth2.client_id;
-    }
-    return secret;
   }
 
 

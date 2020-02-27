@@ -19,7 +19,7 @@ export class PatientFindComponent implements OnInit {
   //  console.log('Patient change - '+patient.id);
     if (patient !== undefined) {
         this.patientChange.set(patient);
-        this.router.navigate(['edms','documents' ] );
+        this.router.navigate(['/documents' ] );
 
     }
   }

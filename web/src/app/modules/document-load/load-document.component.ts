@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
-import {AuthService} from '../../service/auth.service';
 import {FhirService} from '../../service/fhir.service';
 import {Router} from '@angular/router';
 import {EprService} from '../../service/epr.service';
@@ -54,11 +53,10 @@ export class LoadDocumentComponent implements OnInit {
   public progressBar = false;
 
 
-  @ViewChild('docCreated') inputCreated;
+  @ViewChild('docCreated', { static : true}) inputCreated;
 
   constructor(private http: HttpClient,
               private router: Router,
-              public auth: AuthService,
               private fhirService: FhirService,
               public eprService: EprService,
               private _dialogService: TdDialogService,
@@ -76,14 +74,6 @@ export class LoadDocumentComponent implements OnInit {
         patients.push(this.eprService.patient);
         this.document.patients = patients;
       }
-/*
-      this.fhirService.getNHSDValueSet('NRLS-RecordType-1').subscribe(
-        data => {
-          this.documentType = data;
-          //this.practiceSettings.compose.include[0].concept
-        }
-      );
-      */
 
       this.documentType = {
         "resourceType": "ValueSet",
@@ -292,10 +282,10 @@ export class LoadDocumentComponent implements OnInit {
             }
           }
           if (this.eprService.documentReference !== undefined) {
-              this.router.navigate(['edms', 'binary', this.eprService.documentReference.id], );
+              this.router.navigate([ '/binary', this.eprService.documentReference.id], );
 
           } else {
-              this.router.navigate(['edms', 'documents'], );
+              this.router.navigate([ '/documents'], );
           }
         },
         err => {
@@ -441,9 +431,9 @@ export class LoadDocumentComponent implements OnInit {
             }
           }
           if (this.eprService.documentReference !== undefined && this.eprService.documentReference.id !== undefined) {
-              this.router.navigate(['edms', 'binary', this.eprService.documentReference.id] );
+              this.router.navigate(['/binary', this.eprService.documentReference.id] );
           } else {
-              this.router.navigate(['edms', 'documents'] );
+              this.router.navigate([ '/documents'] );
           }
         },
         err => {
@@ -522,9 +512,9 @@ export class LoadDocumentComponent implements OnInit {
           }
         }
             if (this.eprService.documentReference !== undefined) {
-                this.router.navigate(['edms', 'binary', this.eprService.documentReference.id] );
+                this.router.navigate([ '/binary', this.eprService.documentReference.id] );
             } else {
-                this.router.navigate(['edms', 'documents'] );
+                this.router.navigate([ '/documents'] );
             }
       },
       err  => {

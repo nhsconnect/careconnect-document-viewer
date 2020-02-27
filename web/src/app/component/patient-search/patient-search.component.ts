@@ -14,7 +14,6 @@ import {
 
 import {HttpErrorResponse} from '@angular/common/http';
 import {FhirService} from "../../service/fhir.service";
-import {AuthService} from "../../service/auth.service";
 import {NEVER} from "rxjs/internal/observable/never";
 import {EprService} from "../../service/epr.service";
 
@@ -34,7 +33,6 @@ export class PatientSearchComponent implements OnInit {
   @Output() patientSelected : EventEmitter<fhir.Patient> = new EventEmitter();
 
   constructor(private patientChange : EprService, private fhirService: FhirService
-    ,private authService : AuthService
   ) {}
 
 

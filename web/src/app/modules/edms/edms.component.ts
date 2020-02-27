@@ -1,5 +1,4 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {AuthService} from '../../service/auth.service';
 import {EprService} from '../../service/epr.service';
 import {User} from '../../model/user';
 import { TdLayoutManageListComponent, TdMediaService} from '@covalent/core';
@@ -14,7 +13,7 @@ import {Router} from '@angular/router';
 export class EdmsComponent implements AfterViewInit, OnInit {
 
 
-  @ViewChild('manageList') manageList: TdLayoutManageListComponent;
+  @ViewChild('manageList', { static : true}) manageList: TdLayoutManageListComponent;
 
   public miniNav = true;
 
@@ -22,27 +21,22 @@ export class EdmsComponent implements AfterViewInit, OnInit {
     public media: TdMediaService,
     public dialog: MatDialog,
     private _changeDetectorRef: ChangeDetectorRef,
-    public authService: AuthService,
     public eprService: EprService,
     private router: Router
   ) {
 
   }
 
-  routes = [ {
-    title: 'Logout',
-    route: '/logout',
-    icon: 'exit_to_app',
-  }
+  routes = [
   ];
 
   btnRoutes = [{
     title: 'Select Patient',
-    href: 'patient',
+    href: '/patient',
     icon: 'person',
   }, {
     title: 'Import Document',
-    href: 'load',
+    href: '/load',
     icon: 'note_add',
   }
   ];
@@ -71,14 +65,7 @@ export class EdmsComponent implements AfterViewInit, OnInit {
 
    // TODO Get UserDetails from Token console.log('token '+this.outh2Service.getUser());
 
-    this.subUser = this.authService.getUserEventEmitter()
-      .subscribe(item => {
 
-        this.user = item;
-        this.userName = this.user.userName;
-        this.email = this.user.email;
-
-      });
     this.subPatient = this.eprService.getPatientChangeEmitter()
       .subscribe( patient => {
         if (patient !== undefined) {

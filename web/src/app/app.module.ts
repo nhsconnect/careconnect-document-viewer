@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './/app-routing.module';
 import { LoadDocumentComponent } from './modules/document-load/load-document.component';
 
 import { ViewDocumentComponent } from './component/binary/composition-view/view-document.component';
@@ -96,29 +95,20 @@ import { MedicationDispenseDetailComponent } from './dialog/medication-dispense-
 import { ImmunisationDetailComponent } from './dialog/immunisation-detail/immunisation-detail.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {EdmsComponent} from './modules/edms/edms.component';
-import {EdmsRoutingModule} from './edms-routing.module';
 import {ObservationDetailComponent} from './component/observation-detail/observation-detail.component';
 import {CareGoogleChartComponent} from './component/care-google-chart/care-google-chart.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FileUploadModule} from 'ng2-file-upload';
 import {PdfViewerModule} from 'ng2-pdf-viewer';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {FlexLayoutModule} from '@angular/flex-layout';
 import {FhirService} from './service/fhir.service';
-import {AuthService} from './service/auth.service';
 import {LinksService} from './service/links.service';
 import {EprService} from './service/epr.service';
-import {AuthGuard} from './service/auth-guard';
-import {Oauth2Service} from './service/oauth2.service';
 import {ErrorsHandler} from './service/errors-handler';
-import {TokenInterceptor} from './service/token-interceptor';
-import {LoginComponent} from './security/login/login.component';
-import {LogoutComponent} from './security/logout/logout.component';
-import {CallbackComponent} from './security/callback/callback.component';
-import {PingComponent} from './security/ping/ping.component';
 import {AppConfigService} from './service/app-config.service';
-import { LoadingComponent } from './security/loading/loading.component';
-import {KeycloakService} from "./service/keycloak.service";
+import {AppRoutingModule} from "./app-routing.module";
+import 'hammerjs';
+
 
 /*
 export function initializeApp(appConfig: AppConfig) {
@@ -154,20 +144,15 @@ const appInitializerFn = (appConfig: AppConfigService) => {
 
     MedicationRequestComponent,
     MedicationComponent,
-
     DocumentReferenceComponent,
-    LoginComponent,
-    LogoutComponent,
     CareGoogleChartComponent,
     ObservationDetailComponent,
-
     ImmunisationComponent,
     EncounterDetailComponent,
     PractitionerSearchComponent,
     OrganisationSearchComponent,
     OrganisationComponent,
     PractitionerComponent,
-    CallbackComponent,
     ResourceDialogComponent,
 
     PatientFindComponent,
@@ -185,7 +170,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     BinaryComponent,
     PractitionerRoleDialogComponent,
     EncounterDialogComponent,
-    PingComponent,
     QuestionnaireResponseComponent,
     RiskAssessmentComponent,
     GoalComponent,
@@ -194,8 +178,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CarePlanComponent,
     MedicationDispenseComponent,
     MedicationDispenseDetailComponent,
-    ImmunisationDetailComponent,
-    LoadingComponent
+    ImmunisationDetailComponent
   ],
   entryComponents: [
     ResourceDialogComponent,
@@ -217,7 +200,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       .forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
 
     FileUploadModule,
     HttpClientModule,
@@ -267,8 +249,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     CovalentExpansionPanelModule,
     CovalentMessageModule,
 
-      EdmsRoutingModule,
     AppRoutingModule
+
 
 /*
     // Issue with https://github.com/Teradata/covalent/issues/1152
@@ -284,23 +266,18 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       deps: [AppConfigService]
     },
     FhirService,
-    AuthService,
+
     LinksService,
     EprService,
-    AuthGuard,
+
     CookieService,
-    Oauth2Service,
+
     BundleService,
     MatIconRegistry,
-    KeycloakService,
+
     {
       provide: ErrorHandler,
       useClass: ErrorsHandler,
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
     },
     /*   { provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
       {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},

@@ -5,8 +5,6 @@ import {LinksService} from "../../service/links.service";
 import {EprService} from "../../service/epr.service";
 
 
-
-
 @Component({
   selector: 'app-edms-record',
   templateUrl: './edms-record.component.html',

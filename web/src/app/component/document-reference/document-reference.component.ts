@@ -69,7 +69,7 @@ export class DocumentReferenceComponent implements OnInit {
 
      this.patientEprService.setDocumentReference(document);
      // this.patientEprService.setSection('binary');
-        this.router.navigate(['edms', 'binary', document.id], );
+        this.router.navigate(['/binary', document.id], );
     } else {
       let alertConfig : IAlertConfig = { message : 'Unable to locate document.'};
       alertConfig.disableClose =  false; // defaults to false

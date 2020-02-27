@@ -19,9 +19,6 @@ export class AppConfigService {
         return this.initEvent;
   }
   loadConfig() {
-    // console.log('hello App' + document.baseURI);
-    // only run if not localhost
-      // console.log('baseURI = ' + document.baseURI);
 
       // console.log('calling config endpoint: ' + document.baseURI + 'camel/config/http');
       this.http.get<any>(document.baseURI + 'camel/config/http').subscribe(result => {
@@ -35,16 +32,7 @@ export class AppConfigService {
             console.log('No configuration endpoint detected');
             const result = {
                 fhirServer: environment.oauth2.eprUrl,
-                messagingServer: environment.messagingUrl,
-                oauth2client_id: environment.oauth2.client_id,
-                oauth2client_secret: environment.oauth2.client_secret,
-                oauth2cookie_domain: environment.oauth2.cookie_domain,
-                logonUrl: environment.oauth2.logonUrl,
-                keycloakauthserverurl: environment.keycloak.authServerUrl,
-                keycloakclient_id: environment.keycloak.client_id,
-                keycloakclient_secret: environment.keycloak.client_secret,
-                keycloakrealm: environment.keycloak.realm,
-                keycloakrooturl: environment.keycloak.RootUrl
+                messagingServer: environment.messagingUrl
             };
             this.appConfig = result;
             this.initEvent.emit(result);

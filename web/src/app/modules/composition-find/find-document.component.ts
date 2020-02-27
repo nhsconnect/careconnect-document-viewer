@@ -48,7 +48,7 @@ export class FindDocumentComponent implements OnInit {
   selectComposition(compositionId : number) {
     console.log("Composition clicked = " + compositionId);
     if (compositionId !=undefined) {
-      this.router.navigate(['doc/'+compositionId ] );
+      this.router.navigate(['/doc/'+compositionId ] );
     }
   }
 }

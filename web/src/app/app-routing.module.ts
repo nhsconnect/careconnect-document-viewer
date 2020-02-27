@@ -1,36 +1,44 @@
-import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './service/auth-guard';
-import {LogoutComponent} from './security/logout/logout.component';
-import {PingComponent} from './security/ping/ping.component';
-import {LoginComponent} from './security/login/login.component';
-import {CallbackComponent} from './security/callback/callback.component';
+import {LoadDocumentComponent} from './modules/document-load/load-document.component';
+import {NgModule} from '@angular/core';
 import {EdmsComponent} from './modules/edms/edms.component';
-import {LoadingComponent} from './security/loading/loading.component';
+import {EdmsRecordComponent} from './modules/edms-record/edms-record.component';
+import {BinaryComponent} from './component/binary/binary/binary.component';
+import {PatientFindComponent} from './modules/patient-find/patient-find.component';
 
 
-
-const routes: Routes = [
-  { path: '', component: LoadingComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'ping', canActivate: [AuthGuard], component: PingComponent },
-  { path: 'logout', component: LogoutComponent },
-  { path: 'callback', component: CallbackComponent }
-
+const edmsRoutes: Routes = [
+    {
+        path: '', component: EdmsComponent,
+        children: [
+            {
+                path: '', redirectTo: 'load', pathMatch: 'full'
+            },
+            {
+                path: 'load',
+                component: LoadDocumentComponent
+            },
+            {
+                path: 'binary/:docid',
+                component: BinaryComponent
+            },
+            {
+                path: 'documents',
+                component: EdmsRecordComponent
+            },
+            {
+                path: 'patient',
+                component: PatientFindComponent,
+            }]
+    },
 ];
-
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [
-    RouterModule
-  ]
+    imports: [
+        RouterModule.forRoot(edmsRoutes)
+    ],
+    exports: [
+        RouterModule
+    ]
 })
-
-
-
 export class AppRoutingModule {
-
-
-
 }
