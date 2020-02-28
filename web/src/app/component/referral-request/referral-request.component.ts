@@ -34,7 +34,7 @@ export class ReferralRequestComponent implements OnInit {
 
   dataSource : ReferralRequestDataSource;
 
-  displayedColumns = ['status', 'intent', 'priority', 'type','typelink','requester','requesterLink','recipient','recipientLink', 'resource'];
+  displayedColumns = ['service', 'intent', 'priority', 'reasonCode', 'type','typelink','requester','requesterLink','recipient','recipientLink', 'resource'];
 
   constructor(private linksService : LinksService,
               public bundleService : BundleService,

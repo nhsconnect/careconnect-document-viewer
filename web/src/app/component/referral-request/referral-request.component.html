@@ -34,11 +34,29 @@
             <td mat-cell *matCellDef="let referralRequest"> {{referralRequest.priority }}  </td>
         </ng-container>
 
+        <ng-container matColumnDef="reasonCode">
+            <th mat-header-cell *matHeaderCellDef> Reason </th>
+            <td mat-cell *matCellDef="let referralRequest">
+                <span *ngIf="referralRequest.reasonCode != undefined && referralRequest.reasonCode.length != null  && referralRequest.reasonCode[0].coding != null">
+                  <b>{{referralRequest.reasonCode[0].coding[0].display}}</b>
+                </span>
+            </td>
+        </ng-container>
+
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef> Referral </th>
             <td mat-cell *matCellDef="let referralRequest">
         <span *ngIf="referralRequest.type != undefined && referralRequest.type.coding.length >0">
           <b>{{referralRequest.type.coding[0].display}}</b>
+        </span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="service">
+            <th mat-header-cell *matHeaderCellDef> Service </th>
+            <td mat-cell *matCellDef="let referralRequest">
+        <span *ngIf="referralRequest.serviceRequested != undefined && referralRequest.serviceRequested[0].coding != undefined">
+          <b>{{referralRequest.serviceRequested[0].coding[0].display}}</b>
         </span>
             </td>
         </ng-container>
@@ -83,7 +101,7 @@
         <ng-container matColumnDef="requester">
             <th mat-header-cell *matHeaderCellDef width="10%"> Requester </th>
             <td mat-cell *matCellDef="let referralRequest">
-                <span *ngIf="referralRequest.requester !=undefined"> {{referralRequest.requester.display}}</span>
+                <span *ngIf="referralRequest.requester !=undefined && referralRequest.requester.agent !=undefined"> {{referralRequest.requester.agent.display}}</span>
             </td>
         </ng-container>
 

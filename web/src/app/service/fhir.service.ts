@@ -22,7 +22,7 @@ export class FhirService {
 
   private baseUrl = 'https://data.developer.nhs.uk/ccri-document/STU3';
 
-  private messagingUrl = undefined;
+  private messagingUrl = 'https://data.developer.nhs.uk/ccri-document/STU3';
 
   private format: Formats = Formats.JsonFormatted;
 

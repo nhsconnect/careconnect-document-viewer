@@ -25,30 +25,19 @@ export class PractitionerRoleDataSource extends DataSource<any> {
     this.dataStore = { roles : [] };
 
     console.log('PractitionerRole.connect useBundle = '+this.useBundle);
+    console.log(this.practitioner);
 
-    if (!this.useBundle) {
-      this.fhirService.get('/PractitionerRole?practitioner='+this.practitioner.id).subscribe(bundle => {
-        if (bundle != undefined && bundle.entry != undefined) {
-          for (let entry of bundle.entry) {
-            console.log('entry = ' + entry.resource.resourceType);
-            this.dataStore.roles.push(<fhir.PractitionerRole> entry.resource);
+    this.bundleService.getRolesForPractitioner(this.practitioner.id).subscribe(roles => {
+      if (roles != undefined ) {
+        for (let role of roles) {
+          console.log('role = ' + role);
+          this.dataStore.roles.push(<fhir.PractitionerRole> role);
 
-          }
         }
-        _roles.next(Object.assign({}, this.dataStore).roles);
-      });
-    } else {
-      this.bundleService.getRolesForPractitioner(this.practitioner.id).subscribe(roles => {
-        if (roles != undefined ) {
-          for (let role of roles) {
-            console.log('role = ' + role);
-            this.dataStore.roles.push(<fhir.PractitionerRole> role);
+      }
+      _roles.next(Object.assign({}, this.dataStore).roles);
+    });
 
-          }
-        }
-        _roles.next(Object.assign({}, this.dataStore).roles);
-      });
-    }
     return _roles.asObservable();
   }
 

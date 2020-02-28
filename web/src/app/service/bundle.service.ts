@@ -13,6 +13,11 @@ export class BundleService {
   constructor(private fhirService: FhirService) { }
 
   public setBundle(bundle: fhir.Bundle) {
+    //console.log(bundle);
+    for (const entry of bundle.entry) {
+      entry.resource.id = entry.fullUrl.replace('urn:uuid:','');
+    }
+    console.log(bundle);
     this.bundle = bundle;
   }
 
@@ -27,7 +32,7 @@ export class BundleService {
     const _roles: BehaviorSubject<fhir.PractitionerRole[]> = <BehaviorSubject<fhir.PractitionerRole[]>>new BehaviorSubject([]);
 
 
-    // console.log('BundleService.getRolesForPractitioner Search ref='+reference);
+    console.log('BundleService.getRolesForPractitioner Search ref='+reference);
 
     if (this.bundle !== undefined && reference.indexOf('/') === -1) {
 
