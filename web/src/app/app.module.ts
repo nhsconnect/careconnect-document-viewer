@@ -109,6 +109,7 @@ import {AppConfigService} from './service/app-config.service';
 import {AppRoutingModule} from "./app-routing.module";
 import 'hammerjs';
 import { ReferralRequestComponent } from './component/referral-request/referral-request.component';
+import {CovalentCodeEditorModule} from "@covalent/code-editor";
 
 
 /*
@@ -194,71 +195,72 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       MedicationDispenseDetailComponent,
       ImmunisationDetailComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-      LayoutModule,
-    CookieModule
-      .forRoot(),
-    FormsModule,
-    ReactiveFormsModule,
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        CookieModule
+            .forRoot(),
+        FormsModule,
+        ReactiveFormsModule,
 
-    FileUploadModule,
-    HttpClientModule,
-    TreeModule,
-    PdfViewerModule,
-    ImageViewerModule,
+        FileUploadModule,
+        HttpClientModule,
+        TreeModule,
+        PdfViewerModule,
+        ImageViewerModule,
 
-    MatSidenavModule,
-    MatInputModule,
-  //  MatMomentDateModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatListModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatGridListModule,
-    MatDialogModule,
-    MatPaginatorModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-      MatTooltipModule,
-
-
-    CovalentLayoutModule,
-
-    /*
-    CovalentStepsModule,
-    */
-    // (optional) Additional Covalent Modules imports
-
-    CovalentHttpModule.forRoot(),
-    CovalentHighlightModule,
-    CovalentMarkdownModule,
-    CovalentJsonFormatterModule,
-    CovalentMenuModule,
-    CovalentDialogsModule,
-    CovalentMediaModule,
-    CovalentNotificationsModule,
-    CovalentLoadingModule,
-
-    CovalentFileModule,
-    CovalentExpansionPanelModule,
-    CovalentMessageModule,
-
-    AppRoutingModule
+        MatSidenavModule,
+        MatInputModule,
+        //  MatMomentDateModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatListModule,
+        MatToolbarModule,
+        MatTableModule,
+        MatGridListModule,
+        MatDialogModule,
+        MatPaginatorModule,
+        MatMenuModule,
+        MatSnackBarModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatTooltipModule,
 
 
-/*
-    // Issue with https://github.com/Teradata/covalent/issues/1152
-    CovalentDynamicFormsModule
-*/
-  ],
+        CovalentLayoutModule,
+
+        /*
+        CovalentStepsModule,
+        */
+        // (optional) Additional Covalent Modules imports
+
+        CovalentHttpModule.forRoot(),
+        CovalentHighlightModule,
+        CovalentMarkdownModule,
+        CovalentJsonFormatterModule,
+        CovalentMenuModule,
+        CovalentDialogsModule,
+        CovalentMediaModule,
+        CovalentNotificationsModule,
+        CovalentLoadingModule,
+
+        CovalentFileModule,
+        CovalentExpansionPanelModule,
+        CovalentMessageModule,
+
+        AppRoutingModule,
+        CovalentCodeEditorModule,
+
+
+        /*
+            // Issue with https://github.com/Teradata/covalent/issues/1152
+            CovalentDynamicFormsModule
+        */
+    ],
   providers: [
     AppConfigService,
     {

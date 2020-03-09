@@ -18,7 +18,12 @@
             "polyfills": "src/polyfills.ts",
             "assets": [
               "src/assets",
-              "src/favicon.png"
+              "src/favicon.png",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@covalent/code-editor/assets/monaco",
+                "output": "/assets/monaco"
+              }
             ],
             "styles": [
               "node_modules/@covalent/core/common/platform.scss",

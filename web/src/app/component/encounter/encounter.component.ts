@@ -84,6 +84,7 @@ export class EncounterComponent implements OnInit {
               const dialogConfig = new MatDialogConfig();
               dialogConfig.disableClose = true;
               dialogConfig.autoFocus = true;
+              dialogConfig.minWidth = '800px';
               dialogConfig.data = {
                 id: 1,
                 locations: this.locations
@@ -105,6 +106,7 @@ export class EncounterComponent implements OnInit {
               const dialogConfig = new MatDialogConfig();
               dialogConfig.disableClose = true;
               dialogConfig.autoFocus = true;
+                dialogConfig.minWidth = '800px';
               dialogConfig.data = {
                 id: 1,
                 locations: this.locations
@@ -136,7 +138,7 @@ export class EncounterComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
-        // dialogConfig.width="800px";
+        dialogConfig.minWidth = '800px';
         dialogConfig.data = {
           id: 1,
           organisations: organisations
@@ -159,7 +161,7 @@ export class EncounterComponent implements OnInit {
 
             dialogConfig.disableClose = true;
             dialogConfig.autoFocus = true;
-            // dialogConfig.width="800px";
+            dialogConfig.minWidth = '800px';
             dialogConfig.data = {
               id: 1,
               practitioners: practitioners,
@@ -176,6 +178,7 @@ export class EncounterComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '800px';
     dialogConfig.data = {
       id: 1,
       resource: resource

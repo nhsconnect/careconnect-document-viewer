@@ -57,9 +57,12 @@ export class ViewDocumentComponent implements OnInit {
 
     this.fhirService.getBinary(id).subscribe( document => {
       const binary: fhir.Binary = document;
-      // console.log(atob(binary.content));
-      this.document = JSON.parse(atob(binary.content));
-      this.bundleService.setBundle(this.document);
+     // console.log(binary.contentType);
+      //console.log(atob(binary.content));
+      if (binary.contentType.includes('fhir')) {
+        this.document = JSON.parse(atob(binary.content));
+        this.bundleService.setBundle(this.document);
+      }
     }, err => {
         this.showWarnDlg('Unable to load document');
 
@@ -105,6 +108,7 @@ export class ViewDocumentComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '800px';
     dialogConfig.data = {
       id: 1,
       resource: resource

@@ -1,17 +1,45 @@
-<h2 mat-dialog-title>
-   <span *ngIf="resource !=undefined">
-     <span *ngIf="resource.resourceType != undefined">
-      Resource Detail [ {{resource.resourceType}} ]
-     </span>
-     <span *ngIf="resource.resourceType == undefined">
-      Composition.section
-     </span>
-   </span></h2>
-<mat-dialog-content>
+<div layout="row" layout-align="start center" flex>
 
+
+    <h2 mat-dialog-title flex>
+        <span *ngIf="resource !=undefined">
+         <span *ngIf="resource.resourceType != undefined">
+              Resource Detail [ {{resource.resourceType}} ]
+         </span>
+            <span *ngIf="resource.resourceType == undefined">
+          Composition.section
+         </span>
+        </span>
+    </h2>
+    <span flex></span>
+        <mat-form-field style="width:70px;">
+            <mat-select [(value)]="format" >
+                <mat-option value="rendered">Pretty</mat-option>
+                <mat-option value="json">JSON</mat-option>
+            </mat-select>
+        </mat-form-field>
+</div>
+
+
+    <mat-dialog-content>
+<span *ngIf="format == 'rendered'">
 <td-json-formatter *ngIf="resource!=undefined" [data]="resource" key="root" [levelsOpen]="4">
 </td-json-formatter>
-</mat-dialog-content>
+</span>
+    <span *ngIf="format != 'rendered'">
+
+       <div flex style="height: 100%;">
+           <!-- -->
+       <td-code-editor
+               [style.height.px]="350"
+               editorStyle="border:0;"
+               flex
+               [(ngModel)]="model" theme="vs"
+               [language]="language"></td-code-editor>
+       </div>
+
+</span>
+    </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
 </mat-dialog-actions>

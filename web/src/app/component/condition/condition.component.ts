@@ -45,6 +45,7 @@ export class ConditionComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+      dialogConfig.minWidth = '800px';
         dialogConfig.data = {
             id: 1,
             resource: resource
@@ -77,6 +78,7 @@ export class ConditionComponent implements OnInit {
 
             dialogConfig.disableClose = true;
             dialogConfig.autoFocus = true;
+            dialogConfig.minWidth = '800px';
             // dialogConfig.width="800px";
             dialogConfig.data = {
               id: 1,
@@ -102,6 +104,7 @@ export class ConditionComponent implements OnInit {
 
           dialogConfig.disableClose = true;
           dialogConfig.autoFocus = true;
+          dialogConfig.minWidth = '800px';
           // dialogConfig.width="800px";
           dialogConfig.data = {
             id: 1,

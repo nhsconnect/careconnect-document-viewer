@@ -66,7 +66,7 @@ export class ProcedureComponent implements OnInit {
 
           dialogConfig.disableClose = true;
           dialogConfig.autoFocus = true;
-          // dialogConfig.width="800px";
+          dialogConfig.minWidth = '800px';
           dialogConfig.data = {
             id: 1,
             encounters : contexts,
@@ -83,6 +83,7 @@ export class ProcedureComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '800px';
     dialogConfig.data = {
       id: 1,
       resource: resource

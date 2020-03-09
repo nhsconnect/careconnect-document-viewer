@@ -40,6 +40,7 @@ export class PractitionerRoleComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    dialogConfig.minWidth = '800px';
     dialogConfig.data = {
       id: 1,
       resource: resource
@@ -61,6 +62,7 @@ export class PractitionerRoleComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.minWidth = '800px';
 
         dialogConfig.data = {
           id: 1,

@@ -83,6 +83,7 @@ export class MedicationDispenseComponent implements OnInit {
 
                             dialogConfig.disableClose = true;
                             dialogConfig.autoFocus = true;
+                            dialogConfig.minWidth = '800px';
                             dialogConfig.data = {
                                 id: 1,
                                 medications: this.selectedMeds
@@ -111,6 +112,7 @@ export class MedicationDispenseComponent implements OnInit {
 
                         dialogConfig.disableClose = true;
                         dialogConfig.autoFocus = true;
+                        dialogConfig.minWidth = '800px';
                         dialogConfig.data = {
                             id: 1,
                             medications: this.selectedMeds
@@ -126,6 +128,7 @@ export class MedicationDispenseComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.minWidth = '800px';
         dialogConfig.data = {
             id: 1,
             resource: resource
@@ -148,6 +151,7 @@ export class MedicationDispenseComponent implements OnInit {
 
                         dialogConfig.disableClose = true;
                         dialogConfig.autoFocus = true;
+                        dialogConfig.minWidth = '800px';
 
                         dialogConfig.data = {
                             id: 1,
@@ -168,6 +172,7 @@ export class MedicationDispenseComponent implements OnInit {
 
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
+        dialogConfig.minWidth = '800px';
 
         dialogConfig.data = {
             id: 1,
@@ -191,6 +196,7 @@ export class MedicationDispenseComponent implements OnInit {
 
                             dialogConfig.disableClose = true;
                             dialogConfig.autoFocus = true;
+                            dialogConfig.minWidth = '800px';
 
                             dialogConfig.data = {
                                 id: 1,

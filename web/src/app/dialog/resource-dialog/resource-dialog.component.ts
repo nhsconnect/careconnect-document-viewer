@@ -12,6 +12,9 @@ declare var $: any;
 })
 export class ResourceDialogComponent implements OnInit {
 
+  format = 'rendered';
+
+  language = 'json';
 
   //https://stackoverflow.com/questions/44987260/how-to-add-jstree-to-angular-2-application-using-typescript-with-types-jstree
 
@@ -26,24 +29,17 @@ export class ResourceDialogComponent implements OnInit {
   @Input()
   resource = undefined;
 
+  model = undefined;
+
 
   ngOnInit() {
     console.log('Init Called TREE');
-
+    this.model = JSON.stringify(this.resource, null, 2);
     this.patientEPRService.getResourceChangeEvent().subscribe(
       resource => {
+        console.log(resource);
         this.resource = resource;
-        /*
-        this.buildNodes();
 
-        $('#docTreeView').jstree('destroy');
-
-        $('#docTreeView').jstree({
-          'core' : {
-            'data' : this.treeData
-          }
-        });
-        */
       }
     )
 
