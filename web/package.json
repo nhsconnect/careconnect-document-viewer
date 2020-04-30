@@ -43,7 +43,7 @@
     "core-js": "^2.6.11",
     "font-awesome": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jstree": "^3.3.9",
     "keycloak-js": "^4.8.3",
     "ng2-file-upload": "^1.4.0",
